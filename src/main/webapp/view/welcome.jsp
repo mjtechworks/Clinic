@@ -8,6 +8,6 @@
     <title>Clinical-Management</title>
 </head>
 <body>
-<h3>Welcome <s:property value="username"></s:property></h3>
+<h3>Welcome <s:property value="firstName"></s:property> <s:property value="lastName"></s:property></h3>
 </body>
 </html>
