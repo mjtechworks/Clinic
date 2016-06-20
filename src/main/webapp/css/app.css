@@ -32,18 +32,24 @@ body {
     margin-left: -40px;
 }
 
-input[type=submit]{
+input[type=submit] {
     margin-top: 30px;
 }
 
-.patient-table{
+.patient-table {
     background-color: white;
     width: 90%;
     margin-left: 5%;
     box-shadow: 10px 10px 5px #888888;
 }
 
-.table-name{
+.table-name {
     padding-left: 5%;
     margin-top: 50px;
+}
+
+.danger-message {
+    width: 310px;
+    margin-left: 70px;
+    margin-top: 10px;
 }
