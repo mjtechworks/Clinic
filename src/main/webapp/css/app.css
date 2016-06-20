@@ -1,0 +1,37 @@
+body {
+    background-color: #E7E7E7;
+}
+
+.login {
+    padding-left: 100px;
+    padding-top: 50px;
+    background-color: white;
+    width: 350px;
+    height: 200px;
+    border-radius: 0px 0px 10px 10px;
+    border: solid #0077ff;
+    border-width: 0px 3px 3px 3px;
+    margin-left: 50px;
+}
+
+.welcome {
+    height: 90px;
+    background-color: #0077ff;
+    margin-top: -25px;
+    color: #FFFFFF;
+    padding-left: 30px;
+    padding-top: 20px;
+}
+
+.label {
+    color: black;
+    font-size: 15px;
+}
+
+.wwFormTable {
+    margin-left: -40px;
+}
+
+input[type=submit]{
+    margin-top: 30px;
+}

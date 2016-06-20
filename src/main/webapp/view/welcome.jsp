@@ -29,5 +29,6 @@
         </tr>
     </s:iterator>
 </table>
+<s:include value="master.jsp"></s:include>
 </body>
 </html>
