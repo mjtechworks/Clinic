@@ -3,7 +3,7 @@ package com.clinical.management.model;
 
 import java.util.Date;
 
-public class Patint {
+public class Patient {
 
     private int doctorID;
 
@@ -17,10 +17,10 @@ public class Patint {
 
     private String phoneNumber;
 
-    public Patint() {
+    public Patient() {
     }
 
-    public Patint(int doctorID, String firstName, String lastName, Date dob, String address, String phoneNumber) {
+    public Patient(int doctorID, String firstName, String lastName, Date dob, String address, String phoneNumber) {
         this.doctorID = doctorID;
         this.firstName = firstName;
         this.lastName = lastName;

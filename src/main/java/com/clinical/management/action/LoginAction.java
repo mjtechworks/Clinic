@@ -1,19 +1,21 @@
 package com.clinical.management.action;
 
 import com.clinical.management.model.Doctor;
+import com.clinical.management.model.Patient;
 import com.clinical.management.service.DoctorService;
 import com.opensymphony.xwork2.Action;
+
+import java.util.List;
 
 public class LoginAction implements Action {
 
     @Override
     public String execute() throws Exception {
 
-        Doctor doctor = DoctorService.findDoctor(username, password);
+        doctor = DoctorService.findDoctor(username, password);
 
         if (doctor != null) {
-            setFirstName(doctor.getFirstName());
-            setLastName(doctor.getLastName());
+            patients = DoctorService.getAllDoctorPatients(doctor.getId());
 
             return "SUCCESS";
         } else
@@ -26,9 +28,9 @@ public class LoginAction implements Action {
 
     private String password;
 
-    private String firstName;
+    private Doctor doctor;
 
-    private String lastName;
+    private List<Patient> patients;
 
     public String getUsername() {
         return username;
@@ -46,19 +48,19 @@ public class LoginAction implements Action {
         this.password = password;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public Doctor getDoctor() {
+        return doctor;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
     }
 
-    public String getLastName() {
-        return lastName;
+    public List<Patient> getPatients() {
+        return patients;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setPatients(List<Patient> patients) {
+        this.patients = patients;
     }
 }
