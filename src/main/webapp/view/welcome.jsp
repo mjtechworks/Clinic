@@ -8,10 +8,12 @@
     <title>Clinical-Management</title>
 </head>
 <body>
-<h2>Welcome <s:property value="doctor.firstName"></s:property> <s:property value="doctor.lastName"></s:property></h2>
-<br>
-<h3>Your Patients</h3>
-<table border="0" cellspacing="0" cellpadding="1">
+<div class="welcome">
+    <h3>Doctor <s:property value="doctor.firstName"></s:property> <s:property value="doctor.lastName"></s:property></h3>
+</div>
+<h4 class="table-name">Your Patients</h4>
+<table class="table table-hover patient-table">
+    <thead>
     <tr>
         <th>First Name</th>
         <th>Last Name</th>
@@ -19,6 +21,7 @@
         <th>Address</th>
         <th>Phone Number</th>
     </tr>
+    </thead>
     <s:iterator value="patients">
         <tr>
             <td><s:property value="firstName"/></td>

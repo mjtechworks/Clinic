@@ -35,3 +35,15 @@ body {
 input[type=submit]{
     margin-top: 30px;
 }
+
+.patient-table{
+    background-color: white;
+    width: 90%;
+    margin-left: 5%;
+    box-shadow: 10px 10px 5px #888888;
+}
+
+.table-name{
+    padding-left: 5%;
+    margin-top: 50px;
+}
