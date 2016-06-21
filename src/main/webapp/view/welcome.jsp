@@ -10,6 +10,11 @@
 <body>
 <div class="welcome">
     <h3>Doctor <s:property value="doctor.firstName"></s:property> <s:property value="doctor.lastName"></s:property></h3>
+    <spa class="logout">
+        <s:form action="logout">
+            <s:submit value="Logout" cssClass="logout-button"></s:submit>
+        </s:form>
+    </spa>
 </div>
 <h4 class="table-name">Your Patients</h4>
 <table class="table table-hover patient-table">

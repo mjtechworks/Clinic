@@ -53,3 +53,15 @@ input[type=submit] {
     margin-left: 70px;
     margin-top: 10px;
 }
+
+.logout {
+    float: right;
+    margin-top: -83px;
+}
+
+.logout-button {
+    height: 67px;
+    background-color: #00aaff;
+    width: 100px;
+    border: none;
+}
