@@ -31,16 +31,4 @@ public class DoctorDAOImpl implements DoctorDAO {
         return user;
     }
 
-    @Override
-    public void addDoctor(Doctor doctor) {
-        Session session = sf.openSession();
-        Transaction tx = session.beginTransaction();
-
-        session.save(doctor);
-
-        tx.commit();
-        session.close();
-    }
-
-
 }

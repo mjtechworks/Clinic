@@ -2,10 +2,11 @@ package com.clinical.management.action;
 
 import com.clinical.management.dao.DoctorDAO;
 import com.clinical.management.dao.DoctorDAOImpl;
+import com.clinical.management.dao.PatientDAO;
+import com.clinical.management.dao.PatientDAOImpl;
 import com.clinical.management.model.Doctor;
 import com.clinical.management.model.Patient;
-import com.clinical.management.service.DoctorService;
-import com.clinical.management.service.Security;
+import com.clinical.management.utility.Security;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import org.apache.struts2.interceptor.SessionAware;
@@ -35,7 +36,10 @@ public class LoginAction extends ActionSupport implements SessionAware, ModelDri
             if (!session.containsKey("doctor"))
                 session.put("doctor", doctor);
 
-            patients = DoctorService.getAllDoctorPatients(doctor.getId());
+            SessionFactory sf = (SessionFactory) ctx.getAttribute("SessionFactory");
+            PatientDAO dao = new PatientDAOImpl(sf);
+
+            patients = dao.getPatientsByDoctorID(doctor.getId());
 
             return "SUCCESS";
         } else

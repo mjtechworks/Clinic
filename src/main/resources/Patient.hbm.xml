@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.clinical.management.model.Patient" table="patient">
+        <id name="id" type="java.lang.Integer">
+            <column name="id"/>
+            <generator class="identity"/>
+        </id>
+        <property name="doctorID" type="int">
+            <column name="doctorID" length="3" not-null="true"></column>
+        </property>
+        <property name="firstName" type="string">
+            <column name="firstName" length="32" not-null="true"/>
+        </property>
+        <property name="lastName" type="string">
+            <column name="lastName" length="32" not-null="true"/>
+        </property>
+        <property name="dob" type="java.util.Date">
+            <column name="dob" not-null="true"></column>
+        </property>
+        <property name="address" type="string">
+            <column name="address" length="32" not-null="true"/>
+        </property>
+        <property name="phoneNumber" type="string">
+            <column name="phoneNumber" length="32" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

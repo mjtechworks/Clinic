@@ -6,5 +6,4 @@ public interface DoctorDAO {
 
     Doctor getDoctorByCredentials(String userName, String password);
 
-    void addDoctor(Doctor doctor);
 }
