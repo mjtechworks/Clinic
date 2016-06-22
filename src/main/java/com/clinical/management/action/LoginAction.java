@@ -39,7 +39,10 @@ public class LoginAction extends ActionSupport implements SessionAware, ModelDri
             SessionFactory sf = (SessionFactory) ctx.getAttribute("SessionFactory");
             PatientDAO dao = new PatientDAOImpl(sf);
 
-            patients = dao.getPatientsByDoctorID(doctor.getId());
+            if (patientName != null)
+                patients = dao.getPatientsByName(doctor.getId(), patientName);
+            else
+                patients = dao.getPatientsByDoctorID(doctor.getId());
 
             return "SUCCESS";
         } else
@@ -51,6 +54,8 @@ public class LoginAction extends ActionSupport implements SessionAware, ModelDri
     private String username;
 
     private String password;
+
+    private String patientName;
 
     private Doctor doctor;
 
@@ -69,6 +74,11 @@ public class LoginAction extends ActionSupport implements SessionAware, ModelDri
     @Override
     public Doctor getModel() {
         return doctor;
+    }
+
+    @Override
+    public void setSession(Map<String, Object> session) {
+        this.session = session;
     }
 
     public String getUsername() {
@@ -103,8 +113,11 @@ public class LoginAction extends ActionSupport implements SessionAware, ModelDri
         this.patients = patients;
     }
 
-    @Override
-    public void setSession(Map<String, Object> session) {
-        this.session = session;
+    public String getPatientName() {
+        return patientName;
+    }
+
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
     }
 }

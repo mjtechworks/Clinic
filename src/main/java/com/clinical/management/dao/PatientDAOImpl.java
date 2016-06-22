@@ -40,9 +40,21 @@ public class PatientDAOImpl implements PatientDAO {
     }
 
     @Override
-    public List<Patient> getPatientsByName(String name) {
-        //TO DO
-        return null;
+    public List<Patient> getPatientsByName(int doctorID, String name) {
+
+        Session session = sf.openSession();
+        Transaction tx = session.beginTransaction();
+
+        Query query = session.createQuery("from Patient where doctorID=:id and (LOWER(firstName) like :name or LOWER(lastName) like :name)");
+        query.setInteger("id", doctorID);
+        query.setString("name", "%" + name.toLowerCase() + "%");
+
+        List<Patient> patients = (List<Patient>) query.list();
+
+        tx.commit();
+        session.close();
+
+        return patients;
     }
 
     @Override

@@ -11,7 +11,7 @@ public interface PatientDAO {
 
     List<Patient> getPatientsByDoctorID(int doctorID);
 
-    List<Patient> getPatientsByName(String name);
+    List<Patient> getPatientsByName(int doctorID, String name);
 
     void addPatient(Patient patient);
 

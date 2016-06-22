@@ -17,6 +17,12 @@
     </spa>
 </div>
 <h4 class="table-name">Your Patients</h4>
+<div class="search">
+    <s:form action="login" method="GET">
+        <s:textfield name="patientName" label="Patient Name"></s:textfield>
+        <s:submit value="Search" cssClass="btn btn-default"></s:submit>
+    </s:form>
+</div>
 <table class="table table-hover patient-table">
     <thead>
     <tr>
