@@ -1,5 +1,6 @@
 package com.clinical.management.model;
 
+
 public class Doctor {
 
     private int id;

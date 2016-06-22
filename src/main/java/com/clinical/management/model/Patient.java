@@ -5,6 +5,8 @@ import java.util.Date;
 
 public class Patient {
 
+    private int id;
+
     private int doctorID;
 
     private String firstName;
@@ -27,6 +29,14 @@ public class Patient {
         this.dob = dob;
         this.address = address;
         this.phoneNumber = phoneNumber;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getDoctorID() {

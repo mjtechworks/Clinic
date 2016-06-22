@@ -19,4 +19,10 @@
         <welcome-file>view/login.jsp</welcome-file>
     </welcome-file-list>
 
+    <listener>
+        <listener-class>
+            com.clinical.management.listener.HibernateServletContextListener
+        </listener-class>
+    </listener>
+
 </web-app>

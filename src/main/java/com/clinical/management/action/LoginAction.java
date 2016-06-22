@@ -1,25 +1,37 @@
 package com.clinical.management.action;
 
+import com.clinical.management.dao.DoctorDAO;
+import com.clinical.management.dao.DoctorDAOImpl;
 import com.clinical.management.model.Doctor;
 import com.clinical.management.model.Patient;
 import com.clinical.management.service.DoctorService;
+import com.clinical.management.service.Security;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.ModelDriven;
 import org.apache.struts2.interceptor.SessionAware;
+import org.apache.struts2.util.ServletContextAware;
+import org.hibernate.SessionFactory;
 
+import javax.servlet.ServletContext;
 import java.util.List;
 import java.util.Map;
 
-public class LoginAction extends ActionSupport implements SessionAware {
+public class LoginAction extends ActionSupport implements SessionAware, ModelDriven<Doctor>, ServletContextAware {
 
     @Override
     public String execute() throws Exception {
-        doctor = DoctorService.findDoctor(username, password);
 
-        if (doctor == null && session.containsKey("doctor"))
+        if (session.containsKey("doctor")) {
             doctor = (Doctor) session.get("doctor");
+        } else if (username != null && password != null) {
+            Security security = new Security();
+            SessionFactory sf = (SessionFactory) ctx.getAttribute("SessionFactory");
+            DoctorDAO dao = new DoctorDAOImpl(sf);
+
+            doctor = dao.getDoctorByCredentials(username, security.encrypt(password));
+        }
 
         if (doctor != null) {
-
             if (!session.containsKey("doctor"))
                 session.put("doctor", doctor);
 
@@ -42,6 +54,18 @@ public class LoginAction extends ActionSupport implements SessionAware {
 
     // For SessionAware
     Map<String, Object> session;
+
+    private ServletContext ctx;
+
+    @Override
+    public void setServletContext(ServletContext sc) {
+        this.ctx = sc;
+    }
+
+    @Override
+    public Doctor getModel() {
+        return doctor;
+    }
 
     public String getUsername() {
         return username;
