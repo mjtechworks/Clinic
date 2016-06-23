@@ -76,3 +76,28 @@ input[type=submit] {
     margin-top: 0px;
     margin-bottom: 10px;
 }
+
+.create {
+    margin-left: 10%;
+}
+
+.create input[type=submit] {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.create-patient {
+    margin-left: 20%;
+    margin-top: 10%;
+    width: 60%;
+    margin-right: 20%;
+    background-color: white;
+    height: 500px;
+    box-shadow: 10px 10px 5px #888888;
+}
+
+.create-patient form {
+    margin-left: 150px;
+    padding-top: 50px;
+}
+

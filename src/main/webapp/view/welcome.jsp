@@ -17,6 +17,11 @@
     </spa>
 </div>
 <h4 class="table-name">Your Patients</h4>
+<div class="create">
+    <s:form action="create">
+        <s:submit value="Add New Patient" cssClass="btn btn-primary"></s:submit>
+    </s:form>
+</div>
 <div class="search">
     <s:form action="login" method="GET">
         <s:textfield name="patientName" label="Patient Name"></s:textfield>

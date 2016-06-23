@@ -14,6 +14,10 @@
         <action name="logout" class="com.clinical.management.action.LogoutAction">
             <result name="SUCCESS">view/login.jsp</result>
         </action>
+        <action name="create" class="com.clinical.management.action.CreateAction">
+            <result name="SUCCESS">view/create.jsp</result>
+            <result name="ERROR">view/error.jsp</result>
+        </action>
     </package>
 
 </struts>
