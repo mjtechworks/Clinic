@@ -88,7 +88,7 @@ input[type=submit] {
 
 .create-patient {
     margin-left: 20%;
-    margin-top: 10%;
+    margin-top: 20px;
     width: 60%;
     margin-right: 20%;
     background-color: white;
@@ -101,3 +101,8 @@ input[type=submit] {
     padding-top: 50px;
 }
 
+#cancel {
+    float: right;
+    margin-top: -33px;
+    margin-right: 40px;
+}
