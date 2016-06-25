@@ -11,26 +11,32 @@ import org.apache.struts2.util.ServletContextAware;
 import org.hibernate.SessionFactory;
 
 import javax.servlet.ServletContext;
+import java.util.List;
 import java.util.Map;
 
 
-public class Update extends ActionSupport implements SessionAware, ModelDriven<Doctor>, ServletContextAware {
-
+public class UpdatePatientAction extends ActionSupport implements SessionAware, ModelDriven<Doctor>, ServletContextAware {
 
     @Override
     public String execute() throws Exception {
 
-        if (!session.containsKey("doctor") || patientID == 0)
+        if (!session.containsKey("doctor") || !session.containsKey("patientID"))
             return "ERROR";
 
         SessionFactory sf = (SessionFactory) ctx.getAttribute("SessionFactory");
         PatientDAO dao = new PatientDAOImpl(sf);
 
-        Patient patient = dao.getPatientById(patientID);
-
+        patientID = (int) session.get("patientID");
         doctor = (Doctor) session.get("doctor");
 
-        session.put("patientID", patientID);
+        session.remove("patientID");
+
+        patient.setDoctorID(doctor.getId());
+        patient.setId(patientID);
+
+        dao.updatePatient(patient);
+
+        patients = dao.getPatientsByDoctorID(doctor.getId());
 
         return "SUCCESS";
     }
@@ -39,6 +45,8 @@ public class Update extends ActionSupport implements SessionAware, ModelDriven<D
     private Doctor doctor;
 
     private Map<String, Object> session;
+
+    private List<Patient> patients;
 
     private ServletContext ctx;
 
@@ -54,20 +62,20 @@ public class Update extends ActionSupport implements SessionAware, ModelDriven<D
         this.patient = patient;
     }
 
-    public int getPatientID() {
-        return patientID;
-    }
-
-    public void setPatientID(int patientID) {
-        this.patientID = patientID;
-    }
-
     public Doctor getDoctor() {
         return doctor;
     }
 
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
+    }
+
+    public List<Patient> getPatients() {
+        return patients;
+    }
+
+    public void setPatients(List<Patient> patients) {
+        this.patients = patients;
     }
 
     @Override

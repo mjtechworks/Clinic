@@ -86,7 +86,7 @@ input[type=submit] {
     margin-bottom: 0px;
 }
 
-.create-patient {
+.create-patient, .update-patient {
     margin-left: 20%;
     margin-top: 20px;
     width: 60%;
@@ -107,7 +107,7 @@ input[type=submit] {
     margin-right: 40px;
 }
 
-#ui-datepicker-div{
+#ui-datepicker-div {
     background-color: #E7E7E7;
     box-shadow: 10px 10px 5px #888888;
 }
