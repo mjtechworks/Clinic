@@ -106,3 +106,8 @@ input[type=submit] {
     margin-top: -33px;
     margin-right: 40px;
 }
+
+#ui-datepicker-div{
+    background-color: #E7E7E7;
+    box-shadow: 10px 10px 5px #888888;
+}

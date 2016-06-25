@@ -19,6 +19,9 @@
         integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
         crossorigin="anonymous"></script>
 
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"
+        integrity="sha256-DI6NdAhhFRnO2k51mumYeDShet3I8AKCQf/tf7ARNhI=" crossorigin="anonymous"></script>
+
 <link rel="stylesheet" href="css/app.css">
 
 <script src="js/app.js"></script>

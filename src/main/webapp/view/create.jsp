@@ -23,7 +23,7 @@
     <s:form action="create-patient">
         <s:textfield name="patient.firstName" label="First Name"></s:textfield>
         <s:textfield name="patient.lastName" label="Last Name"></s:textfield>
-        <s:textfield name="dob" label="Date of Birth"></s:textfield>
+        <s:textfield name="dob" label="Date of Birth" id="datepicker"></s:textfield>
         <s:textfield name="patient.address" label="Address"></s:textfield>
         <s:textfield name="patient.phoneNumber" label="Phone Number"></s:textfield>
         <s:submit value="Create" cssClass="btn btn-default"></s:submit>
