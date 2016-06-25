@@ -48,7 +48,9 @@
             <td><s:property value="address"/></td>
             <td><s:property value="phoneNumber"/></td>
             <td>
-                <button class="btn btn-success">Update</button>
+                <button class="btn btn-success"
+                        onclick="updatePatient(<s:property value="id"/>)">Update
+                </button>
             </td>
             <td>
                 <button class="btn btn-danger"
@@ -61,6 +63,10 @@
 <script>
     function deletePatient(id) {
         location.href = '/delete.action?patientID=' + id;
+    }
+
+    function updatePatient(id) {
+        location.href = '/update.action?patientID=' + id;
     }
 </script>
 <s:include value="master.jsp"></s:include>
