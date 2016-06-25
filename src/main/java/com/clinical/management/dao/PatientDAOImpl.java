@@ -78,7 +78,13 @@ public class PatientDAOImpl implements PatientDAO {
 
     @Override
     public void updatePatient(Patient patient) {
-        //TO DO
+        Session session = sf.openSession();
+        Transaction transaction = session.beginTransaction();
+
+        session.update(patient);
+
+        transaction.commit();
+        session.close();
     }
 
     @Override
