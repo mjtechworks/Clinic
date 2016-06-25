@@ -30,7 +30,7 @@
             <result name="SUCCESS">view/update.jsp</result>
             <result name="ERROR">view/error.jsp</result>
         </action>
-        <action name="update-patient" class="com.clinical.management.action.Update">
+        <action name="update-patient" class="com.clinical.management.action.UpdatePatientAction">
             <result name="SUCCESS">view/welcome.jsp</result>
             <result name="ERROR">view/error.jsp</result>
         </action>

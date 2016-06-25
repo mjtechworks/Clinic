@@ -20,7 +20,7 @@
     <h4 class="table-name">Add below your patient information</h4>
 </div>
 <div class="update-patient">
-    <s:form action="create-patient">
+    <s:form action="update-patient">
         <s:textfield name="patient.firstName" label="First Name"></s:textfield>
         <s:textfield name="patient.lastName" label="Last Name"></s:textfield>
         <s:textfield name="dob" label="Date of Birth" id="datepicker"></s:textfield>

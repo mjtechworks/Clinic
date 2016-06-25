@@ -96,7 +96,7 @@ input[type=submit] {
     box-shadow: 10px 10px 5px #888888;
 }
 
-.create-patient form {
+.create-patient form, .update-patient form {
     margin-left: 150px;
     padding-top: 50px;
 }
