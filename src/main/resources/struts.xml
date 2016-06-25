@@ -22,6 +22,10 @@
             <result name="SUCCESS">view/welcome.jsp</result>
             <result name="ERROR">view/error.jsp</result>
         </action>
+        <action name="delete" class="com.clinical.management.action.DeleteAction">
+            <result name="SUCCESS">view/welcome.jsp</result>
+            <result name="ERROR">view/error.jsp</result>
+        </action>
     </package>
 
 </struts>

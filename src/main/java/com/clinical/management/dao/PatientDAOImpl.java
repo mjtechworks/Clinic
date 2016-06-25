@@ -18,9 +18,17 @@ public class PatientDAOImpl implements PatientDAO {
 
     @Override
     public Patient getPatientById(int id) {
-        //TO DO
+        Session session = sf.openSession();
+        Transaction tx = session.beginTransaction();
 
-        return null;
+        Query query = session.createQuery("from Patient where id=:id");
+        query.setInteger("id", id);
+
+        Patient patient = (Patient) query.uniqueResult();
+
+        tx.commit();
+        session.close();
+        return patient;
     }
 
     @Override
@@ -75,6 +83,14 @@ public class PatientDAOImpl implements PatientDAO {
 
     @Override
     public void deletePatientById(int id) {
-        //TO DO
+        Session session = sf.openSession();
+        Transaction transaction = session.beginTransaction();
+
+        Patient patient = getPatientById(id);
+
+        session.delete(patient);
+
+        transaction.commit();
+        session.close();
     }
 }

@@ -36,6 +36,8 @@
         <th>Date of Birth</th>
         <th>Address</th>
         <th>Phone Number</th>
+        <th>Update</th>
+        <th>Delete</th>
     </tr>
     </thead>
     <s:iterator value="patients">
@@ -45,9 +47,22 @@
             <td><s:property value="dob"/></td>
             <td><s:property value="address"/></td>
             <td><s:property value="phoneNumber"/></td>
+            <td>
+                <button class="btn btn-success">Update</button>
+            </td>
+            <td>
+                <button class="btn btn-danger"
+                        onclick="deletePatient(<s:property value="id"/>)">Delete
+                </button>
+            </td>
         </tr>
     </s:iterator>
 </table>
+<script>
+    function deletePatient(id) {
+        location.href = '/delete.action?patientID=' + id;
+    }
+</script>
 <s:include value="master.jsp"></s:include>
 </body>
 </html>
