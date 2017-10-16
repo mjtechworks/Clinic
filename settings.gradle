@@ -1,0 +1,3 @@
+rootProject.name = 'clinical-management'
+
+include 'clinical-management-doctor'

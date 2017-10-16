@@ -1,0 +1,8 @@
+doctor-service:
+ build: doctor-service
+ ports:
+  - 7000:7000
+ links:
+  - doctor-mongodb
+doctor-mongodb:
+ image: mongo
