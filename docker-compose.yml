@@ -4,5 +4,16 @@ doctor-service:
   - 7000:7000
  links:
   - doctor-mongodb
+
 doctor-mongodb:
+ image: mongo
+
+patient-service:
+ build: patient-service
+ ports:
+  - 8000:8000
+ links:
+  - patient-mongodb
+
+patient-mongodb:
  image: mongo
