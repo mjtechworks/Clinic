@@ -2,3 +2,4 @@ rootProject.name = 'clinical-management'
 
 include 'doctor-service'
 include 'patient-service'
+include 'drug-service'

@@ -17,3 +17,13 @@ patient-service:
 
 patient-mongodb:
  image: mongo
+
+drug-service:
+ build: drug-service
+ ports:
+  - 6000:6000
+ links:
+  - drug-mongodb
+
+drug-mongodb:
+ image: mongo
