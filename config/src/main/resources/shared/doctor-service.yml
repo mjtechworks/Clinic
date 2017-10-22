@@ -1,0 +1,12 @@
+spring:
+  data:
+    mongodb:
+      host: doctor-mongodb
+      username: user
+      password: ${MONGODB_PASSWORD}
+      database: clinical-management
+      port: 27017
+
+server:
+  context-path: /doctors
+  port: 7000
