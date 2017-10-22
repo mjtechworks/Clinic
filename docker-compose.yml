@@ -1,29 +1,86 @@
-doctor-service:
- build: doctor-service
- ports:
-  - 7000:7000
- links:
-  - doctor-mongodb
+version: '1.0'
 
-doctor-mongodb:
- image: mongo
+services:
+  doctor-service:
+      environment:
+        DOCTOR_SERVICE_PASSWORD: $DOCTOR_SERVICE_PASSWORD
+        MONGODB_PASSWORD: $MONGODB_PASSWORD
+      build: doctor-service
+      ports:
+        - 7000:7000
+      restart: always
+      depends_on:
+        config:
+          condition: service_healthy
+      logging:
+        options:
+          max-size: "10m"
+          max-file: "10"
 
-drug-service:
- build: drug-service
- ports:
-  - 7500:7500
- links:
-  - drug-mongodb
+  doctor-mongodb:
+      environment:
+        MONGODB_PASSWORD: $MONGODB_PASSWORD
+      build: mongodb
+      ports:
+        - 27000:27017
+      restart: always
+      logging:
+        options:
+          max-size: "10m"
+          max-file: "10"
 
-drug-mongodb:
- image: mongo
+  drug-service:
+      environment:
+        DRUG_SERVICE_PASSWORD: $DRUG_SERVICE_PASSWORD
+        MONGODB_PASSWORD: $MONGODB_PASSWORD
+      build: drug-service
+      ports:
+        - 7500:7500
+      restart: always
+      depends_on:
+        config:
+          condition: service_healthy
+      logging:
+        options:
+          max-size: "10m"
+          max-file: "10"
 
-patient-service:
- build: patient-service
- ports:
-  - 8000:8000
- links:
-  - patient-mongodb
+  drug-mongodb:
+      environment:
+        MONGODB_PASSWORD: $MONGODB_PASSWORD
+      build: mongodb
+      ports:
+        - 27500:27017
+      restart: always
+      logging:
+        options:
+          max-size: "10m"
+          max-file: "10"
 
-patient-mongodb:
- image: mongo
+  patient-service:
+      environment:
+        PATIENT_SERVICE_PASSWORD: $PATIENT_SERVICE_PASSWORD
+        MONGODB_PASSWORD: $MONGODB_PASSWORD
+      build: patient-service
+      ports:
+        - 8000:8000
+      restart: always
+      depends_on:
+        config:
+          condition: service_healthy
+      logging:
+        options:
+          max-size: "10m"
+          max-file: "10"
+
+  drug-mongodb:
+      environment:
+        MONGODB_PASSWORD: $MONGODB_PASSWORD
+      build: mongodb
+      ports:
+        - 28000:27017
+      restart: always
+      logging:
+        options:
+          max-size: "10m"
+          max-file: "10"
