@@ -8,6 +8,16 @@ doctor-service:
 doctor-mongodb:
  image: mongo
 
+drug-service:
+ build: drug-service
+ ports:
+  - 7500:7500
+ links:
+  - drug-mongodb
+
+drug-mongodb:
+ image: mongo
+
 patient-service:
  build: patient-service
  ports:
@@ -16,14 +26,4 @@ patient-service:
   - patient-mongodb
 
 patient-mongodb:
- image: mongo
-
-drug-service:
- build: drug-service
- ports:
-  - 6000:6000
- links:
-  - drug-mongodb
-
-drug-mongodb:
  image: mongo
