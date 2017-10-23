@@ -84,3 +84,15 @@ services:
         options:
           max-size: "10m"
           max-file: "10"
+
+  config:
+    environment:
+      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+    build: config
+    ports:
+     - 8888:8888
+    restart: always
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
