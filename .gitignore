@@ -4,3 +4,4 @@
 doctor-service/build/
 patient-service/build/
 drug-service/build/
+config/build/
