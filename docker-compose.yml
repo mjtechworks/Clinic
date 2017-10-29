@@ -1,8 +1,21 @@
 version: '2.1'
 
 services:
+  config:
+    environment:
+      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+    build: config
+    ports:
+     - 8888:8888
+    restart: always
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
   doctor-service:
       environment:
+        CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
         DOCTOR_SERVICE_PASSWORD: $DOCTOR_SERVICE_PASSWORD
         MONGODB_PASSWORD: $MONGODB_PASSWORD
       build: doctor-service
@@ -31,6 +44,7 @@ services:
 
   drug-service:
       environment:
+        CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
         DRUG_SERVICE_PASSWORD: $DRUG_SERVICE_PASSWORD
         MONGODB_PASSWORD: $MONGODB_PASSWORD
       build: drug-service
@@ -59,6 +73,7 @@ services:
 
   patient-service:
       environment:
+        CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
         PATIENT_SERVICE_PASSWORD: $PATIENT_SERVICE_PASSWORD
         MONGODB_PASSWORD: $MONGODB_PASSWORD
       build: patient-service
@@ -84,15 +99,3 @@ services:
         options:
           max-size: "10m"
           max-file: "10"
-
-  config:
-    environment:
-      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-    build: config
-    ports:
-     - 8888:8888
-    restart: always
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "10"
