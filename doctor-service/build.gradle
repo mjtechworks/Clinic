@@ -31,7 +31,6 @@ ext {
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.springframework.boot:spring-boot-starter-data-mongodb')
-    compile('org.springframework.boot:spring-boot-starter-security')
     compile('org.springframework.cloud:spring-cloud-starter-config')
     compile group: 'javax.persistence', name: 'persistence-api', version: '1.0'
     testCompile('org.springframework.boot:spring-boot-starter-test')
