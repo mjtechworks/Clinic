@@ -13,6 +13,21 @@ services:
         max-size: "10m"
         max-file: "10"
 
+  registry:
+      environment:
+        CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+      build: registry
+      ports:
+       - 7777:7777
+      restart: always
+      depends_on:
+        config:
+          condition: service_healthy
+      logging:
+        options:
+          max-size: "10m"
+          max-file: "10"
+
   doctor-service:
       environment:
         CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
@@ -88,7 +103,7 @@ services:
           max-size: "10m"
           max-file: "10"
 
-  drug-mongodb:
+  patient-mongodb:
       environment:
         MONGODB_PASSWORD: $MONGODB_PASSWORD
       build: mongodb
