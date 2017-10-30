@@ -18,7 +18,7 @@ services:
         CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       build: registry
       ports:
-       - 7777:7777
+       - 8761:8761
       restart: always
       depends_on:
         config:

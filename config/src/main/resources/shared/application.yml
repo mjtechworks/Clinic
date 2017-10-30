@@ -8,4 +8,4 @@ eureka:
     prefer-ip-address: true
   client:
     serviceUrl:
-      defaultZone: http://registry:7777/eureka/
+      defaultZone: http://registry:8761/eureka/
