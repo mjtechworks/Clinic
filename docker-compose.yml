@@ -32,12 +32,12 @@ services:
       environment:
         CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
       build: gateway
+      ports:
+        - 80:4000
       restart: always
       depends_on:
         config:
           condition: service_healthy
-      ports:
-        - 80:4000
       logging:
         options:
           max-size: "10m"
