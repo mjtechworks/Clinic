@@ -18,19 +18,19 @@ zuul:
 
   routes:
     doctor-service:
-        path: /doctor/**
+        path: /doctors/**
         serviceId: doctor-service
         stripPrefix: false
         sensitiveHeaders:
 
     drug-service:
-        path: /drug/**
+        path: /drugs/**
         serviceId: drug-service
         stripPrefix: false
         sensitiveHeaders:
 
     patient-service:
-        path: /patient/**
+        path: /patients/**
         serviceId: patient-service
         stripPrefix: false
         sensitiveHeaders:
