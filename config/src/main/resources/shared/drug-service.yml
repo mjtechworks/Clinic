@@ -1,7 +1,7 @@
 spring:
   data:
     mongodb:
-      host: drugr-mongodb
+      host: drug-mongodb
       username: user
       password: ${MONGODB_PASSWORD}
       database: clinical-management
