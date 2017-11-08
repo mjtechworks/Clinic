@@ -38,6 +38,7 @@ dependencies {
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('de.flapdoodle.embed:de.flapdoodle.embed.mongo');
+    testCompile('com.jayway.jsonpath:json-path:2.2.0');
 }
 
 dependencyManagement {
