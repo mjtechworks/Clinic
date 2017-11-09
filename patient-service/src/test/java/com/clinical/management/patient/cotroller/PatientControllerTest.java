@@ -47,7 +47,7 @@ public class PatientControllerTest {
     }
 
     @Test
-    public void getAccountById() throws Exception {
+    public void getPatientById() throws Exception {
         Patient patient = new Patient();
 
         patient.setId("55");
@@ -63,7 +63,7 @@ public class PatientControllerTest {
     }
 
     @Test
-    public void saveAccount() throws Exception {
+    public void savePatient() throws Exception {
         Patient patient = new Patient();
 
         patient.setId("55");
