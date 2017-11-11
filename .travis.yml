@@ -30,5 +30,3 @@ cache:
     - $HOME/.sonar/cache
     - $HOME/.gradle
     - .gradle
-
-dist: trusty
