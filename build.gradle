@@ -1,0 +1,55 @@
+buildscript {
+    ext {
+        springBootVersion = '1.5.8.RELEASE'
+        sonarQubeVersion = '2.6'
+    }
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:${sonarQubeVersion}")
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'jacoco'
+    apply plugin: 'org.sonarqube'
+    apply plugin: 'eclipse'
+    apply plugin: 'org.springframework.boot'
+
+    group 'com.clinical.management'
+    version '1.0-SNAPSHOT'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+    }
+
+    ext {
+        springCloudVersion = 'Dalston.SR4'
+    }
+
+    dependencies {
+        testCompile('org.springframework.boot:spring-boot-starter-test')
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+    }
+
+    sonarqube {
+        properties {
+            property "sonar.projectName", "Clinical-Management"
+            property "sonar.projectKey", "com.clinical.management"
+        }
+    }
+}
