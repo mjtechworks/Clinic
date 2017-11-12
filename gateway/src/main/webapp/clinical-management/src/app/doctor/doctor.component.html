@@ -1,0 +1,13 @@
+<div>
+  <h2>Doctor</h2>
+
+  <label>Full Name</label>
+  <input #fullName type="text"/>
+
+  <label>Email</label>
+  <input #email type="text"/>
+
+  <br>
+
+  <button (click)="newDoctor(fullName.value, email.value)"> Save</button>
+</div>
