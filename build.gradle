@@ -15,10 +15,18 @@ buildscript {
     }
 }
 
+apply plugin: 'jacoco'
+apply plugin: 'org.sonarqube'
+
+sonarqube {
+    properties {
+        property "sonar.projectName", "Clinical-Management"
+        property "sonar.projectKey", "com.clinical.management"
+    }
+}
+
 subprojects {
     apply plugin: 'java'
-    apply plugin: 'jacoco'
-    apply plugin: 'org.sonarqube'
     apply plugin: 'eclipse'
     apply plugin: 'org.springframework.boot'
 
@@ -43,13 +51,6 @@ subprojects {
     dependencyManagement {
         imports {
             mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-        }
-    }
-
-    sonarqube {
-        properties {
-            property "sonar.projectName", "Clinical-Management"
-            property "sonar.projectKey", "com.clinical.management"
         }
     }
 }
