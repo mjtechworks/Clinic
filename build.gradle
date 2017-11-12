@@ -1,22 +1,18 @@
 buildscript {
     ext {
         springBootVersion = '1.5.8.RELEASE'
-        sonarQubeVersion = '2.6'
     }
     repositories {
         mavenCentral()
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:${sonarQubeVersion}")
     }
 }
 
-apply plugin: 'jacoco'
-apply plugin: 'org.sonarqube'
+plugins {
+    id "org.sonarqube" version "2.6"
+}
 
 sonarqube {
     properties {
@@ -28,6 +24,7 @@ sonarqube {
 subprojects {
     apply plugin: 'java'
     apply plugin: 'eclipse'
+    apply plugin: 'jacoco'
     apply plugin: 'org.springframework.boot'
 
     group 'com.clinical.management'
