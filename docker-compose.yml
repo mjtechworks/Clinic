@@ -72,35 +72,6 @@ services:
           max-size: "10m"
           max-file: "10"
 
-  drug-service:
-      environment:
-        CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
-        DRUG_SERVICE_PASSWORD: $DRUG_SERVICE_PASSWORD
-        MONGODB_PASSWORD: $MONGODB_PASSWORD
-      build: drug-service
-      ports:
-        - 7500:7500
-      restart: always
-      depends_on:
-        config:
-          condition: service_healthy
-      logging:
-        options:
-          max-size: "10m"
-          max-file: "10"
-
-  drug-mongodb:
-      environment:
-        MONGODB_PASSWORD: $MONGODB_PASSWORD
-      build: mongodb
-      ports:
-        - 27500:27017
-      restart: always
-      logging:
-        options:
-          max-size: "10m"
-          max-file: "10"
-
   patient-service:
       environment:
         CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD

@@ -3,7 +3,10 @@
 .DS_Store
 doctor-service/build/
 patient-service/build/
-drug-service/build/
 config/build/
 gateway/build/
 registry/build/
+doctor-service/out/
+gateway/src/test/
+patient-service/out/
+registry/src/test/
