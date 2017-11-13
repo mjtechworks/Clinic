@@ -1,0 +1,5 @@
+spring:
+  data:
+    mongodb:
+      database: clinical-management
+      port: 0
