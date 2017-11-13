@@ -23,6 +23,12 @@ zuul:
         stripPrefix: false
         sensitiveHeaders:
 
+    appointment-service:
+        path: /appointments/**
+        serviceId: appointment-service
+        stripPrefix: false
+        sensitiveHeaders:
+
     patient-service:
         path: /patients/**
         serviceId: patient-service
