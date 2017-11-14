@@ -18,6 +18,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import javax.ws.rs.core.MediaType;
 
+import java.text.SimpleDateFormat;
+
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -48,27 +50,46 @@ public class PatientControllerTest {
 
     @Test
     public void getPatientById() throws Exception {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+
         Patient patient = new Patient();
 
         patient.setId("55");
+        patient.setFirstName("Test 1");
+        patient.setLastName("Test 2");
         patient.setEmail("test@test.com");
-        patient.setFullName("Test Test");
+        patient.setPhoneNumber("0700000000");
+        patient.setHeight(175);
+        patient.setWeight(80);
+        patient.setDateOfBirth(sdf.parse("10/10/1990"));
 
         when(patientRepository.findOne(patient.getId())).thenReturn(patient);
 
         mockMvc.perform(get("/" + patient.getId()))
-                .andExpect(jsonPath("$.fullName").value(patient.getFullName()))
+                .andExpect(jsonPath("$.firstName").value(patient.getFirstName()))
+                .andExpect(jsonPath("$.lastName").value(patient.getLastName()))
                 .andExpect(jsonPath("$.email").value(patient.getEmail()))
+                .andExpect(jsonPath("$.phoneNumber").value(patient.getPhoneNumber()))
+                .andExpect(jsonPath("$.height").value(patient.getHeight()))
+                .andExpect(jsonPath("$.weight").value(patient.getWeight()))
+                .andExpect(jsonPath("$.dateOfBirth").value(patient.getDateOfBirth()))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void savePatient() throws Exception {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+
         Patient patient = new Patient();
 
         patient.setId("55");
+        patient.setFirstName("Test 1");
+        patient.setLastName("Test 2");
         patient.setEmail("test@test.com");
-        patient.setFullName("Test Test");
+        patient.setPhoneNumber("0700000000");
+        patient.setHeight(175);
+        patient.setWeight(80);
+        patient.setDateOfBirth(sdf.parse("10/10/1990"));
 
         String json = mapper.writeValueAsString(patient);
 

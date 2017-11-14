@@ -1,8 +1,12 @@
 package com.clinical.management.patient.domain;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @Document(collection = "patients")
 public class Patient {
@@ -10,8 +14,28 @@ public class Patient {
     @Id
     private String id;
 
+    @NotNull
+    private String firstName;
+
+    @NotNull
+    private String lastName;
+
+    @NotNull
+    @Email
     private String email;
-    private String fullName;
+
+    @NotNull
+    @Length(max = 10, min = 10)
+    private String phoneNumber;
+
+    @NotNull
+    private Integer height;
+
+    @NotNull
+    private Integer weight;
+
+    @NotNull
+    private Date dateOfBirth;
 
     public String getId() {
         return id;
@@ -19,6 +43,22 @@ public class Patient {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -29,11 +69,35 @@ public class Patient {
         this.email = email;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Integer getHeight() {
+        return height;
+    }
+
+    public void setHeight(Integer height) {
+        this.height = height;
+    }
+
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 }
