@@ -51,14 +51,20 @@ public class DoctorControllerTest {
         Doctor doctor = new Doctor();
 
         doctor.setId("55");
-        doctor.setFullName("Test");
+        doctor.setFirstName("Test 1");
+        doctor.setLastName("Test 2");
         doctor.setEmail("test@test.com");
+        doctor.setAddress("Test Address");
+        doctor.setPhoneNumber("0700000000");
 
         when(doctorRepository.findOne(doctor.getId())).thenReturn(doctor);
 
         mockMvc.perform(get("/" + doctor.getId()))
-                .andExpect(jsonPath("$.fullName").value(doctor.getFullName()))
+                .andExpect(jsonPath("$.firstName").value(doctor.getFirstName()))
+                .andExpect(jsonPath("$.lastName").value(doctor.getLastName()))
                 .andExpect(jsonPath("$.email").value(doctor.getEmail()))
+                .andExpect(jsonPath("$.address").value(doctor.getAddress()))
+                .andExpect(jsonPath("$.phoneNumber").value(doctor.getPhoneNumber()))
                 .andExpect(status().isOk());
     }
 
@@ -67,8 +73,11 @@ public class DoctorControllerTest {
         Doctor doctor = new Doctor();
 
         doctor.setId("55");
-        doctor.setFullName("Test");
+        doctor.setFirstName("Test 1");
+        doctor.setLastName("Test 2");
         doctor.setEmail("test@test.com");
+        doctor.setAddress("Test Address");
+        doctor.setPhoneNumber("0700000000");
 
         String json = mapper.writeValueAsString(doctor);
 

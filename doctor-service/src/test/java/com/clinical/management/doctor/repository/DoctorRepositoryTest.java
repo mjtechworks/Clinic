@@ -24,15 +24,21 @@ public class DoctorRepositoryTest {
         Doctor doctor = new Doctor();
 
         doctor.setId("55");
-        doctor.setFullName("Test");
+        doctor.setFirstName("Test 1");
+        doctor.setLastName("Test 2");
         doctor.setEmail("test@test.com");
+        doctor.setAddress("Test Address");
+        doctor.setPhoneNumber("0700000000");
 
         doctorRepository.save(doctor);
 
         Doctor found = doctorRepository.findOne(doctor.getId());
 
-        assertEquals(doctor.getFullName(), found.getFullName());
+        assertEquals(doctor.getFirstName(), found.getFirstName());
+        assertEquals(doctor.getLastName(), found.getLastName());
         assertEquals(doctor.getEmail(), found.getEmail());
+        assertEquals(doctor.getAddress(), found.getAddress());
+        assertEquals(doctor.getPhoneNumber(), found.getPhoneNumber());
     }
 
 }
