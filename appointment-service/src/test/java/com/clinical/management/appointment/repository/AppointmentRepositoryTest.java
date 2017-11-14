@@ -29,6 +29,8 @@ public class AppointmentRepositoryTest {
         Appointment appointment = new Appointment();
 
         appointment.setId("55");
+        appointment.setPatientId("66");
+        appointment.setDoctorId("77");
         appointment.setStartDate(sdf.parse("11/11/2017 10:45"));
         appointment.setEndDate(sdf.parse("11/11/2017 11:15"));
         appointment.setRemark("Test - Remark");
@@ -39,6 +41,9 @@ public class AppointmentRepositoryTest {
 
         Appointment found = appointmentRepository.findOne(appointment.getId());
 
+        assertEquals(appointment.getPatientId(), found.getPatientId());
+        assertEquals(appointment.getDoctorId(), found.getDoctorId());
+        assertEquals(appointment.getStartDate(), found.getStartDate());
         assertEquals(appointment.getStartDate(), found.getStartDate());
         assertEquals(appointment.getEndDate(), found.getEndDate());
         assertEquals(appointment.getRemark(), found.getRemark());

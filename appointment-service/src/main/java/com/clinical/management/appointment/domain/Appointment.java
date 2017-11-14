@@ -1,8 +1,8 @@
 package com.clinical.management.appointment.domain;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -11,6 +11,12 @@ public class Appointment {
 
     @Id
     private String id;
+
+    @NotNull
+    private String doctorId;
+
+    @NotNull
+    private String patientId;
 
     @NotNull
     private Date startDate;
@@ -32,6 +38,22 @@ public class Appointment {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(String doctorId) {
+        this.doctorId = doctorId;
+    }
+
+    public String getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(String patientId) {
+        this.patientId = patientId;
     }
 
     public Date getStartDate() {

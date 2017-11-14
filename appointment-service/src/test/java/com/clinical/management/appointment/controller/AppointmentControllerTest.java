@@ -52,6 +52,8 @@ public class AppointmentControllerTest {
         Appointment appointment = new Appointment();
 
         appointment.setId("55");
+        appointment.setPatientId("66");
+        appointment.setDoctorId("77");
         appointment.setStartDate(sdf.parse("11/11/2017 10:45"));
         appointment.setEndDate(sdf.parse("11/11/2017 11:15"));
         appointment.setRemark("Test - Remark");
@@ -61,6 +63,8 @@ public class AppointmentControllerTest {
         when(appointmentRepository.findOne(appointment.getId())).thenReturn(appointment);
 
         mockMvc.perform(get("/" + appointment.getId()))
+                .andExpect(jsonPath("$.doctorId").value(appointment.getDoctorId()))
+                .andExpect(jsonPath("$.patientId").value(appointment.getPatientId()))
                 .andExpect(jsonPath("$.startDate").value(appointment.getStartDate()))
                 .andExpect(jsonPath("$.endDate").value(appointment.getEndDate()))
                 .andExpect(jsonPath("$.remark").value(appointment.getRemark()))
@@ -77,6 +81,8 @@ public class AppointmentControllerTest {
         Appointment appointment = new Appointment();
 
         appointment.setId("55");
+        appointment.setPatientId("66");
+        appointment.setDoctorId("77");
         appointment.setStartDate(sdf.parse("11/11/2017 10:45"));
         appointment.setEndDate(sdf.parse("11/11/2017 11:15"));
         appointment.setRemark("Test - Remark");
