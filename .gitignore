@@ -10,3 +10,4 @@ doctor-service/out/
 gateway/src/test/
 patient-service/out/
 registry/src/test/
+gateway/src/main/webapp/clinical-management/node_modules/
