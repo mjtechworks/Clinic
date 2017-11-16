@@ -2,6 +2,7 @@ package com.clinical.management.patient.repository;
 
 import com.clinical.management.patient.PatientApplication;
 import com.clinical.management.patient.domain.Patient;
+import com.clinical.management.patient.util.PatientUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
 
@@ -22,18 +25,7 @@ public class PatientRepositoryTest {
 
     @Test
     public void findPatientById() throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
-
-        Patient patient = new Patient();
-
-        patient.setId("55");
-        patient.setFirstName("Test 1");
-        patient.setLastName("Test 2");
-        patient.setEmail("test@test.com");
-        patient.setPhoneNumber("0700000000");
-        patient.setHeight(175);
-        patient.setWeight(80);
-        patient.setDateOfBirth(sdf.parse("10/10/1990"));
+        Patient patient = PatientUtil.getPatient();
 
         patientRepository.save(patient);
 
@@ -47,5 +39,30 @@ public class PatientRepositoryTest {
         assertEquals(patient.getHeight(), found.getHeight());
         assertEquals(patient.getDateOfBirth(), found.getDateOfBirth());
     }
+
+    @Test
+    public void findAllPatients() throws ParseException {
+        List<Patient> patients = PatientUtil.getPatients();
+
+        patientRepository.save(patients);
+
+        List<Patient> founds = patientRepository.findAll();
+
+        assertEquals(founds.size(), 5);
+
+        for (int i = 0; i < 5; i++) {
+            Patient patient = patients.get(i);
+            Patient found = founds.get(i);
+
+            assertEquals(patient.getFirstName(), found.getFirstName());
+            assertEquals(patient.getLastName(), found.getLastName());
+            assertEquals(patient.getEmail(), found.getEmail());
+            assertEquals(patient.getPhoneNumber(), found.getPhoneNumber());
+            assertEquals(patient.getWeight(), found.getWeight());
+            assertEquals(patient.getHeight(), found.getHeight());
+            assertEquals(patient.getDateOfBirth(), found.getDateOfBirth());
+        }
+    }
+
 
 }

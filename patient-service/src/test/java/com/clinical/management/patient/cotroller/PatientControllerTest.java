@@ -4,6 +4,7 @@ import com.clinical.management.patient.PatientApplication;
 import com.clinical.management.patient.controller.PatientController;
 import com.clinical.management.patient.domain.Patient;
 import com.clinical.management.patient.repository.PatientRepository;
+import com.clinical.management.patient.util.PatientUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +19,10 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import javax.ws.rs.core.MediaType;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -50,18 +54,7 @@ public class PatientControllerTest {
 
     @Test
     public void getPatientById() throws Exception {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
-
-        Patient patient = new Patient();
-
-        patient.setId("55");
-        patient.setFirstName("Test 1");
-        patient.setLastName("Test 2");
-        patient.setEmail("test@test.com");
-        patient.setPhoneNumber("0700000000");
-        patient.setHeight(175);
-        patient.setWeight(80);
-        patient.setDateOfBirth(sdf.parse("10/10/1990"));
+        Patient patient = PatientUtil.getPatient();
 
         when(patientRepository.findOne(patient.getId())).thenReturn(patient);
 
@@ -77,21 +70,17 @@ public class PatientControllerTest {
     }
 
     @Test
+    public void getAllPatients() throws Exception {
+        when(patientRepository.findAll()).thenReturn(PatientUtil.getPatients());
+
+        mockMvc.perform(get("/all"))
+                .andExpect(status().isOk());
+    }
+
+
+    @Test
     public void savePatient() throws Exception {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
-
-        Patient patient = new Patient();
-
-        patient.setId("55");
-        patient.setFirstName("Test 1");
-        patient.setLastName("Test 2");
-        patient.setEmail("test@test.com");
-        patient.setPhoneNumber("0700000000");
-        patient.setHeight(175);
-        patient.setWeight(80);
-        patient.setDateOfBirth(sdf.parse("10/10/1990"));
-
-        String json = mapper.writeValueAsString(patient);
+        String json = mapper.writeValueAsString(PatientUtil.getPatient());
 
         mockMvc.perform(post("").contentType(MediaType.APPLICATION_JSON).content(json))
                 .andExpect(status().isOk());
