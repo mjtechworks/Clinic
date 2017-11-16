@@ -1,42 +1,71 @@
-<div class="container">
-    <h2>Patient</h2>
+<div class="row">
+    <div class="col-md-6">
+        <h2>New Patient</h2>
 
-    <form (ngSubmit)="onSubmit()" #patientForm="ngForm">
-        <div class="form-group">
-            <label for="firstName">First Name</label>
-            <input type="text" class="form-control" id="firstName" required [(ngModel)]="model.firstName"
-                   name="firstName">
-        </div>
-        <div class="form-group">
-            <label for="lastName">Last Name</label>
-            <input type="text" class="form-control" id="lastName" required [(ngModel)]="model.lastName"
-                   name="lastName">
-        </div>
-        <div class="form-group">
-            <label for="lastName">Email</label>
-            <input type="text" class="form-control" id="email" required [(ngModel)]="model.email"
-                   name="email">
-        </div>
-        <div class="form-group">
-            <label for="lastName">Phone Number</label>
-            <input type="text" class="form-control" id="phoneNumber" required [(ngModel)]="model.phoneNumber"
-                   name="phoneNumber">
-        </div>
-        <div class="form-group">
-            <label for="lastName">Height</label>
-            <input type="text" class="form-control" id="height" required [(ngModel)]="model.height"
-                   name="height">
-        </div>
-        <div class="form-group">
-            <label for="lastName">Weight</label>
-            <input type="text" class="form-control" id="weight" required [(ngModel)]="model.weight"
-                   name="weight">
-        </div>
-        <div class="form-group">
-            <label for="lastName">Date of Birth</label>
-            <input type="text" class="form-control" id="dateOfBirth" required [(ngModel)]="model.dateOfBirth"
-                   name="dateOfBirth">
-        </div>
-        <button type="submit" class="btn btn-success" [disabled]="!patientForm.form.valid">Submit</button>
-    </form>
+        <form (ngSubmit)="onSubmit()" #patientForm="ngForm">
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" class="form-control" id="firstName" required [(ngModel)]="model.firstName"
+                       name="firstName">
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" class="form-control" id="lastName" required [(ngModel)]="model.lastName"
+                       name="lastName">
+            </div>
+            <div class="form-group">
+                <label for="lastName">Email</label>
+                <input type="text" class="form-control" id="email" required [(ngModel)]="model.email"
+                       name="email">
+            </div>
+            <div class="form-group">
+                <label for="lastName">Phone Number</label>
+                <input type="text" class="form-control" id="phoneNumber" required [(ngModel)]="model.phoneNumber"
+                       name="phoneNumber">
+            </div>
+            <div class="form-group">
+                <label for="lastName">Height</label>
+                <input type="text" class="form-control" id="height" required [(ngModel)]="model.height"
+                       name="height">
+            </div>
+            <div class="form-group">
+                <label for="lastName">Weight</label>
+                <input type="text" class="form-control" id="weight" required [(ngModel)]="model.weight"
+                       name="weight">
+            </div>
+            <div class="form-group">
+                <label for="lastName">Date of Birth</label>
+                <input type="text" class="form-control" id="dateOfBirth" required [(ngModel)]="model.dateOfBirth"
+                       name="dateOfBirth">
+            </div>
+            <button type="submit" class="btn btn-success" [disabled]="!patientForm.form.valid">Submit</button>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <h2>Patients</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Height</th>
+                <th>Weight</th>
+                <th>Date of Birth</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let patient of patients">
+                <td>{{patient.firstName}}</td>
+                <td>{{patient.lastName}}</td>
+                <td>{{patient.email}}</td>
+                <td>{{patient.phoneNumber}}</td>
+                <td>{{patient.height}}</td>
+                <td>{{patient.weight}}</td>
+                <td>{{patient.dateOfBirth}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
