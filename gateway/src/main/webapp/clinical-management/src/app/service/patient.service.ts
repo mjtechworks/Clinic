@@ -6,13 +6,18 @@ import {Injectable} from "@angular/core";
 @Injectable()
 export class PatientService {
 
-    private getAllPatientUrl = 'http://localhost:80/patients/all';
+    private getAllPatientUrl = 'patients/all';
+    private addPatientUrl = 'patients';
 
     constructor(private http: HttpClient) {
     }
 
     public getAllPatient(): Observable<Patient[]> {
         return this.http.get<Patient[]>(this.getAllPatientUrl);
+    }
+
+    public addPatient(patient: Patient): Observable<Patient> {
+        return this.http.post<Patient>(this.addPatientUrl, patient);
     }
 
 }

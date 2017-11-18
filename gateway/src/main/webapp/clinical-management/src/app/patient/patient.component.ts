@@ -26,7 +26,9 @@ export class DoctorComponent implements OnInit {
     }
 
     private onSubmit() {
-        console.log(this.model);
+        this.patientService.addPatient(this.model).subscribe(data => {
+            this.patients.push(data);
+        });
     }
 
 }
