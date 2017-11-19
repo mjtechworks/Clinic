@@ -14,29 +14,34 @@
                        name="lastName">
             </div>
             <div class="form-group">
-                <label for="lastName">Email</label>
+                <label for="email">Email</label>
                 <input type="text" class="form-control" id="email" required [(ngModel)]="model.email"
                        name="email">
             </div>
             <div class="form-group">
-                <label for="lastName">Phone Number</label>
+                <label for="phoneNumber">Phone Number</label>
                 <input type="text" class="form-control" id="phoneNumber" required [(ngModel)]="model.phoneNumber"
                        name="phoneNumber">
             </div>
             <div class="form-group">
-                <label for="lastName">Height</label>
+                <label for="height">Height</label>
                 <input type="text" class="form-control" id="height" required [(ngModel)]="model.height"
                        name="height">
             </div>
             <div class="form-group">
-                <label for="lastName">Weight</label>
+                <label for="weight">Weight</label>
                 <input type="text" class="form-control" id="weight" required [(ngModel)]="model.weight"
                        name="weight">
             </div>
             <div class="form-group">
-                <label for="lastName">Date of Birth</label>
+                <label for="dateOfBirth">Date of Birth</label>
                 <input type="text" class="form-control" id="dateOfBirth" required [(ngModel)]="model.dateOfBirth"
                        name="dateOfBirth">
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <input type="text" class="form-control" id="gender" required [(ngModel)]="model.gender"
+                       name="gender">
             </div>
             <button type="submit" class="btn btn-success" [disabled]="!patientForm.form.valid">Submit</button>
         </form>
@@ -53,6 +58,7 @@
                 <th>Height</th>
                 <th>Weight</th>
                 <th>Date of Birth</th>
+                <th>Gender</th>
             </tr>
             </thead>
             <tbody>
@@ -64,6 +70,7 @@
                 <td>{{patient.height}}</td>
                 <td>{{patient.weight}}</td>
                 <td>{{patient.dateOfBirth}}</td>
+                <td>{{patient.gender}}</td>
             </tr>
             </tbody>
         </table>

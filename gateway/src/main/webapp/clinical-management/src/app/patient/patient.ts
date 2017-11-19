@@ -6,4 +6,5 @@ export class Patient {
     public height: number;
     public weight: number;
     public dateOfBirth: string;
+    public gender: string;
 }
