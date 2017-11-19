@@ -1,5 +1,6 @@
 package com.clinical.management.patient.util;
 
+import com.clinical.management.patient.domain.Gender;
 import com.clinical.management.patient.domain.Patient;
 
 import java.text.ParseException;
@@ -22,6 +23,7 @@ public class PatientUtil {
         patient.setHeight(175);
         patient.setWeight(80);
         patient.setDateOfBirth(sdf.parse("10/10/1990"));
+        patient.setGender(Gender.MASCULINE);
 
         return patient;
     }
@@ -41,6 +43,7 @@ public class PatientUtil {
             patient.setHeight(175 + i);
             patient.setWeight(80 + i);
             patient.setDateOfBirth(sdf.parse("10/10/1990"));
+            patient.setGender(Gender.FEMININE);
 
             patients.add(patient);
         }

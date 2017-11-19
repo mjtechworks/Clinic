@@ -37,6 +37,9 @@ public class Patient {
     @NotNull
     private Date dateOfBirth;
 
+    @NotNull
+    private Gender gender;
+
     public String getId() {
         return id;
     }
@@ -99,5 +102,13 @@ public class Patient {
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 }

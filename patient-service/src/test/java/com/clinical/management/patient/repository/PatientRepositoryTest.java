@@ -38,6 +38,7 @@ public class PatientRepositoryTest {
         assertEquals(patient.getWeight(), found.getWeight());
         assertEquals(patient.getHeight(), found.getHeight());
         assertEquals(patient.getDateOfBirth(), found.getDateOfBirth());
+        assertEquals(patient.getGender(), found.getGender());
     }
 
     @Test
@@ -61,6 +62,7 @@ public class PatientRepositoryTest {
             assertEquals(patient.getWeight(), found.getWeight());
             assertEquals(patient.getHeight(), found.getHeight());
             assertEquals(patient.getDateOfBirth(), found.getDateOfBirth());
+            assertEquals(patient.getGender(), found.getGender());
         }
     }
 
