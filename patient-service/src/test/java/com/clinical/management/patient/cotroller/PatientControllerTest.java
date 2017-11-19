@@ -66,7 +66,6 @@ public class PatientControllerTest {
                 .andExpect(jsonPath("$.height").value(patient.getHeight()))
                 .andExpect(jsonPath("$.weight").value(patient.getWeight()))
                 .andExpect(jsonPath("$.dateOfBirth").value(patient.getDateOfBirth()))
-                .andExpect(jsonPath("$.gender").value(patient.getGender()))
                 .andExpect(status().isOk());
     }
 
