@@ -129,3 +129,16 @@ services:
         options:
           max-size: "10m"
           max-file: "10"
+
+  user-interface:
+      build: user-interface
+      ports:
+        - 4200:4200
+      restart: always
+      depends_on:
+        config:
+          condition: service_healthy
+      logging:
+        options:
+          max-size: "10m"
+          max-file: "10"
