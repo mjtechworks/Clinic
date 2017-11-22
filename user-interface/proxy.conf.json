@@ -1,6 +1,10 @@
 {
-  "/patients": {
+  "/api": {
     "target": "http://localhost:80",
-    "secure": false
+    "secure": false,
+    "pathRewrite": {
+      "^/api": ""
+    },
+    "logLevel": "debug"
   }
 }

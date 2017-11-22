@@ -6,8 +6,8 @@ import {Injectable} from "@angular/core";
 @Injectable()
 export class PatientService {
 
-    private getAllPatientUrl = 'patients/all';
-    private addPatientUrl = 'patients';
+    private getAllPatientUrl = 'api/patients/all';
+    private addPatientUrl = 'api/patients';
 
     constructor(private http: HttpClient) {
     }
