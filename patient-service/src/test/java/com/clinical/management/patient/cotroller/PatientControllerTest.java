@@ -82,7 +82,7 @@ public class PatientControllerTest {
     public void savePatient() throws Exception {
         String json = mapper.writeValueAsString(PatientUtil.getPatient());
 
-        mockMvc.perform(post("").contentType(MediaType.APPLICATION_JSON).content(json))
+        mockMvc.perform(post("/add").contentType(MediaType.APPLICATION_JSON).content(json))
                 .andExpect(status().isOk());
 
     }

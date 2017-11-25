@@ -81,7 +81,7 @@ public class DoctorControllerTest {
 
         String json = mapper.writeValueAsString(doctor);
 
-        mockMvc.perform(post("").contentType(MediaType.APPLICATION_JSON).content(json))
+        mockMvc.perform(post("/add").contentType(MediaType.APPLICATION_JSON).content(json))
                 .andExpect(status().isOk());
 
     }

@@ -91,7 +91,7 @@ public class AppointmentControllerTest {
 
         String json = mapper.writeValueAsString(appointment);
 
-        mockMvc.perform(post("").contentType(MediaType.APPLICATION_JSON).content(json))
+        mockMvc.perform(post("/add").contentType(MediaType.APPLICATION_JSON).content(json))
                 .andExpect(status().isOk());
 
     }

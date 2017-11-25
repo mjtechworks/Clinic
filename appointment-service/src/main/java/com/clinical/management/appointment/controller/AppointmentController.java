@@ -15,7 +15,7 @@ public class AppointmentController {
         this.appointmentRepository = appointmentRepository;
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST, value = "/add")
     public Appointment create(@RequestBody Appointment appointment) {
         return appointmentRepository.save(appointment);
     }

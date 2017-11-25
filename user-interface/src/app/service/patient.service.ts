@@ -7,7 +7,7 @@ import {Injectable} from "@angular/core";
 export class PatientService {
 
     private getAllPatientUrl = 'api/patients/all';
-    private addPatientUrl = 'api/patients';
+    private addPatientUrl = 'api/patients/add';
 
     constructor(private http: HttpClient) {
     }

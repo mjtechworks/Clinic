@@ -17,7 +17,7 @@ public class PatientController {
         this.patientRepository = patientRepository;
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST, value = "/add")
     public Patient create(@RequestBody Patient patient) {
         return patientRepository.save(patient);
     }
