@@ -6,6 +6,7 @@ import {Appointment} from "./appointment";
     selector: 'app-appointment',
     templateUrl: './appointment.component.html',
     styleUrls: ['./appointment.component.css'],
+    providers: [AppointmentService],
     encapsulation: ViewEncapsulation.None
 })
 export class AppointmentComponent implements OnInit {

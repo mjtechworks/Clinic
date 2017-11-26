@@ -9,7 +9,7 @@ import {PatientService} from "../service/patient.service";
     providers: [PatientService],
     encapsulation: ViewEncapsulation.None
 })
-export class DoctorComponent implements OnInit {
+export class PatientComponent implements OnInit {
 
     private model: Patient;
     private patients: Patient[];
