@@ -1,53 +1,37 @@
 <div class="row">
     <div class="col-md-6">
-        <h2>New Patient</h2>
+        <h2>Patient</h2>
 
-        <form (ngSubmit)="onSubmit()" #patientForm="ngForm">
-            <div class="form-group">
-                <label for="firstName">First Name</label>
-                <input type="text" class="form-control" id="firstName" required [(ngModel)]="model.firstName"
-                       name="firstName">
-            </div>
-            <div class="form-group">
-                <label for="lastName">Last Name</label>
-                <input type="text" class="form-control" id="lastName" required [(ngModel)]="model.lastName"
-                       name="lastName">
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="text" class="form-control" id="email" required [(ngModel)]="model.email"
-                       name="email">
-            </div>
-            <div class="form-group">
-                <label for="phoneNumber">Phone Number</label>
-                <input type="text" class="form-control" id="phoneNumber" required [(ngModel)]="model.phoneNumber"
-                       name="phoneNumber">
-            </div>
-            <div class="form-group">
-                <label for="height">Height</label>
-                <input type="text" class="form-control" id="height" required [(ngModel)]="model.height"
-                       name="height">
-            </div>
-            <div class="form-group">
-                <label for="weight">Weight</label>
-                <input type="text" class="form-control" id="weight" required [(ngModel)]="model.weight"
-                       name="weight">
-            </div>
-            <div class="form-group">
-                <label for="dateOfBirth">Date of Birth</label>
-                <input type="text" class="form-control" id="dateOfBirth" required [(ngModel)]="model.dateOfBirth"
-                       name="dateOfBirth">
-            </div>
-            <div class="form-group">
-                <label for="gender">Gender</label>
-                <input type="text" class="form-control" id="gender" required [(ngModel)]="model.gender"
-                       name="gender">
-            </div>
-            <button type="submit" class="btn btn-success" [disabled]="!patientForm.form.valid">Submit</button>
+        <form (ngSubmit)="onSubmit()" #patientForm="ngForm" class="form-component">
+            <mat-form-field>
+                <input matInput placeholder="First Name" [(ngModel)]="model.firstName" required name="firstName">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Last Name" [(ngModel)]="model.lastName" required name="lastName">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Email" [(ngModel)]="model.email" required name="email">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Phone Number" [(ngModel)]="model.phoneNumber" required name="phoneNumber">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Height" [(ngModel)]="model.height" required name="height">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Weight" [(ngModel)]="model.weight" required name="weight">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Date of Birth" [(ngModel)]="model.dateOfBirth" required name="dateOfBirth">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Gender" [(ngModel)]="model.gender" required name="gender">
+            </mat-form-field>
+
+            <button mat-button type="submit" class="btn btn-success" [disabled]="!patientForm.form.valid">Submit</button>
         </form>
     </div>
     <div class="col-md-6">
-        <h2>Patients</h2>
         <table class="table">
             <thead>
             <tr>

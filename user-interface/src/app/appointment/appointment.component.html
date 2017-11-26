@@ -1,48 +1,33 @@
 <div class="row">
-    <div class="col-md-6">
-        <h2>New Appointment</h2>
+    <div>
+        <h2>Appointment</h2>
 
-        <form (ngSubmit)="onSubmit()" #patientForm="ngForm">
-            <div class="form-group">
-                <label for="doctorId">Doctor Id</label>
-                <input type="text" class="form-control" id="doctorId" required [(ngModel)]="model.doctorId"
-                       name="doctorId">
-            </div>
-            <div class="form-group">
-                <label for="patientId">Patient Id</label>
-                <input type="text" class="form-control" id="patientId" required [(ngModel)]="model.patientId"
-                       name="patientId">
-            </div>
-            <div class="form-group">
-                <label for="startDate">Start Date</label>
-                <input type="text" class="form-control" id="startDate" required [(ngModel)]="model.startDate"
-                       name="startDate">
-            </div>
-            <div class="form-group">
-                <label for="endDate">End Date</label>
-                <input type="text" class="form-control" id="endDate" required [(ngModel)]="model.endDate"
-                       name="endDate">
-            </div>
-            <div class="form-group">
-                <label for="remark">Remark</label>
-                <input type="text" class="form-control" id="remark" required [(ngModel)]="model.remark"
-                       name="remark">
-            </div>
-            <div class="form-group">
-                <label for="recommendation">Recommendation</label>
-                <input type="text" class="form-control" id="recommendation" required [(ngModel)]="model.recommendation"
-                       name="recommendation">
-            </div>
-            <div class="form-group">
-                <label for="reason">Reason</label>
-                <input type="text" class="form-control" id="reason" required [(ngModel)]="model.reason"
-                       name="reason">
-            </div>
-            <button type="submit" class="btn btn-success" [disabled]="!patientForm.form.valid">Submit</button>
+        <form (ngSubmit)="onSubmit()" #patientForm="ngForm" class="form-component">
+            <mat-form-field>
+                <input matInput placeholder="Doctor Id" [(ngModel)]="model.doctorId" required name="doctorId">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Patient Id" [(ngModel)]="model.patientId" required name="patientId">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Start Date" [(ngModel)]="model.startDate" required name="startDate">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="End Date" [(ngModel)]="model.endDate" required name="endDate">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Remark" [(ngModel)]="model.remark" required name="remark">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Recommendation" [(ngModel)]="model.recommendation" required name="recommendation">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Reason" [(ngModel)]="model.reason" required name="reason">
+            </mat-form-field>
+            <button mat-button type="submit" class="btn btn-success" [disabled]="!patientForm.form.valid">Submit</button>
         </form>
     </div>
     <div class="col-md-6">
-        <h2>Appointments</h2>
         <table class="table">
             <thead>
             <tr>
