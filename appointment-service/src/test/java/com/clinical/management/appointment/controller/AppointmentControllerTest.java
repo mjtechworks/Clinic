@@ -3,6 +3,7 @@ package com.clinical.management.appointment.controller;
 import com.clinical.management.appointment.AppointmentApplication;
 import com.clinical.management.appointment.domain.Appointment;
 import com.clinical.management.appointment.repository.AppointmentRepository;
+import com.clinical.management.appointment.util.AppointmentUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
@@ -47,18 +48,7 @@ public class AppointmentControllerTest {
 
     @Test
     public void getAppointmentById() throws Exception {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy hh:mm");
-
-        Appointment appointment = new Appointment();
-
-        appointment.setId("55");
-        appointment.setPatientId("66");
-        appointment.setDoctorId("77");
-        appointment.setStartDate(sdf.parse("11/11/2017 10:45"));
-        appointment.setEndDate(sdf.parse("11/11/2017 11:15"));
-        appointment.setRemark("Test - Remark");
-        appointment.setRecommendation("Test - Recommendation");
-        appointment.setReason("Test - Reason");
+        Appointment appointment = AppointmentUtil.getAppointment();
 
         when(appointmentRepository.findOne(appointment.getId())).thenReturn(appointment);
 
@@ -73,21 +63,17 @@ public class AppointmentControllerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void getAllAppointment() throws Exception {
+        when(appointmentRepository.findAll()).thenReturn(AppointmentUtil.getAppointments());
+
+        mockMvc.perform(get("/all"))
+                .andExpect(status().isOk());
+    }
 
     @Test
     public void saveAppointment() throws Exception {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy hh:mm");
-
-        Appointment appointment = new Appointment();
-
-        appointment.setId("55");
-        appointment.setPatientId("66");
-        appointment.setDoctorId("77");
-        appointment.setStartDate(sdf.parse("11/11/2017 10:45"));
-        appointment.setEndDate(sdf.parse("11/11/2017 11:15"));
-        appointment.setRemark("Test - Remark");
-        appointment.setRecommendation("Test - Recommendation");
-        appointment.setReason("Test - Reason");
+        Appointment appointment = AppointmentUtil.getAppointment();
 
         String json = mapper.writeValueAsString(appointment);
 
