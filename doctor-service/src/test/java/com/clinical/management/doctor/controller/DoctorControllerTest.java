@@ -5,6 +5,7 @@ import com.clinical.management.doctor.DoctorApplication;
 import com.clinical.management.doctor.domain.Doctor;
 import com.clinical.management.doctor.repository.DoctorRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.security.auth.UserPrincipal;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,43 +48,43 @@ public class DoctorControllerTest {
     }
 
     @Test
-    public void getDoctorById() throws Exception {
-        Doctor doctor = new Doctor();
+    public void shouldCreateNewUser() throws Exception {
+        final Doctor doctor = new Doctor();
 
         doctor.setId("55");
         doctor.setFirstName("Test 1");
         doctor.setLastName("Test 2");
         doctor.setEmail("test@test.com");
-        doctor.setAddress("Test Address");
-        doctor.setPhoneNumber("0700000000");
-
-        when(doctorRepository.findOne(doctor.getId())).thenReturn(doctor);
-
-        mockMvc.perform(get("/" + doctor.getId()))
-                .andExpect(jsonPath("$.firstName").value(doctor.getFirstName()))
-                .andExpect(jsonPath("$.lastName").value(doctor.getLastName()))
-                .andExpect(jsonPath("$.email").value(doctor.getEmail()))
-                .andExpect(jsonPath("$.address").value(doctor.getAddress()))
-                .andExpect(jsonPath("$.phoneNumber").value(doctor.getPhoneNumber()))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    public void saveDoctor() throws Exception {
-        Doctor doctor = new Doctor();
-
-        doctor.setId("55");
-        doctor.setFirstName("Test 1");
-        doctor.setLastName("Test 2");
-        doctor.setEmail("test@test.com");
+        doctor.setPassword("testPassword01");
         doctor.setAddress("Test Address");
         doctor.setPhoneNumber("0700000000");
 
         String json = mapper.writeValueAsString(doctor);
 
-        mockMvc.perform(post("/add").contentType(MediaType.APPLICATION_JSON).content(json))
+        mockMvc.perform(post("/create").contentType(MediaType.APPLICATION_JSON).content(json))
                 .andExpect(status().isOk());
+    }
 
+    @Test
+    public void shouldFailWhenUserIsNotValid() throws Exception {
+        final Doctor doctor = new Doctor();
+
+        doctor.setId("555");
+        doctor.setFirstName("1");
+        doctor.setLastName("2");
+        doctor.setEmail("test@test.com");
+        doctor.setPassword("t");
+        doctor.setAddress("Test Address");
+        doctor.setPhoneNumber("0700000000");
+
+        mockMvc.perform(post("/create")).andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void shouldReturnCurrentUser() throws Exception {
+        mockMvc.perform(get("/current").principal(new UserPrincipal("test@test.com")))
+                .andExpect(jsonPath("$.name").value("test@test.com"))
+                .andExpect(status().isOk());
     }
 
 }

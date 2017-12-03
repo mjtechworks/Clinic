@@ -27,16 +27,18 @@ public class DoctorRepositoryTest {
         doctor.setFirstName("Test 1");
         doctor.setLastName("Test 2");
         doctor.setEmail("test@test.com");
+        doctor.setPassword("testPassword01");
         doctor.setAddress("Test Address");
         doctor.setPhoneNumber("0700000000");
 
         doctorRepository.save(doctor);
 
-        Doctor found = doctorRepository.findOne(doctor.getId());
+        Doctor found = doctorRepository.findDoctorByEmail(doctor.getId());
 
         assertEquals(doctor.getFirstName(), found.getFirstName());
         assertEquals(doctor.getLastName(), found.getLastName());
         assertEquals(doctor.getEmail(), found.getEmail());
+        assertEquals(doctor.getPassword(), found.getPassword());
         assertEquals(doctor.getAddress(), found.getAddress());
         assertEquals(doctor.getPhoneNumber(), found.getPhoneNumber());
     }
