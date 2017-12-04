@@ -20,7 +20,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 public class DoctorServiceTest {
 
     @InjectMocks
-    private DoctorService doctorService;
+    private DoctorServiceImpl doctorService;
 
     @Mock
     private DoctorRepository repository;

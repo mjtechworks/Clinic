@@ -20,7 +20,7 @@ public class DoctorRepositoryTest {
     private DoctorRepository doctorRepository;
 
     @Test
-    public void findDoctorById() {
+    public void findDoctorByEmail() {
         Doctor doctor = new Doctor();
 
         doctor.setId("55");
@@ -33,7 +33,7 @@ public class DoctorRepositoryTest {
 
         doctorRepository.save(doctor);
 
-        Doctor found = doctorRepository.findDoctorByEmail(doctor.getId());
+        Doctor found = doctorRepository.findDoctorByEmail(doctor.getEmail());
 
         assertEquals(doctor.getFirstName(), found.getFirstName());
         assertEquals(doctor.getLastName(), found.getLastName());

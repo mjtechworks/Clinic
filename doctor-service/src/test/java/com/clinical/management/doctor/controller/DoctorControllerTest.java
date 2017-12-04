@@ -4,6 +4,7 @@ package com.clinical.management.doctor.controller;
 import com.clinical.management.doctor.DoctorApplication;
 import com.clinical.management.doctor.domain.Doctor;
 import com.clinical.management.doctor.repository.DoctorRepository;
+import com.clinical.management.doctor.service.DoctorService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.security.auth.UserPrincipal;
 import org.junit.Before;
@@ -37,7 +38,7 @@ public class DoctorControllerTest {
     private DoctorController doctorController;
 
     @Mock
-    private DoctorRepository doctorRepository;
+    private DoctorService doctorService;
 
     private MockMvc mockMvc;
 

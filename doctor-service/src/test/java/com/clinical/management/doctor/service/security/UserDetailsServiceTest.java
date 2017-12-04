@@ -12,7 +12,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -26,7 +25,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 public class UserDetailsServiceTest {
 
     @InjectMocks
-    private UserDetailsService service;
+    private UserDetailsServiceImpl service;
 
     @Mock
     private DoctorRepository repository;
@@ -48,7 +47,8 @@ public class UserDetailsServiceTest {
         user.setPassword(doctor.getPassword());
         user.setUsername(doctor.getEmail());
 
-        assertEquals(user, loaded);
+        assertEquals(user.getUsername(), loaded.getUsername());
+        assertEquals(user.getPassword(), loaded.getPassword());
     }
 
     @Test(expected = UsernameNotFoundException.class)
