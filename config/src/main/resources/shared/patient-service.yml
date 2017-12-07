@@ -1,3 +1,12 @@
+security:
+  oauth2:
+    client:
+      clientId: patient-service
+      clientSecret: ${PATIENT_SERVICE_PASSWORD}
+      accessTokenUri: http://doctor-service:7000/doctors/oauth/token
+      grant-type: client_credentials
+      scope: server
+
 spring:
   data:
     mongodb:
