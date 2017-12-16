@@ -17,6 +17,8 @@ export class AuthenticationService {
         let params = new URLSearchParams();
         params.append('username', loginData.username);
         params.append('password', loginData.password);
+        params.append('grant_type','password');
+        params.append('client_id','clientIdPassword');
 
         let headers = new HttpHeaders({
             'Content-type': 'application/x-www-form-urlencoded; charset=utf-8',
