@@ -12,6 +12,7 @@ import {MatButtonModule, MatInputModule, MatTableModule} from "@angular/material
 import {CookieService} from "ngx-cookie-service";
 import {LoginComponent} from './login/login.component';
 import {HomeComponent} from './home/home.component';
+import {RouterModule} from "@angular/router";
 
 
 @NgModule({
@@ -22,7 +23,10 @@ import {HomeComponent} from './home/home.component';
         MatTableModule,
         MatInputModule,
         FormsModule,
-        HttpClientModule
+        HttpClientModule,
+        RouterModule.forRoot([
+            {path: '', component: HomeComponent},
+            {path: 'login', component: LoginComponent}])
     ],
     declarations: [
         AppComponent,
