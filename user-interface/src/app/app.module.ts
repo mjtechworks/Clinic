@@ -9,6 +9,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {AppointmentComponent} from './appointment/appointment.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatButtonModule, MatInputModule, MatTableModule} from "@angular/material";
+import {CookieService} from "ngx-cookie-service";
 
 
 @NgModule({
@@ -26,7 +27,7 @@ import {MatButtonModule, MatInputModule, MatTableModule} from "@angular/material
         PatientComponent,
         AppointmentComponent
     ],
-    providers: [],
+    providers: [CookieService],
     bootstrap: [AppComponent]
 })
 export class AppModule {
