@@ -10,7 +10,8 @@ import {AppointmentComponent} from './appointment/appointment.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatButtonModule, MatInputModule, MatTableModule} from "@angular/material";
 import {CookieService} from "ngx-cookie-service";
-import { LoginComponent } from './login/login.component';
+import {LoginComponent} from './login/login.component';
+import {HomeComponent} from './home/home.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { LoginComponent } from './login/login.component';
         AppComponent,
         PatientComponent,
         AppointmentComponent,
-        LoginComponent
+        LoginComponent,
+        HomeComponent
     ],
     providers: [CookieService],
     bootstrap: [AppComponent]

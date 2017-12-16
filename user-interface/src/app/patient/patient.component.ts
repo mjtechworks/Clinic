@@ -3,7 +3,7 @@ import {Patient} from "./patient";
 import {PatientService} from "../service/patient.service";
 
 @Component({
-    selector: 'app-doctor',
+    selector: 'app-patient',
     templateUrl: './patient.component.html',
     styleUrls: ['./patient.style.css'],
     providers: [PatientService],
