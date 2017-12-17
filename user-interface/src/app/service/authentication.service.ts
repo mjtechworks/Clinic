@@ -2,34 +2,45 @@ import {Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {CookieService} from "ngx-cookie-service";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class AuthenticationService {
 
-    private loginDoctor = 'api/doctors/login';
+    private tokenRequest = 'api/doctors/token';
+    private currentAccount = 'api/doctors/current';
 
     constructor(private router: Router, private http: HttpClient, private cookieService: CookieService) {
     }
 
     obtainAccessToken(loginData) {
-        let params = new URLSearchParams();
-        params.append('username', loginData.username);
-        params.append('password', loginData.password);
-        params.append('grant_type', 'password');
-        params.append('client_id', 'clientIdPassword');
+        let data = {
+            scope: 'ui',
+            username: loginData.username,
+            password: loginData.password,
+            grant_type: 'password'
+        };
 
-        let headers = new HttpHeaders({
-            'Content-type': 'application/x-www-form-urlencoded; charset=utf-8',
-            'Authorization': 'Basic ' + btoa("clientIdPassword:secret")
-        });
+        let headers = new HttpHeaders({'Authorization': 'Basic YnJvd3Nlcjo='});
         let options = {
             headers: headers
         };
 
-        this.http.post(this.loginDoctor, params.toString(), options)
+        this.http.post(this.tokenRequest, data, options)
             .subscribe(
                 data => this.saveToken(data),
                 err => alert('Invalid Credentials'));
+    }
+
+    getCurrentAccount(): Observable<Object> {
+        let token = this.getOauthToken();
+
+        let headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
+        let options = {
+            headers: headers
+        };
+
+        return this.http.get(this.currentAccount, options);
     }
 
     saveToken(token) {
@@ -38,6 +49,10 @@ export class AuthenticationService {
         this.router.navigate(['/']);
     }
 
+
+    getOauthToken(): String {
+        return this.cookieService.get('access_token');
+    }
 
     checkCredentials() {
         if (!this.cookieService.check('access_token')) {

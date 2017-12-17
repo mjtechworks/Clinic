@@ -2,7 +2,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
 import {Injectable} from "@angular/core";
 import {Appointment} from "../appointment/appointment";
-import {CookieService} from "ngx-cookie-service";
+import {AuthenticationService} from "./authentication.service";
 
 @Injectable()
 export class AppointmentService {
@@ -10,15 +10,11 @@ export class AppointmentService {
     private addAppointmentUrl = 'api/appointments/add';
 
 
-    constructor(private http: HttpClient, private cookieService: CookieService) {
+    constructor(private http: HttpClient, private authService: AuthenticationService) {
     }
 
     public getAllAppointment(): Observable<Appointment[]> {
-        let headers = new HttpHeaders({
-            'Content-type': 'application/x-www-form-urlencoded; charset=utf-8',
-            'Authorization': 'Bearer ' + this.cookieService.get('access_token')
-        });
-
+        let headers = new HttpHeaders({'Authorization': 'Bearer ' + this.authService.getOauthToken()});
         let options = {
             headers: headers
         };
@@ -27,11 +23,7 @@ export class AppointmentService {
     }
 
     public addAppointment(appointment: Appointment): Observable<Appointment> {
-        let headers = new HttpHeaders({
-            'Content-type': 'application/x-www-form-urlencoded; charset=utf-8',
-            'Authorization': 'Bearer ' + this.cookieService.get('access_token')
-        });
-
+        let headers = new HttpHeaders({'Authorization': 'Bearer ' + this.authService.getOauthToken()});
         let options = {
             headers: headers
         };

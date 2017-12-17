@@ -23,7 +23,6 @@ public class DoctorController {
         return principal;
     }
 
-    @PreAuthorize("#oauth2.hasScope('server')")
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public boolean createUser(@Valid @RequestBody Doctor doctor) {
         return doctorService.create(doctor);
