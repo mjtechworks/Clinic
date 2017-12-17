@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {AppointmentService} from "../service/appointment.service";
-import {Appointment} from "./appointment";
+import {Appointment} from "../domain/appointment";
 
 @Component({
     selector: 'app-appointment',

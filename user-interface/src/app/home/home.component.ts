@@ -5,6 +5,7 @@ import {AuthenticationService} from "../service/authentication.service";
     selector: 'app-home',
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.css'],
+    providers: [AuthenticationService],
     encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent implements OnInit {

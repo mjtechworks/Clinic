@@ -1,7 +1,7 @@
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
 import {Injectable} from "@angular/core";
-import {Appointment} from "../appointment/appointment";
+import {Appointment} from "../domain/appointment";
 import {AuthenticationService} from "./authentication.service";
 
 @Injectable()

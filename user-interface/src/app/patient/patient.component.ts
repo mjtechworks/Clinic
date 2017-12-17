@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {Patient} from "./patient";
+import {Patient} from "../domain/patient";
 import {PatientService} from "../service/patient.service";
 
 @Component({
