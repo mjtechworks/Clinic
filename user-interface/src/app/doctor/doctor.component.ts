@@ -8,7 +8,7 @@ import {AuthenticationService} from "../service/authentication.service";
     selector: 'app-doctor',
     templateUrl: './doctor.component.html',
     styleUrls: ['./doctor.component.css'],
-    providers: [DoctorService],
+    providers: [DoctorService, AuthenticationService],
     encapsulation: ViewEncapsulation.None
 })
 export class DoctorComponent implements OnInit {
