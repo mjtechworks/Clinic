@@ -1,8 +1,22 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-.form-component{
+.form-component {
     min-width: 150px;
     width: 100%;
+}
+
+.form-account-component {
+    display: flex;
+    flex-direction: column;
+}
+
+.doctor-component {
+    position: absolute;
+    margin: auto;
+    right: 0;
+    left: 0;
+    height: 25%;
+    width: 50%;
 }
 
 .table {
@@ -16,9 +30,13 @@
     padding: 8px;
 }
 
-.table tr:nth-child(even){background-color: #f2f2f2;}
+.table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
 
-.table tr:hover {background-color: #ddd;}
+.table tr:hover {
+    background-color: #ddd;
+}
 
 .table th {
     padding-top: 12px;

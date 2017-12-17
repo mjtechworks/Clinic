@@ -1,3 +1,36 @@
-<p>
-  doctor works!
-</p>
+<div class="doctor-component">
+    <mat-card>
+        <mat-card-title>New Account</mat-card-title>
+
+        <form (ngSubmit)="onSubmit()" #accountForm="ngForm" class="form-component form-account-component">
+            <mat-form-field>
+                <input matInput placeholder="First Name" [(ngModel)]="model.firstName" required name="firstName">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Last Name" [(ngModel)]="model.lastName" required name="lastName">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="email" placeholder="Email" [(ngModel)]="model.email" required name="email">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="password" placeholder="Password" [(ngModel)]="model.password" required
+                       name="password">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="password" placeholder="Repeat Password" [(ngModel)]="repeatPassword" required
+                       name="repeatPassword">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Address" [(ngModel)]="model.address" required name="address">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Phone Number" [(ngModel)]="model.phoneNumber" required
+                       name="phoneNumber">
+            </mat-form-field>
+            <mat-card-actions>
+                <button mat-button type="submit" class="btn btn-success" [disabled]="!accountForm.form.valid">Submit
+                </button>
+            </mat-card-actions>
+        </form>
+    </mat-card>
+</div>
