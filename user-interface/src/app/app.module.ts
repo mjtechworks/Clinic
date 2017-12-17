@@ -13,6 +13,7 @@ import {CookieService} from "ngx-cookie-service";
 import {LoginComponent} from './login/login.component';
 import {HomeComponent} from './home/home.component';
 import {RouterModule} from "@angular/router";
+import {DoctorComponent} from './doctor/doctor.component';
 
 
 @NgModule({
@@ -26,14 +27,17 @@ import {RouterModule} from "@angular/router";
         HttpClientModule,
         RouterModule.forRoot([
             {path: '', component: HomeComponent},
-            {path: 'login', component: LoginComponent}])
+            {path: 'login', component: LoginComponent},
+            {path: 'create-account', component: DoctorComponent}
+        ])
     ],
     declarations: [
         AppComponent,
         PatientComponent,
         AppointmentComponent,
         LoginComponent,
-        HomeComponent
+        HomeComponent,
+        DoctorComponent
     ],
     providers: [CookieService],
     bootstrap: [AppComponent]

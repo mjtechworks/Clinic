@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {AuthenticationService} from "../service/authentication.service";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-login',
@@ -11,7 +12,7 @@ import {AuthenticationService} from "../service/authentication.service";
 export class LoginComponent implements OnInit {
     public loginData = {username: "", password: ""};
 
-    constructor(private service: AuthenticationService) {
+    constructor(private service: AuthenticationService, private router: Router) {
     }
 
     ngOnInit() {
@@ -19,6 +20,10 @@ export class LoginComponent implements OnInit {
 
     login() {
         this.service.obtainAccessToken(this.loginData);
+    }
+
+    createAccount() {
+        this.router.navigate(['/create-account']);
     }
 
 }
