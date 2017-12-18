@@ -7,21 +7,19 @@ import {Observable} from "rxjs/Observable";
 @Injectable()
 export class AuthenticationService {
 
-    private tokenRequest = 'api/doctors/token';
+    private tokenRequest = 'api/doctors/oauth/token';
     private currentAccount = 'api/doctors/current';
 
     constructor(private router: Router, private http: HttpClient, private cookieService: CookieService) {
     }
 
     obtainAccessToken(loginData) {
-        let data = {
-            scope: 'ui',
-            username: loginData.username,
-            password: loginData.password,
-            grant_type: 'password'
-        };
+        let data = "scope=ui&grant_type=password&username=" + loginData.username + "&password=" + loginData.password;
 
-        let headers = new HttpHeaders({'Authorization': 'Basic YnJvd3Nlcjo='});
+        let headers = new HttpHeaders({
+            'Content-type': 'application/x-www-form-urlencoded; charset=utf-8',
+            'Authorization': 'Basic YnJvd3Nlcjo='
+        });
         let options = {
             headers: headers
         };

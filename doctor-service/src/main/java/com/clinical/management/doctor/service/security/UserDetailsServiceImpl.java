@@ -28,7 +28,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
 
         User user = new User();
-        user.setId(user.getId());
+        user.setId(doctor.getId());
         user.setPassword(doctor.getPassword());
         user.setUsername(doctor.getEmail());
 
