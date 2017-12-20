@@ -1,5 +1,19 @@
-<h1>Login</h1>
-<input type="text" [(ngModel)]="loginData.username"/>
-<input type="password" [(ngModel)]="loginData.password"/>
-<button (click)="login()" type="submit">Login</button>
-<button (click)="createAccount()" type="submit">Create Account</button>
+<div class="doctor-component">
+    <mat-card>
+        <mat-card-title>Login</mat-card-title>
+        <form (ngSubmit)="login()" #loginForm="ngForm" class="form-component form-account-component">
+            <mat-form-field>
+                <input matInput type="email" placeholder="Email" [(ngModel)]="loginData.username" required name="email">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="password" placeholder="Password" [(ngModel)]="loginData.password" required
+                       name="password">
+            </mat-form-field>
+            <mat-card-actions>
+                <button mat-button type="submit" class="btn btn-success" [disabled]="!loginForm.form.valid">Login
+                </button>
+                <button mat-button (click)="createAccount()" type="submit">Create Account</button>
+            </mat-card-actions>
+        </form>
+    </mat-card>
+</div>
