@@ -43,12 +43,41 @@ services:
           max-size: "10m"
           max-file: "10"
 
-  doctor-service:
+  auth-service:
       environment:
         CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
         DOCTOR_SERVICE_PASSWORD: $DOCTOR_SERVICE_PASSWORD
         APPOINTMENT_SERVICE_PASSWORD: $APPOINTMENT_SERVICE_PASSWORD
         PATIENT_SERVICE_PASSWORD: $PATIENT_SERVICE_PASSWORD
+        MONGODB_PASSWORD: $MONGODB_PASSWORD
+      build: auth-service
+      ports:
+          - 5000:5000
+      restart: always
+      depends_on:
+        config:
+          condition: service_healthy
+      logging:
+        options:
+          max-size: "10m"
+          max-file: "10"
+
+  auth-mongodb:
+    environment:
+      MONGODB_PASSWORD: $MONGODB_PASSWORD
+    build: mongodb
+    ports:
+      - 25000:27017
+    restart: always
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  doctor-service:
+      environment:
+        CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+        APPOINTMENT_SERVICE_PASSWORD: $APPOINTMENT_SERVICE_PASSWORD
         MONGODB_PASSWORD: $MONGODB_PASSWORD
       build: doctor-service
       ports:
