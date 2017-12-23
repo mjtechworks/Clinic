@@ -4,6 +4,23 @@ import com.clinical.management.doctor.domain.Doctor;
 
 public interface DoctorService {
 
-    boolean create(Doctor doctor);
+    /**
+     * Finds account by given name
+     *
+     * @param doctorEmail doctor email
+     * @return found account
+     */
+    Doctor findByEmail(String doctorEmail);
+
+
+    /**
+     * Checks if account with the same name already exists
+     * Invokes Auth Service user creation
+     * Creates new doctor with default parameters
+     *
+     * @param doctor doctor credential
+     * @return created account
+     */
+    Doctor create(Doctor doctor);
 
 }

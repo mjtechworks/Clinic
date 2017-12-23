@@ -3,6 +3,7 @@ package com.clinical.management.doctor.domain;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotNull;
@@ -11,38 +12,47 @@ import javax.validation.constraints.NotNull;
 public class Doctor {
 
     @Id
-    private String id;
-
-    @NotNull
-    private String firstName;
-
-    @NotNull
-    private String lastName;
-
     @Email
-    @NotNull
+    @Length(min = 3, max = 20)
     private String email;
 
-    @NotNull
+    @Transient
     private String password;
 
     @NotNull
+    @Length(min = 1, max = 32)
+    private String firstName;
+
+    @NotNull
+    @Length(min = 1, max = 32)
+    private String lastName;
+
+    @NotNull
+    @Length(max = 20_000)
     private String address;
 
     @NotNull
     @Length(max = 10, min = 10)
     private String phoneNumber;
 
-    public String getId() {
-        return id;
+    public String getEmail() {
+        return email;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getFirstName() {
         return firstName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public void setFirstName(String firstName) {
@@ -55,22 +65,6 @@ public class Doctor {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getAddress() {

@@ -34,7 +34,6 @@ public class DoctorServiceTest {
     public void shouldCreateDoctor() {
         Doctor doctor = new Doctor();
 
-        doctor.setId("55");
         doctor.setFirstName("Test 1");
         doctor.setLastName("Test 2");
         doctor.setEmail("test@test.com");

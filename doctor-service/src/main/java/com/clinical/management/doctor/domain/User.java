@@ -1,64 +1,34 @@
 package com.clinical.management.doctor.domain;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 
-import java.util.List;
+import javax.validation.constraints.NotNull;
 
-public class User implements UserDetails {
+public class User {
 
-    private String id;
+    @Email
+    @NotNull
+    @Length(min = 3, max = 20)
     private String username;
+
+    @NotNull
+    @Length(min = 6, max = 40)
     private String password;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
     public String getUsername() {
         return username;
-    }
-
-    @Override
-    public List<GrantedAuthority> getAuthorities() {
-        return null;
     }
 
     public void setUsername(String username) {
         this.username = username;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
     }
 }

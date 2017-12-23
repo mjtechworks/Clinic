@@ -23,7 +23,6 @@ public class DoctorRepositoryTest {
     public void findDoctorByEmail() {
         Doctor doctor = new Doctor();
 
-        doctor.setId("55");
         doctor.setFirstName("Test 1");
         doctor.setLastName("Test 2");
         doctor.setEmail("test@test.com");

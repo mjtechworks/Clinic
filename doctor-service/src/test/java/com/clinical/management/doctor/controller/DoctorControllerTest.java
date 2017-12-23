@@ -52,7 +52,6 @@ public class DoctorControllerTest {
     public void shouldCreateNewUser() throws Exception {
         final Doctor doctor = new Doctor();
 
-        doctor.setId("55");
         doctor.setFirstName("Test 1");
         doctor.setLastName("Test 2");
         doctor.setEmail("test@test.com");
@@ -70,7 +69,6 @@ public class DoctorControllerTest {
     public void shouldFailWhenUserIsNotValid() throws Exception {
         final Doctor doctor = new Doctor();
 
-        doctor.setId("555");
         doctor.setFirstName("1");
         doctor.setLastName("2");
         doctor.setEmail("test@test.com");
