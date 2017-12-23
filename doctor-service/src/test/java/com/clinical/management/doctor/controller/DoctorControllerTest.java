@@ -66,8 +66,6 @@ public class DoctorControllerTest {
 
         when(doctorService.findByEmail(doctor.getEmail())).thenReturn(doctor);
 
-        when(doctorService.findByEmail(doctor.getEmail())).thenReturn(doctor);
-
         mockMvc.perform(get("/current").principal(new UserPrincipal(doctor.getEmail())))
                 .andExpect(jsonPath("$.email").value(doctor.getEmail()))
                 .andExpect(status().isOk());
@@ -98,7 +96,7 @@ public class DoctorControllerTest {
 
         String json = mapper.writeValueAsString(doctor);
 
-        mockMvc.perform(post("/").principal(new UserPrincipal(doctor.getEmail())).contentType(MediaType.APPLICATION_JSON).content(json))
+        mockMvc.perform(post("/create").principal(new UserPrincipal(doctor.getEmail())).contentType(MediaType.APPLICATION_JSON).content(json))
                 .andExpect(status().isBadRequest());
     }
 

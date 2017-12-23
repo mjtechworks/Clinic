@@ -14,8 +14,6 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.print.Doc;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.*;
@@ -67,15 +65,10 @@ public class DoctorServiceTest {
         doctor.setAddress("Test Address");
         doctor.setPhoneNumber("0700000000");
 
-        User user = new User();
-        user.setUsername(doctor.getEmail());
-        user.setPassword(doctor.getPassword());
-
         Doctor created = doctorService.create(doctor);
         assertEquals(doctor.getEmail(), created.getEmail());
         assertNull(created.getPassword());
 
-        verify(authClient, times(1)).createUser(user);
         verify(repository, times(1)).save(doctor);
     }
 

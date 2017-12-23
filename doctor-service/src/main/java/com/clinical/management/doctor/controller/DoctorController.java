@@ -19,7 +19,7 @@ public class DoctorController {
     }
 
     @PreAuthorize("#oauth2.hasScope('server')")
-    @RequestMapping(path = "/{email}", method = RequestMethod.GET)
+    @RequestMapping(path = "/{email:.+}", method = RequestMethod.GET)
     public Doctor getDoctorByName(@PathVariable String email) {
         return doctorService.findByEmail(email);
     }
