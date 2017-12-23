@@ -3,7 +3,6 @@ package com.clinical.management.doctor.controller;
 
 import com.clinical.management.doctor.DoctorApplication;
 import com.clinical.management.doctor.domain.Doctor;
-import com.clinical.management.doctor.repository.DoctorRepository;
 import com.clinical.management.doctor.service.DoctorService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.security.auth.UserPrincipal;
@@ -49,8 +48,34 @@ public class DoctorControllerTest {
     }
 
     @Test
-    public void shouldCreateNewUser() throws Exception {
+    public void shouldGetDoctorByEmail() throws Exception {
         final Doctor doctor = new Doctor();
+        doctor.setEmail("test@test.com");
+
+        when(doctorService.findByEmail(doctor.getEmail())).thenReturn(doctor);
+
+        mockMvc.perform(get("/" + doctor.getEmail()))
+                .andExpect(jsonPath("$.email").value(doctor.getEmail()))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void shouldGetCurrentDoctor() throws Exception {
+        final Doctor doctor = new Doctor();
+        doctor.setEmail("test@test.com");
+
+        when(doctorService.findByEmail(doctor.getEmail())).thenReturn(doctor);
+
+        when(doctorService.findByEmail(doctor.getEmail())).thenReturn(doctor);
+
+        mockMvc.perform(get("/current").principal(new UserPrincipal(doctor.getEmail())))
+                .andExpect(jsonPath("$.email").value(doctor.getEmail()))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void shouldCreateDoctor() throws Exception {
+        Doctor doctor = new Doctor();
 
         doctor.setFirstName("Test 1");
         doctor.setLastName("Test 2");
@@ -61,29 +86,20 @@ public class DoctorControllerTest {
 
         String json = mapper.writeValueAsString(doctor);
 
-        mockMvc.perform(post("/create").contentType(MediaType.APPLICATION_JSON).content(json))
+        mockMvc.perform(post("/create").principal(new UserPrincipal(doctor.getEmail())).contentType(MediaType.APPLICATION_JSON).content(json))
                 .andExpect(status().isOk());
+
     }
 
     @Test
-    public void shouldFailWhenUserIsNotValid() throws Exception {
-        final Doctor doctor = new Doctor();
+    public void shouldFailOnCreateNewDoctor() throws Exception {
+        Doctor doctor = new Doctor();
+        doctor.setEmail("test");
 
-        doctor.setFirstName("1");
-        doctor.setLastName("2");
-        doctor.setEmail("test@test.com");
-        doctor.setPassword("t");
-        doctor.setAddress("Test Address");
-        doctor.setPhoneNumber("0700000000");
+        String json = mapper.writeValueAsString(doctor);
 
-        mockMvc.perform(post("/create")).andExpect(status().isBadRequest());
-    }
-
-    @Test
-    public void shouldReturnCurrentUser() throws Exception {
-        mockMvc.perform(get("/current").principal(new UserPrincipal("test@test.com")))
-                .andExpect(jsonPath("$.name").value("test@test.com"))
-                .andExpect(status().isOk());
+        mockMvc.perform(post("/").principal(new UserPrincipal(doctor.getEmail())).contentType(MediaType.APPLICATION_JSON).content(json))
+                .andExpect(status().isBadRequest());
     }
 
 }

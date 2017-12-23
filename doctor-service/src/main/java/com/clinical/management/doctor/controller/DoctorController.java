@@ -1,7 +1,6 @@
 package com.clinical.management.doctor.controller;
 
 import com.clinical.management.doctor.domain.Doctor;
-import com.clinical.management.doctor.domain.User;
 import com.clinical.management.doctor.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
