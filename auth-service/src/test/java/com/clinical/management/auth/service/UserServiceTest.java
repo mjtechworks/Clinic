@@ -34,8 +34,8 @@ public class UserServiceTest {
     public void shouldCreateUser() {
 
         User user = new User();
-        user.setUsername("name");
-        user.setPassword("password");
+        user.setUsername("test@test.com");
+        user.setPassword("password123");
 
         userService.create(user);
         verify(repository, times(1)).save(user);
@@ -45,8 +45,8 @@ public class UserServiceTest {
     public void shouldFailWhenUserAlreadyExists() {
 
         User user = new User();
-        user.setUsername("name");
-        user.setPassword("password");
+        user.setUsername("test@test.com");
+        user.setPassword("password123");
 
         when(repository.findOne(user.getUsername())).thenReturn(new User());
         userService.create(user);

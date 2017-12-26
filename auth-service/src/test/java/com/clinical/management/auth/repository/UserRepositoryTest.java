@@ -21,8 +21,8 @@ public class UserRepositoryTest {
     public void shouldSaveAndFindUserByName() {
 
         User user = new User();
-        user.setUsername("name");
-        user.setPassword("password");
+        user.setUsername("test@test.com");
+        user.setPassword("password123");
         repository.save(user);
 
         User found = repository.findOne(user.getUsername());

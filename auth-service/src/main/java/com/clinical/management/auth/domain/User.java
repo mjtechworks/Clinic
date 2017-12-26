@@ -1,18 +1,25 @@
 package com.clinical.management.auth.domain;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Document(collection = "users")
 public class User implements UserDetails {
 
     @Id
+    @Email
+    @Length(min = 3, max = 20)
     private String username;
 
+    @NotNull
+    @Length(min = 6, max = 40)
     private String password;
 
     @Override

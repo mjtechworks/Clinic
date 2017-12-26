@@ -42,8 +42,8 @@ public class UserControllerTest {
     public void shouldCreateNewUser() throws Exception {
 
         final User user = new User();
-        user.setUsername("test");
-        user.setPassword("password");
+        user.setUsername("test@test.com");
+        user.setPassword("password123");
 
         String json = mapper.writeValueAsString(user);
 
