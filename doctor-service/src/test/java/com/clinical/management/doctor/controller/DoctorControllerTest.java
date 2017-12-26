@@ -54,7 +54,7 @@ public class DoctorControllerTest {
 
         when(doctorService.findByEmail(doctor.getEmail())).thenReturn(doctor);
 
-        mockMvc.perform(get("/" + doctor.getEmail()))
+        mockMvc.perform(get("/find?email=" + doctor.getEmail()))
                 .andExpect(jsonPath("$.email").value(doctor.getEmail()))
                 .andExpect(status().isOk());
     }
