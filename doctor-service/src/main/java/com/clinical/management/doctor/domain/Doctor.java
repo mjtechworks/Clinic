@@ -13,7 +13,7 @@ public class Doctor {
 
     @Id
     @Email
-    @Length(min = 3, max = 20)
+    @Length(min = 3, max = 64)
     private String email;
 
     @Transient

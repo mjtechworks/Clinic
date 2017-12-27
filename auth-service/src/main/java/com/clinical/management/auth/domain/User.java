@@ -15,7 +15,7 @@ public class User implements UserDetails {
 
     @Id
     @Email
-    @Length(min = 3, max = 20)
+    @Length(min = 3, max = 64)
     private String username;
 
     @NotNull

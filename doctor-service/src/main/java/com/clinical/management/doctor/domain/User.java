@@ -9,7 +9,7 @@ public class User {
 
     @Email
     @NotNull
-    @Length(min = 3, max = 20)
+    @Length(min = 3, max = 64)
     private String username;
 
     @NotNull
