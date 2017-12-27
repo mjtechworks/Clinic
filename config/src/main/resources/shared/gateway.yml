@@ -17,6 +17,12 @@ zuul:
     socket-timeout-millis: 20000
 
   routes:
+    auth-service:
+        path: /uaa/**
+        url: http://auth-service:5000
+        stripPrefix: false
+        sensitiveHeaders:
+
     doctor-service:
         path: /doctors/**
         serviceId: doctor-service

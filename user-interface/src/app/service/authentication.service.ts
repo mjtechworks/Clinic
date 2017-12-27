@@ -7,8 +7,8 @@ import {Observable} from "rxjs/Observable";
 @Injectable()
 export class AuthenticationService {
 
-    private tokenRequest = 'api/doctors/oauth/token';
-    private currentAccount = 'api/doctors/current';
+    private tokenRequest = 'api/uaa/oauth/token';
+    private currentAccount = 'api/uaa/current';
 
     constructor(private router: Router, private http: HttpClient, private cookieService: CookieService) {
     }
