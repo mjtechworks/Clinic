@@ -173,3 +173,19 @@ services:
         options:
           max-size: "10m"
           max-file: "10"
+
+  monitoring:
+      environment:
+        CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+      build: monitoring
+      ports:
+        - 9000:8080
+        - 8989:8989
+      restart: always
+      depends_on:
+        config:
+          condition: service_healthy
+      logging:
+        options:
+          max-size: "10m"
+          max-file: "10"
