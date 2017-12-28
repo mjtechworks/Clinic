@@ -47,7 +47,7 @@ public class UserControllerTest {
 
         String json = mapper.writeValueAsString(user);
 
-        mockMvc.perform(post("/users").contentType(MediaType.APPLICATION_JSON).content(json))
+        mockMvc.perform(post("/create").contentType(MediaType.APPLICATION_JSON).content(json))
                 .andExpect(status().isOk());
     }
 
@@ -58,13 +58,13 @@ public class UserControllerTest {
         user.setUsername("t");
         user.setPassword("p");
 
-        mockMvc.perform(post("/users"))
+        mockMvc.perform(post("/create"))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
     public void shouldReturnCurrentUser() throws Exception {
-        mockMvc.perform(get("/users/current").principal(new UserPrincipal("test")))
+        mockMvc.perform(get("/current").principal(new UserPrincipal("test")))
                 .andExpect(jsonPath("$.name").value("test"))
                 .andExpect(status().isOk());
     }
