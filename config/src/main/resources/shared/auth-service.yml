@@ -10,3 +10,8 @@ spring:
 server:
   context-path: /uaa
   port: 5000
+
+security:
+  oauth2:
+    resource:
+      filter-order: 3
