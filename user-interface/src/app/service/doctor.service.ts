@@ -1,6 +1,5 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {AuthenticationService} from "./authentication.service";
 import {Doctor} from "../domain/doctor";
 import {Observable} from "rxjs/Observable";
 
@@ -9,11 +8,11 @@ export class DoctorService {
 
     private createDoctorUrl = "api/doctors/create";
 
-    constructor(private http: HttpClient, private authService: AuthenticationService) {
+    constructor(private http: HttpClient) {
     }
 
-    public createDoctor(doctor: Doctor): Observable<boolean> {
-        return this.http.post<boolean>(this.createDoctorUrl, doctor);
+    public createDoctor(doctor: Doctor): Observable<Object> {
+        return this.http.post<Object>(this.createDoctorUrl, doctor);
     }
 
 }

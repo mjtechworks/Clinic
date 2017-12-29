@@ -25,24 +25,28 @@ export class DoctorComponent implements OnInit {
 
     private onSubmit() {
         if (this.repeatPassword === this.model.password) {
-            this.doctorService.createDoctor(this.model).subscribe(data => this.obtainAccess(data),
-                err => this.obtainAccess(false));
+            this.doctorService.createDoctor(this.model).subscribe(
+                data => this.obtainAccess(data),
+                err => this.displayMessage(err));
         } else {
-            this.snackBar.open("The passwords aren't the same", "", {
-                duration: 5000,
-            });
+            this.displayMessage("The passwords aren't the same");
         }
     }
 
     private obtainAccess(data) {
-        if (data == true) {
+        if (typeof data.message == 'undefined' && typeof data.status == 'undefined') {
+            this.displayMessage("Doctor with email " + this.model.email + " has been created !");
             let loginData = {username: this.model.email, password: this.model.password};
             this.authService.obtainAccessToken(loginData);
         } else {
-            this.snackBar.open("An error has occur !", "", {
-                duration: 5000,
-            });
+            this.displayMessage("Doctor with email " + this.model.email + " already exits !");
         }
+    }
+
+    private displayMessage(message) {
+        this.snackBar.open(message, "", {
+            duration: 5000,
+        });
     }
 
 }
