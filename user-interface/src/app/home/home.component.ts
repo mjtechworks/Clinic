@@ -17,8 +17,4 @@ export class HomeComponent implements OnInit {
         this.service.checkCredentials();
     }
 
-    logout() {
-        this.service.logout();
-    }
-
 }

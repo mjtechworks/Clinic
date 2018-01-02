@@ -1,1 +1,12 @@
-<router-outlet></router-outlet>
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav opened mode="side" class="left-menu">
+        <a (click)="navigate('')">Home</a>
+        <br>
+        <a (click)="navigate('/appointments')">Appointments</a>
+        <br>
+        <a (click)="navigate('/patients')">Patients</a>
+        <br>
+        <a (click)="logout()">Logout</a>
+    </mat-sidenav>
+    <router-outlet></router-outlet>
+</mat-sidenav-container>
