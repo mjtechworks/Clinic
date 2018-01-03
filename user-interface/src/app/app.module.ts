@@ -23,6 +23,9 @@ import {LoginComponent} from './login/login.component';
 import {HomeComponent} from './home/home.component';
 import {RouterModule} from "@angular/router";
 import {DoctorComponent} from './doctor/doctor.component';
+import {CalendarModule} from "angular-calendar";
+import {CommonModule} from "@angular/common";
+import {NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -63,6 +66,9 @@ import {DoctorComponent} from './doctor/doctor.component';
         FormsModule,
         MatSnackBarModule,
         HttpClientModule,
+        CalendarModule.forRoot(),
+        NgbModalModule.forRoot(),
+        CommonModule,
         RouterModule.forRoot([
             {path: '', component: HomeComponent},
             {path: 'login', component: LoginComponent},
