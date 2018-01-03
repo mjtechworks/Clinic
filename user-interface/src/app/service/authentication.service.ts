@@ -52,6 +52,10 @@ export class AuthenticationService {
         }
     }
 
+    public isUserLogin(): boolean {
+        return this.cookieService.check('access_token');
+    }
+
     public logout() {
         this.cookieService.delete('access_token');
         this.router.navigate(['/login']);

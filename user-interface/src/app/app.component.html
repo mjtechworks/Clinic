@@ -1,4 +1,4 @@
-<mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container class="sidenav-container" *ngIf="this.service.isUserLogin()">
     <mat-sidenav opened mode="side" class="left-menu">
         <a (click)="navigate('')">Home</a>
         <br>
@@ -10,3 +10,5 @@
     </mat-sidenav>
     <router-outlet></router-outlet>
 </mat-sidenav-container>
+
+<router-outlet *ngIf="!this.service.isUserLogin()"></router-outlet>
