@@ -1,5 +1,5 @@
-<mat-sidenav-container class="sidenav-container" *ngIf="this.service.isUserLogin()">
-    <mat-sidenav opened mode="side" class="left-menu">
+<div *ngIf="this.service.isUserLogin()" class="sidenav-container row">
+    <div class="col-sm-1">
         <a (click)="navigate('')">Home</a>
         <br>
         <a (click)="navigate('/appointments')">Appointments</a>
@@ -7,8 +7,11 @@
         <a (click)="navigate('/patients')">Patients</a>
         <br>
         <a (click)="logout()">Logout</a>
-    </mat-sidenav>
+    </div>
+    <div class="col-sm-11">
+        <router-outlet></router-outlet>
+    </div>
+</div>
+<div *ngIf="!this.service.isUserLogin()">
     <router-outlet></router-outlet>
-</mat-sidenav-container>
-
-<router-outlet *ngIf="!this.service.isUserLogin()"></router-outlet>
+</div>

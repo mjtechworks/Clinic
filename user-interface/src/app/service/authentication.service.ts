@@ -65,6 +65,7 @@ export class AuthenticationService {
         let expireDate = new Date().getTime() + (1000 * token.expires_in);
         this.cookieService.set("access_token", token.access_token, expireDate);
         this.router.navigate(['/']);
+        window.location.reload();
     }
 
     private displayMessage(message) {
