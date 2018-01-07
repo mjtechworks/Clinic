@@ -1,14 +1,13 @@
-<div *ngIf="this.service.isUserLogin()" class="sidenav-container row">
-    <div class="col-sm-1">
+<div *ngIf="this.service.isUserLogin()">
+    <div #sidenav id="sidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
         <a (click)="navigate('')">Home</a>
-        <br>
         <a (click)="navigate('/appointments')">Appointments</a>
-        <br>
         <a (click)="navigate('/patients')">Patients</a>
-        <br>
         <a (click)="logout()">Logout</a>
     </div>
-    <div class="col-sm-11">
+    <div #main id="main">
+        <span class="openNav" (click)="openNav()">&#9776;</span>
         <router-outlet></router-outlet>
     </div>
 </div>
