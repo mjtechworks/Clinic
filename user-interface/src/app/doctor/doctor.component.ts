@@ -3,6 +3,7 @@ import {Doctor} from "../domain/doctor";
 import {MatSnackBar} from "@angular/material";
 import {DoctorService} from "../service/doctor.service";
 import {AuthenticationService} from "../service/authentication.service";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-doctor',
@@ -16,10 +17,14 @@ export class DoctorComponent implements OnInit {
     private model: Doctor;
     private repeatPassword: string;
 
-    constructor(public snackBar: MatSnackBar, private doctorService: DoctorService, private authService: AuthenticationService) {
+    constructor(public snackBar: MatSnackBar, private doctorService: DoctorService, private authService: AuthenticationService, private router: Router) {
     }
 
     ngOnInit() {
+        if(this.authService.isUserLogin()){
+            this.router.navigate(['/']);
+        }
+
         this.model = new Doctor();
     }
 

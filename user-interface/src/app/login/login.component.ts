@@ -12,14 +12,17 @@ import {Router} from "@angular/router";
 export class LoginComponent implements OnInit {
     public loginData = {username: "", password: ""};
 
-    constructor(private service: AuthenticationService, private router: Router) {
+    constructor(private authService: AuthenticationService, private router: Router) {
     }
 
     ngOnInit() {
+        if (this.authService.isUserLogin()) {
+            this.router.navigate(['/']);
+        }
     }
 
     login() {
-        this.service.obtainAccessToken(this.loginData);
+        this.authService.obtainAccessToken(this.loginData);
     }
 
     createAccount() {
