@@ -25,13 +25,12 @@ export class AppComponent {
     }
 
     private openNav() {
-        this.sidenav.nativeElement.style.width = "250px";
-        this.main.nativeElement.style.marginLeft = "250px";
+        if (this.sidenav.nativeElement.style.width === "0px") {
+            this.sidenav.nativeElement.style.width = "200px";
+            this.main.nativeElement.style.marginLeft = "200px";
+        } else {
+            this.sidenav.nativeElement.style.width = "0px";
+            this.main.nativeElement.style.marginLeft = "0px";
+        }
     }
-
-    private closeNav() {
-        this.sidenav.nativeElement.style.width = "0";
-        this.main.nativeElement.style.marginLeft = "0";
-    }
-
 }

@@ -1,13 +1,22 @@
 <div *ngIf="this.service.isUserLogin()">
+    <div class="nav-top">
+        <div class="nav-bar nav-white nav-card" id="myNavbar">
+            <span class="open-nav nav-bar-item nav-button nav-wide" (click)="openNav()">&#9776;</span>
+            <embed type="image/svg+xml" src="/assets/clinical-management.svg" id="logo-image"
+                   class="nav-bar-item nav-button nav-wide">
+            <span id="logo-text">Clinical Management</span>
+            <div class="nav-right w3-hide-small">
+                <span class="nav-bar-item nav-button">NUME Prenume</span>
+            </div>
+        </div>
+    </div>
     <div #sidenav id="sidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
         <a (click)="navigate('')">Home</a>
         <a (click)="navigate('/appointments')">Appointments</a>
         <a (click)="navigate('/patients')">Patients</a>
         <a (click)="logout()">Logout</a>
     </div>
     <div #main id="main">
-        <span class="openNav" (click)="openNav()">&#9776;</span>
         <router-outlet></router-outlet>
     </div>
 </div>
