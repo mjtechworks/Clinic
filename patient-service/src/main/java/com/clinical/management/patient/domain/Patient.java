@@ -15,6 +15,10 @@ public class Patient {
     private String id;
 
     @NotNull
+    @Email
+    private String doctorEmail;
+
+    @NotNull
     private String firstName;
 
     @NotNull
@@ -110,5 +114,13 @@ public class Patient {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    public String getDoctorEmail() {
+        return doctorEmail;
+    }
+
+    public void setDoctorEmail(String doctorEmail) {
+        this.doctorEmail = doctorEmail;
     }
 }

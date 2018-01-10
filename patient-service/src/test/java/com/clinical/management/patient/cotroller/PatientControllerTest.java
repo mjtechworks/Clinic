@@ -71,9 +71,9 @@ public class PatientControllerTest {
 
     @Test
     public void getAllPatients() throws Exception {
-        when(patientRepository.findAll()).thenReturn(PatientUtil.getPatients());
+        when(patientRepository.findAllByDoctorEmail("doctor@email.com")).thenReturn(PatientUtil.getPatients());
 
-        mockMvc.perform(get("/all"))
+        mockMvc.perform(get("/all?doctorEmail=doctor@email.com"))
                 .andExpect(status().isOk());
     }
 

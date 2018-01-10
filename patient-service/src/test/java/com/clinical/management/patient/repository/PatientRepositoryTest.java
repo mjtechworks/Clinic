@@ -34,6 +34,7 @@ public class PatientRepositoryTest {
         assertEquals(patient.getFirstName(), found.getFirstName());
         assertEquals(patient.getLastName(), found.getLastName());
         assertEquals(patient.getEmail(), found.getEmail());
+        assertEquals(patient.getDoctorEmail(), found.getDoctorEmail());
         assertEquals(patient.getPhoneNumber(), found.getPhoneNumber());
         assertEquals(patient.getWeight(), found.getWeight());
         assertEquals(patient.getHeight(), found.getHeight());
@@ -42,12 +43,12 @@ public class PatientRepositoryTest {
     }
 
     @Test
-    public void findAllPatients() throws ParseException {
+    public void findAllByDoctorEmail() throws ParseException {
         List<Patient> patients = PatientUtil.getPatients();
 
         patientRepository.save(patients);
 
-        List<Patient> founds = patientRepository.findAll();
+        List<Patient> founds = patientRepository.findAllByDoctorEmail("doctor@email.com");
 
         assertEquals(founds.size(), 5);
 
@@ -58,6 +59,7 @@ public class PatientRepositoryTest {
             assertEquals(patient.getFirstName(), found.getFirstName());
             assertEquals(patient.getLastName(), found.getLastName());
             assertEquals(patient.getEmail(), found.getEmail());
+            assertEquals(patient.getDoctorEmail(), found.getDoctorEmail());
             assertEquals(patient.getPhoneNumber(), found.getPhoneNumber());
             assertEquals(patient.getWeight(), found.getWeight());
             assertEquals(patient.getHeight(), found.getHeight());

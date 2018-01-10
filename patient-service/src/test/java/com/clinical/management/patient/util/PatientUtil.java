@@ -16,6 +16,7 @@ public class PatientUtil {
         Patient patient = new Patient();
 
         patient.setId("55");
+        patient.setDoctorEmail("doctor@email.com");
         patient.setFirstName("Test 1");
         patient.setLastName("Test 2");
         patient.setEmail("test@test.com");
@@ -36,6 +37,7 @@ public class PatientUtil {
             Patient patient = new Patient();
 
             patient.setId("55" + i);
+            patient.setDoctorEmail("doctor@email.com");
             patient.setFirstName("Test " + i);
             patient.setLastName("Test 2-" + i);
             patient.setEmail("test@test.com");

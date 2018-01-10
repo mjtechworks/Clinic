@@ -23,8 +23,8 @@ public class PatientController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/all")
-    public List<Patient> getAllPatients() {
-        return patientRepository.findAll();
+    public List<Patient> getAllPatients(@RequestParam(value = "doctorEmail", required = true) String doctorEmail) {
+        return patientRepository.findAllByDoctorEmail(doctorEmail);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{patientId}")
