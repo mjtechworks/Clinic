@@ -1,6 +1,7 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AuthenticationService} from "./service/authentication.service";
 import {Router} from "@angular/router";
+import {Doctor} from "./domain/doctor";
 
 @Component({
     selector: 'app-root',
@@ -8,12 +9,20 @@ import {Router} from "@angular/router";
     styleUrls: ['./app.component.css'],
     providers: [AuthenticationService],
 })
-export class AppComponent {
-
+export class AppComponent implements OnInit {
     @ViewChild('sidenav') sidenav: ElementRef;
     @ViewChild('main') main: ElementRef;
+    private doctor: Doctor = new Doctor();
 
     constructor(private service: AuthenticationService, private router: Router) {
+    }
+
+    ngOnInit(): void {
+        if (this.service.isUserLogin()) {
+            this.service.getCurrentAccount().subscribe(data => {
+                this.doctor = data;
+            });
+        }
     }
 
     private logout() {

@@ -4,12 +4,13 @@ import {Router} from "@angular/router";
 import {CookieService} from "ngx-cookie-service";
 import {Observable} from "rxjs/Observable";
 import {MatSnackBar} from "@angular/material";
+import {Doctor} from "../domain/doctor";
 
 @Injectable()
 export class AuthenticationService {
 
     private tokenRequest = 'api/uaa/oauth/token';
-    private currentAccount = 'api/uaa/current';
+    private currentAccount = 'api/doctors/current';
 
     constructor(private router: Router, private http: HttpClient, private cookieService: CookieService, private snackBar: MatSnackBar) {
     }
@@ -27,11 +28,11 @@ export class AuthenticationService {
 
         this.http.post(this.tokenRequest, data, options)
             .subscribe(
-                data => this.saveToken(data),
+                data => this.saveCredentials(data, loginData.username),
                 err => this.displayMessage('Invalid Credentials'));
     }
 
-    public getCurrentAccount(): Observable<Object> {
+    public getCurrentAccount(): Observable<Doctor> {
         let token = this.getOauthToken();
 
         let headers = new HttpHeaders({'Authorization': 'Bearer ' + token});
@@ -39,11 +40,15 @@ export class AuthenticationService {
             headers: headers
         };
 
-        return this.http.get(this.currentAccount, options);
+        return this.http.get<Doctor>(this.currentAccount, options);
     }
 
     public getOauthToken(): String {
         return this.cookieService.get('access_token');
+    }
+
+    public getUsername(): String {
+        return this.cookieService.get("username");
     }
 
     public checkCredentials() {
@@ -58,12 +63,16 @@ export class AuthenticationService {
 
     public logout() {
         this.cookieService.delete('access_token');
+        this.cookieService.delete('username');
         this.router.navigate(['/login']);
     }
 
-    private saveToken(token) {
+    private saveCredentials(token, username) {
         let expireDate = new Date().getTime() + (1000 * token.expires_in);
+
         this.cookieService.set("access_token", token.access_token, expireDate);
+        this.cookieService.set("username", username, expireDate);
+
         this.router.navigate(['/']);
         window.location.reload();
     }
