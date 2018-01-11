@@ -7,7 +7,7 @@ import {AuthenticationService} from "./authentication.service";
 @Injectable()
 export class PatientService {
 
-    private getAllPatientUrl = 'api/patients/all';
+    private getAllPatientUrl = 'api/patients/all?doctorEmail=';
     private addPatientUrl = 'api/patients/add';
 
     constructor(private http: HttpClient, private authService: AuthenticationService) {
@@ -19,7 +19,7 @@ export class PatientService {
             headers: headers
         };
 
-        return this.http.get<Patient[]>(this.getAllPatientUrl, options);
+        return this.http.get<Patient[]>(this.getAllPatientUrl + this.authService.getUsername(), options);
     }
 
     public addPatient(patient: Patient): Observable<Patient> {

@@ -1,5 +1,6 @@
 export class Patient {
     public id: string;
+    public doctorEmail: string;
     public firstName: string;
     public lastName: string;
     public email: string;

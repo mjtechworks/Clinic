@@ -43,11 +43,11 @@ export class AuthenticationService {
         return this.http.get<Doctor>(this.currentAccount, options);
     }
 
-    public getOauthToken(): String {
+    public getOauthToken(): string {
         return this.cookieService.get('access_token');
     }
 
-    public getUsername(): String {
+    public getUsername(): string {
         return this.cookieService.get("username");
     }
 

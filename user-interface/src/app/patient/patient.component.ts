@@ -29,6 +29,8 @@ export class PatientComponent implements OnInit {
     }
 
     private onSubmit() {
+        this.model.doctorEmail = this.authService.getUsername();
+
         this.patientService.addPatient(this.model).subscribe(data => {
             this.patients.push(data);
         });
