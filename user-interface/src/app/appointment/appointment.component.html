@@ -1,52 +1,46 @@
-<div class="row">
-    <div>
-        <h2>Appointment</h2>
+<h2>Appointment</h2>
 
-        <form (ngSubmit)="onSubmit()" #patientForm="ngForm" class="form-component">
-            <mat-form-field>
-                <input matInput placeholder="Doctor Id" [(ngModel)]="model.doctorId" required name="doctorId">
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput placeholder="Patient Id" [(ngModel)]="model.patientId" required name="patientId">
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput placeholder="Start Date" [(ngModel)]="model.startDate" required name="startDate">
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput placeholder="End Date" [(ngModel)]="model.endDate" required name="endDate">
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput placeholder="Remark" [(ngModel)]="model.remark" required name="remark">
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput placeholder="Recommendation" [(ngModel)]="model.recommendation" required name="recommendation">
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput placeholder="Reason" [(ngModel)]="model.reason" required name="reason">
-            </mat-form-field>
-            <button mat-button type="submit" class="btn btn-success" [disabled]="!patientForm.form.valid">Submit</button>
-        </form>
-    </div>
-    <div class="col-md-6">
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Remark</th>
-                <th>Reason</th>
-                <th>Recommendation</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let appointment of appointments">
-                <td>{{appointment.startDate}}</td>
-                <td>{{appointment.endDate}}</td>
-                <td>{{appointment.remark}}</td>
-                <td>{{appointment.reason}}</td>
-                <td>{{appointment.recommendation}}</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+<form (ngSubmit)="onSubmit()" #patientForm="ngForm" class="form-component">
+    <mat-form-field>
+        <input matInput placeholder="Doctor Id" [(ngModel)]="model.doctorId" required name="doctorId">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Patient Id" [(ngModel)]="model.patientId" required name="patientId">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Start Date" [(ngModel)]="model.startDate" required name="startDate">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="End Date" [(ngModel)]="model.endDate" required name="endDate">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Remark" [(ngModel)]="model.remark" required name="remark">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Recommendation" [(ngModel)]="model.recommendation" required name="recommendation">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Reason" [(ngModel)]="model.reason" required name="reason">
+    </mat-form-field>
+    <button mat-button type="submit" class="btn btn-success" [disabled]="!patientForm.form.valid">Submit</button>
+</form>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Remark</th>
+        <th>Reason</th>
+        <th>Recommendation</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let appointment of appointments">
+        <td>{{appointment.startDate}}</td>
+        <td>{{appointment.endDate}}</td>
+        <td>{{appointment.remark}}</td>
+        <td>{{appointment.reason}}</td>
+        <td>{{appointment.recommendation}}</td>
+    </tr>
+    </tbody>
+</table>
