@@ -1,56 +1,70 @@
-<h2>Patient</h2>
-
-<form (ngSubmit)="onSubmit()" #patientForm="ngForm" class="form-component">
-    <mat-form-field>
-        <input matInput placeholder="First Name" [(ngModel)]="model.firstName" required name="firstName">
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput placeholder="Last Name" [(ngModel)]="model.lastName" required name="lastName">
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput placeholder="Email" [(ngModel)]="model.email" required name="email">
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput placeholder="Phone Number" [(ngModel)]="model.phoneNumber" required name="phoneNumber">
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput placeholder="Height" [(ngModel)]="model.height" required name="height">
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput placeholder="Weight" [(ngModel)]="model.weight" required name="weight">
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput placeholder="Date of Birth" [(ngModel)]="model.dateOfBirth" required name="dateOfBirth">
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput placeholder="Gender" [(ngModel)]="model.gender" required name="gender">
-    </mat-form-field>
-
-    <button mat-button type="submit" class="btn btn-success" [disabled]="!patientForm.form.valid">Submit</button>
-</form>
-<table class="table">
-    <thead>
-    <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
-        <th>Phone Number</th>
-        <th>Height</th>
-        <th>Weight</th>
-        <th>Date of Birth</th>
-        <th>Gender</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let patient of patients">
-        <td>{{patient.firstName}}</td>
-        <td>{{patient.lastName}}</td>
-        <td>{{patient.email}}</td>
-        <td>{{patient.phoneNumber}}</td>
-        <td>{{patient.height}}</td>
-        <td>{{patient.weight}}</td>
-        <td>{{patient.dateOfBirth}}</td>
-        <td>{{patient.gender}}</td>
-    </tr>
-    </tbody>
-</table>
+<div class="container">
+    <mat-card>
+        <mat-card-title>Add new patient</mat-card-title>
+        <form (ngSubmit)="onSubmit()" #patientForm="ngForm" class="form-component">
+            <mat-form-field>
+                <input matInput placeholder="First Name" [(ngModel)]="model.firstName" required name="firstName">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Last Name" [(ngModel)]="model.lastName" required name="lastName">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Email" [(ngModel)]="model.email" required name="email">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Phone Number" [(ngModel)]="model.phoneNumber" required name="phoneNumber">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Height" [(ngModel)]="model.height" required name="height">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Weight" [(ngModel)]="model.weight" required name="weight">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [(ngModel)]="model.dateOfBirth" placeholder="Date of Birth" required name="dateOfBirth"
+                       [matDatepicker]="dateOfBirth">
+                <mat-datepicker-toggle matSuffix [for]="dateOfBirth"></mat-datepicker-toggle>
+                <mat-datepicker #dateOfBirth></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-select placeholder="Gender" required name="gender" [(ngModel)]="model.gender">
+                    <mat-option value="MASCULINE"> Masculine</mat-option>
+                    <mat-option value="FEMININE"> Feminine</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button mat-button type="submit" class="btn" [disabled]="!patientForm.form.valid">Submit</button>
+        </form>
+    </mat-card>
+</div>
+<br>
+<div class="container">
+    <mat-card>
+        <mat-card-title>List of patients</mat-card-title>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Height</th>
+                <th>Weight</th>
+                <th>Date of Birth</th>
+                <th>Gender</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let patient of patients">
+                <td>{{patient.firstName}}</td>
+                <td>{{patient.lastName}}</td>
+                <td>{{patient.email}}</td>
+                <td>{{patient.phoneNumber}}</td>
+                <td>{{patient.height}}</td>
+                <td>{{patient.weight}}</td>
+                <td>{{patient.dateOfBirth | date: 'dd-MM-yyyy'}}</td>
+                <td>{{patient.gender == "FEMININE" ? "Feminine" : "Masculine"}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </mat-card>
+</div>
