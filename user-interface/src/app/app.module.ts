@@ -26,6 +26,7 @@ import {DoctorComponent} from './doctor/doctor.component';
 import {CalendarModule} from "angular-calendar";
 import {CommonModule} from "@angular/common";
 import {NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
+import {FilterPipe} from "./pipe/filter";
 
 
 @NgModule({
@@ -83,7 +84,8 @@ import {NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
         AppointmentComponent,
         LoginComponent,
         HomeComponent,
-        DoctorComponent
+        DoctorComponent,
+        FilterPipe
     ],
     providers: [CookieService],
     bootstrap: [AppComponent]

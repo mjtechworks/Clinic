@@ -40,6 +40,9 @@
 <div class="container">
     <mat-card>
         <mat-card-title>List of patients</mat-card-title>
+        <mat-form-field>
+            <input matInput placeholder="Search by email" [(ngModel)]="emailSearch" name="emailSearch">
+        </mat-form-field>
         <table class="table table-hover">
             <thead>
             <tr>
@@ -54,7 +57,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let patient of patients">
+            <tr *ngFor="let patient of patients | filter : emailSearch">
                 <td>{{patient.firstName}}</td>
                 <td>{{patient.lastName}}</td>
                 <td>{{patient.email}}</td>
