@@ -27,6 +27,7 @@ import {CalendarModule} from "angular-calendar";
 import {CommonModule} from "@angular/common";
 import {NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
 import {FilterPipe} from "./pipe/filter";
+import {OwlDateTimeModule, OwlNativeDateTimeModule} from "ng-pick-datetime";
 
 
 @NgModule({
@@ -70,6 +71,8 @@ import {FilterPipe} from "./pipe/filter";
         CalendarModule.forRoot(),
         NgbModalModule.forRoot(),
         CommonModule,
+        OwlDateTimeModule,
+        OwlNativeDateTimeModule,
         RouterModule.forRoot([
             {path: '', component: HomeComponent},
             {path: 'login', component: LoginComponent},

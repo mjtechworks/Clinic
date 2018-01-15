@@ -4,6 +4,7 @@ import {Appointment} from "../domain/appointment";
 import {AuthenticationService} from "../service/authentication.service";
 import {Patient} from "../domain/patient";
 import {PatientService} from "../service/patient.service";
+import {MatSnackBar} from "@angular/material";
 
 @Component({
     selector: 'app-appointment',
@@ -17,7 +18,7 @@ export class AppointmentComponent implements OnInit {
     private model: Appointment;
     private patients: Patient[];
 
-    constructor(private appointmentService: AppointmentService, private authService : AuthenticationService, private patientService: PatientService) {
+    constructor(private appointmentService: AppointmentService, private authService: AuthenticationService, private patientService: PatientService, public snackBar: MatSnackBar) {
     }
 
     ngOnInit() {
@@ -31,8 +32,14 @@ export class AppointmentComponent implements OnInit {
     }
 
     private onSubmit() {
-        this.appointmentService.addAppointment(this.model).subscribe(data => {
+        this.model.doctorId = this.authService.getUsername();
 
+        this.appointmentService.addAppointment(this.model).subscribe(data => this.displayMessage("An appointment was established !"));
+    }
+
+    private displayMessage(message) {
+        this.snackBar.open(message, "", {
+            duration: 5000,
         });
     }
 

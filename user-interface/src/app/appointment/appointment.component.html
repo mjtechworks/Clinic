@@ -3,10 +3,14 @@
         <mat-card-title>Add new appointment</mat-card-title>
         <form (ngSubmit)="onSubmit()" #patientForm="ngForm" class="form-component">
             <mat-form-field>
-                <input matInput placeholder="Start Date" [(ngModel)]="model.startDate" required name="startDate">
+                <input matInput [(ngModel)]="model.startDate" placeholder="Start Date" required name="startDate"
+                       [owlDateTimeTrigger]="startDate" [owlDateTime]="startDate">
+                <owl-date-time #startDate></owl-date-time>
             </mat-form-field>
             <mat-form-field>
-                <input matInput placeholder="End Date" [(ngModel)]="model.endDate" required name="endDate">
+                <input matInput [(ngModel)]="model.endDate" placeholder="End Date" required name="endDate"
+                       [owlDateTimeTrigger]="endDate" [owlDateTime]="endDate">
+                <owl-date-time #endDate></owl-date-time>
             </mat-form-field>
             <br>
             <mat-form-field>
@@ -15,6 +19,7 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
+                    <th></th>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Email</th>
@@ -23,6 +28,8 @@
                 </thead>
                 <tbody>
                 <tr *ngFor="let patient of patients | filter : emailSearch">
+                    <td><input type="radio" name="radiogroup" [value]="patient.id" [(ngModel)]="model.patientId"
+                               required></td>
                     <td>{{patient.firstName}}</td>
                     <td>{{patient.lastName}}</td>
                     <td>{{patient.email}}</td>
