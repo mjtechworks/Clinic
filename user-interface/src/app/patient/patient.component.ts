@@ -2,6 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {Patient} from "../domain/patient";
 import {PatientService} from "../service/patient.service";
 import {AuthenticationService} from "../service/authentication.service";
+import {MatSnackBar} from "@angular/material";
 
 @Component({
     selector: 'app-patient',
@@ -15,7 +16,7 @@ export class PatientComponent implements OnInit {
     private model: Patient;
     private patients: Patient[];
 
-    constructor(private patientService: PatientService, private authService: AuthenticationService) {
+    constructor(private patientService: PatientService, private authService: AuthenticationService, public snackBar: MatSnackBar) {
     }
 
     ngOnInit() {
@@ -33,6 +34,13 @@ export class PatientComponent implements OnInit {
 
         this.patientService.addPatient(this.model).subscribe(data => {
             this.patients.push(data);
+            this.displayMessage("A patient was created !");
+        });
+    }
+
+    private displayMessage(message) {
+        this.snackBar.open(message, "", {
+            duration: 5000,
         });
     }
 
