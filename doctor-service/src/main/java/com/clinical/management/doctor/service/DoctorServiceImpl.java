@@ -44,4 +44,14 @@ public class DoctorServiceImpl implements DoctorService {
 
         return doctor;
     }
+
+    @Override
+    public Doctor update(Doctor doctor) {
+        Doctor existing = repository.findDoctorByEmail(doctor.getEmail());
+        Assert.notNull(existing, "Doctor " + doctor.getEmail() + " doesn't exist !");
+
+        repository.save(doctor);
+
+        return doctor;
+    }
 }

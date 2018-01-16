@@ -20,7 +20,7 @@ public class DoctorController {
 
     @PreAuthorize("#oauth2.hasScope('server')")
     @RequestMapping(path = "/find", method = RequestMethod.GET)
-    public Doctor getDoctorByName(@RequestParam(value="email", required=true) String email) {
+    public Doctor getDoctorByName(@RequestParam(value = "email", required = true) String email) {
         return doctorService.findByEmail(email);
     }
 
@@ -32,6 +32,11 @@ public class DoctorController {
     @RequestMapping(path = "/create", method = RequestMethod.POST)
     public Doctor createNewDoctor(@Valid @RequestBody Doctor doctor) {
         return doctorService.create(doctor);
+    }
+
+    @RequestMapping(path = "/update", method = RequestMethod.PUT)
+    public Doctor updateDoctor(@Valid @RequestBody Doctor doctor) {
+        return doctorService.update(doctor);
     }
 
 }

@@ -23,4 +23,13 @@ public interface DoctorService {
      */
     Doctor create(Doctor doctor);
 
+
+    /**
+     * Update doctor information (first name, last name, address, phone number)
+     *
+     * @param doctor new doctor information
+     * @return doctor updated
+     */
+    Doctor update(Doctor doctor);
+
 }

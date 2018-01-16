@@ -72,4 +72,29 @@ public class DoctorServiceTest {
         verify(repository, times(1)).save(doctor);
     }
 
+    @Test
+    public void shouldUpdateDoctor() {
+        Doctor doctor = new Doctor();
+
+        doctor.setFirstName("Test 1");
+        doctor.setLastName("Test 2");
+        doctor.setEmail("test@test.com");
+        doctor.setPassword("testPassword01");
+        doctor.setAddress("Test Address");
+        doctor.setPhoneNumber("0700000000");
+
+        when(repository.findDoctorByEmail(doctor.getEmail())).thenReturn(doctor);
+
+        doctor.setFirstName("Test 3");
+        doctor.setLastName("Test 4");
+        doctor.setAddress("Test Address 1");
+
+        Doctor updateDoctor = doctorService.update(doctor);
+        assertEquals(doctor.getFirstName(), updateDoctor.getFirstName());
+        assertEquals(doctor.getLastName(), updateDoctor.getLastName());
+        assertEquals(doctor.getAddress(), updateDoctor.getAddress());
+
+        verify(repository, times(1)).save(doctor);
+    }
+
 }

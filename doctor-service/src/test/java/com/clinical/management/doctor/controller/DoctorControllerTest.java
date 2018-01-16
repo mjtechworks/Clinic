@@ -23,6 +23,7 @@ import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -98,6 +99,25 @@ public class DoctorControllerTest {
 
         mockMvc.perform(post("/create").principal(new UserPrincipal(doctor.getEmail())).contentType(MediaType.APPLICATION_JSON).content(json))
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void shouldUpdateDoctor() throws Exception {
+        Doctor doctor = new Doctor();
+
+        doctor.setFirstName("Test 1");
+        doctor.setLastName("Test 2");
+        doctor.setEmail("test@test.com");
+        doctor.setPassword("testPassword01");
+        doctor.setAddress("Test Address");
+        doctor.setPhoneNumber("0700000000");
+
+        when(doctorService.update(doctor)).thenReturn(doctor);
+
+        String json = mapper.writeValueAsString(doctor);
+
+        mockMvc.perform(put("/update").principal(new UserPrincipal(doctor.getEmail())).contentType(MediaType.APPLICATION_JSON).content(json))
+                .andExpect(status().isOk());
     }
 
 }
