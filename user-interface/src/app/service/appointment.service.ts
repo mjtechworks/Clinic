@@ -3,32 +3,24 @@ import {Observable} from "rxjs/Observable";
 import {Injectable} from "@angular/core";
 import {Appointment} from "../domain/appointment";
 import {AuthenticationService} from "./authentication.service";
+import {Service} from "./service";
 
 @Injectable()
-export class AppointmentService {
+export class AppointmentService extends Service {
     private getAllAppointmentUrl = 'api/appointments/all';
     private addAppointmentUrl = 'api/appointments/add';
 
 
     constructor(private http: HttpClient, private authService: AuthenticationService) {
+        super(authService);
     }
 
     public getAllAppointment(): Observable<Appointment[]> {
-        let headers = new HttpHeaders({'Authorization': 'Bearer ' + this.authService.getOauthToken()});
-        let options = {
-            headers: headers
-        };
-
-        return this.http.get<Appointment[]>(this.getAllAppointmentUrl, options);
+        return this.http.get<Appointment[]>(this.getAllAppointmentUrl, super.getHeader());
     }
 
     public addAppointment(appointment: Appointment): Observable<Appointment> {
-        let headers = new HttpHeaders({'Authorization': 'Bearer ' + this.authService.getOauthToken()});
-        let options = {
-            headers: headers
-        };
-
-        return this.http.post<Appointment>(this.addAppointmentUrl, appointment, options);
+        return this.http.post<Appointment>(this.addAppointmentUrl, appointment, super.getHeader());
     }
 
 }
