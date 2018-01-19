@@ -28,6 +28,7 @@ import {CommonModule} from "@angular/common";
 import {NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
 import {FilterPipe} from "./pipe/filter";
 import {OwlDateTimeModule, OwlNativeDateTimeModule} from "ng-pick-datetime";
+import {DoctorUpdateComponent} from './doctor-update/doctor-update.component';
 
 
 @NgModule({
@@ -78,7 +79,8 @@ import {OwlDateTimeModule, OwlNativeDateTimeModule} from "ng-pick-datetime";
             {path: 'login', component: LoginComponent},
             {path: 'create-account', component: DoctorComponent},
             {path: 'appointments', component: AppointmentComponent},
-            {path: 'patients', component: PatientComponent}
+            {path: 'patients', component: PatientComponent},
+            {path: 'doctor/update', component: DoctorUpdateComponent}
         ])
     ],
     declarations: [
@@ -88,7 +90,8 @@ import {OwlDateTimeModule, OwlNativeDateTimeModule} from "ng-pick-datetime";
         LoginComponent,
         HomeComponent,
         DoctorComponent,
-        FilterPipe
+        FilterPipe,
+        DoctorUpdateComponent
     ],
     providers: [CookieService],
     bootstrap: [AppComponent]

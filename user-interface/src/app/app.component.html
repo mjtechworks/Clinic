@@ -6,7 +6,7 @@
                    class="nav-bar-item nav-button nav-wide">
             <span id="logo-text">Clinical Management</span>
             <div class="nav-right w3-hide-small">
-                <span class="nav-bar-item nav-button">{{doctor.firstName + " " + doctor.lastName}}</span>
+                <span class="nav-bar-item nav-button" (click)="navigate('doctor/update')">{{doctor.firstName + " " + doctor.lastName}}</span>
             </div>
         </div>
     </div>
