@@ -39,4 +39,9 @@ export class DoctorUpdateComponent implements OnInit {
         });
     }
 
+    private mapClicked($event: MouseEvent) {
+        this.model.latitude = $event.coords.lat;
+        this.model.longitude = $event.coords.lng;
+    }
+
 }
