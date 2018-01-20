@@ -4,6 +4,7 @@ export class Doctor {
     public lastName: string;
     public email: string;
     public password: string;
-    public address: string;
+    public latitude: number;
+    public longitude: number;
     public phoneNumber: string;
 }

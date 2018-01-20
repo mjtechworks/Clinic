@@ -21,11 +21,13 @@ export class DoctorComponent implements OnInit {
     }
 
     ngOnInit() {
-        if(this.authService.isUserLogin()){
+        if (this.authService.isUserLogin()) {
             this.router.navigate(['/']);
         }
 
         this.model = new Doctor();
+        this.model.latitude = 44.426543552183006;
+        this.model.longitude = 26.104084253311157;
     }
 
     private onSubmit() {
@@ -52,6 +54,11 @@ export class DoctorComponent implements OnInit {
         this.snackBar.open(message, "", {
             duration: 5000,
         });
+    }
+
+    private mapClicked($event: MouseEvent) {
+        this.model.latitude = $event.coords.lat;
+        this.model.longitude = $event.coords.lng;
     }
 
 }

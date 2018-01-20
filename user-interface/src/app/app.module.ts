@@ -1,4 +1,3 @@
-///<reference path="../../node_modules/@angular/material/autocomplete/typings/autocomplete-module.d.ts"/>
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
@@ -29,6 +28,7 @@ import {NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
 import {FilterPipe} from "./pipe/filter";
 import {OwlDateTimeModule, OwlNativeDateTimeModule} from "ng-pick-datetime";
 import {DoctorUpdateComponent} from './doctor-update/doctor-update.component';
+import {AgmCoreModule} from '@agm/core';
 
 
 @NgModule({
@@ -81,7 +81,10 @@ import {DoctorUpdateComponent} from './doctor-update/doctor-update.component';
             {path: 'appointments', component: AppointmentComponent},
             {path: 'patients', component: PatientComponent},
             {path: 'doctor/update', component: DoctorUpdateComponent}
-        ])
+        ]),
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyBVauZN-pE8Gd1ygY2f6Kxb00WyG_sGI40'
+        })
     ],
     declarations: [
         AppComponent,

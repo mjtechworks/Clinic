@@ -21,12 +21,16 @@
                        name="repeatPassword">
             </mat-form-field>
             <mat-form-field>
-                <input matInput placeholder="Address" [(ngModel)]="model.address" required name="address">
-            </mat-form-field>
-            <mat-form-field>
                 <input matInput placeholder="Phone Number" [(ngModel)]="model.phoneNumber" required
                        name="phoneNumber">
             </mat-form-field>
+            <agm-map [latitude]="model.latitude" [longitude]="model.longitude" (mapClick)="mapClicked($event)">
+                <agm-marker
+                        [latitude]="model.latitude"
+                        [longitude]="model.longitude"
+                        [markerDraggable]="true">
+                </agm-marker>
+            </agm-map>
             <mat-card-actions>
                 <button mat-button type="submit" class="btn" [disabled]="!accountForm.form.valid">Submit
                 </button>

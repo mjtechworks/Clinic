@@ -6,6 +6,10 @@ body {
     font-family: "Lato", sans-serif;
 }
 
+agm-map {
+    height: 300px;
+}
+
 .nav-top {
     position: fixed;
     width: 100%;
