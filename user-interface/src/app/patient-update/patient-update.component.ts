@@ -3,6 +3,7 @@ import {ActivatedRoute} from "@angular/router";
 import {PatientService} from "../service/patient.service";
 import {Patient} from "../domain/patient";
 import {MatSnackBar} from "@angular/material";
+import {AuthenticationService} from "../service/authentication.service";
 
 @Component({
     selector: 'app-patient-update',
@@ -15,10 +16,11 @@ export class PatientUpdateComponent implements OnInit {
 
     private model: Patient;
 
-    constructor(private route: ActivatedRoute, private patientService: PatientService, public snackBar: MatSnackBar) {
+    constructor(private route: ActivatedRoute, private patientService: PatientService, public snackBar: MatSnackBar, private authService : AuthenticationService) {
     }
 
     ngOnInit() {
+        this.authService.checkCredentials();
         this.model = new Patient();
         this.route.params.subscribe(params => this.getPatient(params['id']));
     }
