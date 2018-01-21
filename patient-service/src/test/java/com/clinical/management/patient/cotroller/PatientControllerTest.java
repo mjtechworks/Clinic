@@ -19,15 +19,11 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import javax.ws.rs.core.MediaType;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
@@ -85,6 +81,14 @@ public class PatientControllerTest {
         mockMvc.perform(post("/add").contentType(MediaType.APPLICATION_JSON).content(json))
                 .andExpect(status().isOk());
 
+    }
+
+    @Test
+    public void shouldUpdatePatient() throws Exception {
+        String json = mapper.writeValueAsString(PatientUtil.getPatient());
+
+        mockMvc.perform(put("/update").contentType(MediaType.APPLICATION_JSON).content(json))
+                .andExpect(status().isOk());
     }
 
 }

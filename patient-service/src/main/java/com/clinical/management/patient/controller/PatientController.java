@@ -31,4 +31,10 @@ public class PatientController {
     public Patient get(@PathVariable String patientId) {
         return patientRepository.findOne(patientId);
     }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/update")
+    public Patient update(@RequestBody Patient patient) {
+        return patientRepository.save(patient);
+    }
+
 }
