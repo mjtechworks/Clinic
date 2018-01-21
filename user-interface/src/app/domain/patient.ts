@@ -7,6 +7,6 @@ export class Patient {
     public phoneNumber: string;
     public height: number;
     public weight: number;
-    public dateOfBirth: string;
+    public dateOfBirth: Date;
     public gender: string;
 }

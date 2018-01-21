@@ -1,3 +1,37 @@
-<p>
-  patient-update works!
-</p>
+<div class="container">
+    <mat-card>
+        <mat-card-title>Change patient details</mat-card-title>
+        <form (ngSubmit)="onSubmit()" #patientForm="ngForm" class="form-component">
+            <mat-form-field>
+                <input matInput placeholder="First Name" [(ngModel)]="model.firstName" required name="firstName">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Last Name" [(ngModel)]="model.lastName" required name="lastName">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Email" [(ngModel)]="model.email" required name="email">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Phone Number" [(ngModel)]="model.phoneNumber" required name="phoneNumber">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Height" [(ngModel)]="model.height" required name="height">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Weight" [(ngModel)]="model.weight" required name="weight">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [(ngModel)]="model.dateOfBirth" placeholder="Date of Birth" required name="dateOfBirth"
+                       [owlDateTimeTrigger]="dateOfBirth" [owlDateTime]="dateOfBirth">
+                <owl-date-time [pickerType]="'calendar'" #dateOfBirth></owl-date-time>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-select placeholder="Gender" required name="gender" [(ngModel)]="model.gender">
+                    <mat-option value="MASCULINE"> Masculine</mat-option>
+                    <mat-option value="FEMININE"> Feminine</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button mat-button type="submit" class="btn" [disabled]="!patientForm.form.valid">Submit</button>
+        </form>
+    </mat-card>
+</div>
