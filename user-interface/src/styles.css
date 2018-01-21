@@ -10,6 +10,10 @@ agm-map {
     height: 300px;
 }
 
+.table-hover tbody tr {
+    cursor: pointer;
+}
+
 .nav-top {
     position: fixed;
     width: 100%;

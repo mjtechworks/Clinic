@@ -3,6 +3,7 @@ import {Patient} from "../domain/patient";
 import {PatientService} from "../service/patient.service";
 import {AuthenticationService} from "../service/authentication.service";
 import {MatSnackBar} from "@angular/material";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-patient',
@@ -16,7 +17,7 @@ export class PatientComponent implements OnInit {
     private model: Patient;
     private patients: Patient[];
 
-    constructor(private patientService: PatientService, private authService: AuthenticationService, public snackBar: MatSnackBar) {
+    constructor(private patientService: PatientService, private authService: AuthenticationService, public snackBar: MatSnackBar, private router: Router) {
     }
 
     ngOnInit() {
@@ -42,6 +43,10 @@ export class PatientComponent implements OnInit {
         this.snackBar.open(message, "", {
             duration: 5000,
         });
+    }
+
+    private navigate(url: String) {
+        this.router.navigate([url]);
     }
 
 }

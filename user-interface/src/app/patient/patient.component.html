@@ -56,7 +56,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let patient of patients | filter : emailSearch">
+            <tr *ngFor="let patient of patients | filter : emailSearch"
+                (click)="navigate('/patient/update/' + patient.id)">
                 <td>{{patient.firstName}}</td>
                 <td>{{patient.lastName}}</td>
                 <td>{{patient.email}}</td>
