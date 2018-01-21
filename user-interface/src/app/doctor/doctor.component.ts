@@ -56,7 +56,7 @@ export class DoctorComponent implements OnInit {
         });
     }
 
-    private mapClicked($event: MouseEvent) {
+    private mapClicked($event: any) {
         this.model.latitude = $event.coords.lat;
         this.model.longitude = $event.coords.lng;
     }
