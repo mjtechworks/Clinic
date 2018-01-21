@@ -28,8 +28,10 @@ public class Doctor {
     private String lastName;
 
     @NotNull
-    @Length(max = 20_000)
-    private String address;
+    private Double latitude;
+
+    @NotNull
+    private Double longitude;
 
     @NotNull
     @Length(max = 10, min = 10)
@@ -67,12 +69,20 @@ public class Doctor {
         this.lastName = lastName;
     }
 
-    public String getAddress() {
-        return address;
+    public Double getLatitude() {
+        return latitude;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
     public String getPhoneNumber() {

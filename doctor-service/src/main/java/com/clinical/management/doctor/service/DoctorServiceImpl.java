@@ -32,14 +32,9 @@ public class DoctorServiceImpl implements DoctorService {
         Doctor existing = repository.findDoctorByEmail(doctor.getEmail());
         Assert.isNull(existing, "Doctor already exists: " + doctor.getEmail());
 
-        User user = new User();
-        user.setUsername(doctor.getEmail());
-        user.setPassword(doctor.getPassword());
-
-        authClient.createUser(user);
+        sendUserCredentials(doctor);
 
         doctor.setPassword(null);
-
         repository.save(doctor);
 
         return doctor;
@@ -53,5 +48,13 @@ public class DoctorServiceImpl implements DoctorService {
         repository.save(doctor);
 
         return doctor;
+    }
+
+    private void sendUserCredentials(Doctor doctor) {
+        User user = new User();
+        user.setUsername(doctor.getEmail());
+        user.setPassword(doctor.getPassword());
+
+        authClient.createUser(user);
     }
 }

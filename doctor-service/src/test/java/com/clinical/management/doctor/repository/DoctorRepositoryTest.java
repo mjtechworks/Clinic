@@ -3,6 +3,7 @@ package com.clinical.management.doctor.repository;
 
 import com.clinical.management.doctor.DoctorApplication;
 import com.clinical.management.doctor.domain.Doctor;
+import com.clinical.management.doctor.util.DoctorUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +22,7 @@ public class DoctorRepositoryTest {
 
     @Test
     public void findDoctorByEmail() {
-        Doctor doctor = new Doctor();
-
-        doctor.setFirstName("Test 1");
-        doctor.setLastName("Test 2");
-        doctor.setEmail("test@test.com");
-        doctor.setAddress("Test Address");
-        doctor.setPhoneNumber("0700000000");
+        Doctor doctor = DoctorUtil.getDoctor();
 
         doctorRepository.save(doctor);
 
@@ -36,7 +31,8 @@ public class DoctorRepositoryTest {
         assertEquals(doctor.getFirstName(), found.getFirstName());
         assertEquals(doctor.getLastName(), found.getLastName());
         assertEquals(doctor.getEmail(), found.getEmail());
-        assertEquals(doctor.getAddress(), found.getAddress());
+        assertEquals(doctor.getLatitude(), found.getLatitude());
+        assertEquals(doctor.getLongitude(), found.getLongitude());
         assertEquals(doctor.getPhoneNumber(), found.getPhoneNumber());
     }
 

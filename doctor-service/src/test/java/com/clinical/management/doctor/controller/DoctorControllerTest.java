@@ -4,6 +4,7 @@ package com.clinical.management.doctor.controller;
 import com.clinical.management.doctor.DoctorApplication;
 import com.clinical.management.doctor.domain.Doctor;
 import com.clinical.management.doctor.service.DoctorService;
+import com.clinical.management.doctor.util.DoctorUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.security.auth.UserPrincipal;
 import org.junit.Before;
@@ -74,20 +75,11 @@ public class DoctorControllerTest {
 
     @Test
     public void shouldCreateDoctor() throws Exception {
-        Doctor doctor = new Doctor();
-
-        doctor.setFirstName("Test 1");
-        doctor.setLastName("Test 2");
-        doctor.setEmail("test@test.com");
-        doctor.setPassword("testPassword01");
-        doctor.setAddress("Test Address");
-        doctor.setPhoneNumber("0700000000");
-
+        Doctor doctor = DoctorUtil.getDoctor();
         String json = mapper.writeValueAsString(doctor);
 
         mockMvc.perform(post("/create").principal(new UserPrincipal(doctor.getEmail())).contentType(MediaType.APPLICATION_JSON).content(json))
                 .andExpect(status().isOk());
-
     }
 
     @Test
@@ -103,19 +95,11 @@ public class DoctorControllerTest {
 
     @Test
     public void shouldUpdateDoctor() throws Exception {
-        Doctor doctor = new Doctor();
-
-        doctor.setFirstName("Test 1");
-        doctor.setLastName("Test 2");
-        doctor.setEmail("test@test.com");
-        doctor.setPassword("testPassword01");
-        doctor.setAddress("Test Address");
-        doctor.setPhoneNumber("0700000000");
-
-        when(doctorService.update(doctor)).thenReturn(doctor);
-
+        Doctor doctor = DoctorUtil.getDoctor();
         String json = mapper.writeValueAsString(doctor);
 
+        when(doctorService.update(doctor)).thenReturn(doctor);
+        
         mockMvc.perform(put("/update").principal(new UserPrincipal(doctor.getEmail())).contentType(MediaType.APPLICATION_JSON).content(json))
                 .andExpect(status().isOk());
     }

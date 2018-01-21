@@ -6,6 +6,7 @@ import com.clinical.management.doctor.client.AuthServiceClient;
 import com.clinical.management.doctor.domain.Doctor;
 import com.clinical.management.doctor.domain.User;
 import com.clinical.management.doctor.repository.DoctorRepository;
+import com.clinical.management.doctor.util.DoctorUtil;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,8 +40,7 @@ public class DoctorServiceTest {
 
     @Test
     public void shouldFindByEmail() {
-
-        final Doctor doctor = new Doctor();
+        Doctor doctor = new Doctor();
         doctor.setEmail("test@test.com");
 
         when(repository.findDoctorByEmail(doctor.getEmail())).thenReturn(doctor);
@@ -56,14 +56,7 @@ public class DoctorServiceTest {
 
     @Test
     public void shouldCreateDoctor() {
-        Doctor doctor = new Doctor();
-
-        doctor.setFirstName("Test 1");
-        doctor.setLastName("Test 2");
-        doctor.setEmail("test@test.com");
-        doctor.setPassword("testPassword01");
-        doctor.setAddress("Test Address");
-        doctor.setPhoneNumber("0700000000");
+        Doctor doctor = DoctorUtil.getDoctor();
 
         Doctor created = doctorService.create(doctor);
         assertEquals(doctor.getEmail(), created.getEmail());
@@ -74,25 +67,16 @@ public class DoctorServiceTest {
 
     @Test
     public void shouldUpdateDoctor() {
-        Doctor doctor = new Doctor();
-
-        doctor.setFirstName("Test 1");
-        doctor.setLastName("Test 2");
-        doctor.setEmail("test@test.com");
-        doctor.setPassword("testPassword01");
-        doctor.setAddress("Test Address");
-        doctor.setPhoneNumber("0700000000");
+        Doctor doctor = DoctorUtil.getDoctor();
 
         when(repository.findDoctorByEmail(doctor.getEmail())).thenReturn(doctor);
 
         doctor.setFirstName("Test 3");
         doctor.setLastName("Test 4");
-        doctor.setAddress("Test Address 1");
 
         Doctor updateDoctor = doctorService.update(doctor);
         assertEquals(doctor.getFirstName(), updateDoctor.getFirstName());
         assertEquals(doctor.getLastName(), updateDoctor.getLastName());
-        assertEquals(doctor.getAddress(), updateDoctor.getAddress());
 
         verify(repository, times(1)).save(doctor);
     }
