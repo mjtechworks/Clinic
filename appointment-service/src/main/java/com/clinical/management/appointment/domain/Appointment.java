@@ -1,5 +1,6 @@
 package com.clinical.management.appointment.domain;
 
+import org.hibernate.validator.constraints.Email;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -13,7 +14,8 @@ public class Appointment {
     private String id;
 
     @NotNull
-    private String doctorId;
+    @Email
+    private String doctorEmail;
 
     @NotNull
     private String patientId;
@@ -40,12 +42,12 @@ public class Appointment {
         this.id = id;
     }
 
-    public String getDoctorId() {
-        return doctorId;
+    public String getDoctorEmail() {
+        return doctorEmail;
     }
 
-    public void setDoctorId(String doctorId) {
-        this.doctorId = doctorId;
+    public void setDoctorEmail(String doctorEmail) {
+        this.doctorEmail = doctorEmail;
     }
 
     public String getPatientId() {

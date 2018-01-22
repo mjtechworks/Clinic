@@ -16,7 +16,7 @@ public class AppointmentUtil {
 
         appointment.setId("55");
         appointment.setPatientId("66");
-        appointment.setDoctorId("77");
+        appointment.setDoctorEmail("test@test.com");
         appointment.setStartDate(sdf.parse("11/11/2017 10:45"));
         appointment.setEndDate(sdf.parse("11/11/2017 11:15"));
         appointment.setRemark("Test - Remark");
@@ -35,7 +35,7 @@ public class AppointmentUtil {
 
             appointment.setId("55" + i);
             appointment.setPatientId("66" + i);
-            appointment.setDoctorId("77" + i);
+            appointment.setDoctorEmail("test@test.com");
             appointment.setStartDate(sdf.parse("11/11/2017 10:45"));
             appointment.setEndDate(sdf.parse("11/11/2017 11:15"));
             appointment.setRemark("Test - Remark - " + i);

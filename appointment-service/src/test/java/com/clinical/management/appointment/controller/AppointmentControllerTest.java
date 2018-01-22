@@ -3,6 +3,7 @@ package com.clinical.management.appointment.controller;
 import com.clinical.management.appointment.AppointmentApplication;
 import com.clinical.management.appointment.domain.Appointment;
 import com.clinical.management.appointment.repository.AppointmentRepository;
+import com.clinical.management.appointment.service.AppointmentService;
 import com.clinical.management.appointment.util.AppointmentUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
@@ -38,6 +39,9 @@ public class AppointmentControllerTest {
     @Mock
     private AppointmentRepository appointmentRepository;
 
+    @Mock
+    private AppointmentService appointmentService;
+
     private MockMvc mockMvc;
 
     @Before
@@ -53,7 +57,7 @@ public class AppointmentControllerTest {
         when(appointmentRepository.findOne(appointment.getId())).thenReturn(appointment);
 
         mockMvc.perform(get("/" + appointment.getId()))
-                .andExpect(jsonPath("$.doctorId").value(appointment.getDoctorId()))
+                .andExpect(jsonPath("$.doctorEmail").value(appointment.getDoctorEmail()))
                 .andExpect(jsonPath("$.patientId").value(appointment.getPatientId()))
                 .andExpect(jsonPath("$.startDate").value(appointment.getStartDate()))
                 .andExpect(jsonPath("$.endDate").value(appointment.getEndDate()))
@@ -67,7 +71,15 @@ public class AppointmentControllerTest {
     public void getAllAppointment() throws Exception {
         when(appointmentRepository.findAll()).thenReturn(AppointmentUtil.getAppointments());
 
-        mockMvc.perform(get("/all"))
+        mockMvc.perform(get("/all?doctorEmail=test@test.com"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void getAllAppointmentByPatient() throws Exception {
+        when(appointmentRepository.findAll()).thenReturn(AppointmentUtil.getAppointments());
+
+        mockMvc.perform(get("/all?doctorEmail=test@test.com&patientId=550"))
                 .andExpect(status().isOk());
     }
 
