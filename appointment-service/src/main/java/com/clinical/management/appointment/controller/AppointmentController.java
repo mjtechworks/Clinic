@@ -30,6 +30,11 @@ public class AppointmentController {
         return appointmentService.findAllAppointments(doctorEmail, patientId);
     }
 
+    @RequestMapping(method = RequestMethod.PUT, value = "/update")
+    public Appointment update(@RequestBody Appointment appointment) {
+        return appointmentRepository.save(appointment);
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/{appointmentId}")
     public Appointment get(@PathVariable String appointmentId) {
         return appointmentRepository.findOne(appointmentId);

@@ -18,12 +18,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import javax.ws.rs.core.MediaType;
-import java.text.SimpleDateFormat;
 
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -90,6 +90,17 @@ public class AppointmentControllerTest {
         String json = mapper.writeValueAsString(appointment);
 
         mockMvc.perform(post("/add").contentType(MediaType.APPLICATION_JSON).content(json))
+                .andExpect(status().isOk());
+
+    }
+
+    @Test
+    public void updateAppointment() throws Exception {
+        Appointment appointment = AppointmentUtil.getAppointment();
+
+        String json = mapper.writeValueAsString(appointment);
+
+        mockMvc.perform(put("/update").contentType(MediaType.APPLICATION_JSON).content(json))
                 .andExpect(status().isOk());
 
     }
