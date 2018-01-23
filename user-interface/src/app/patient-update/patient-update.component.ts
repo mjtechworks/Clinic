@@ -4,25 +4,33 @@ import {PatientService} from "../service/patient.service";
 import {Patient} from "../domain/patient";
 import {MatSnackBar} from "@angular/material";
 import {AuthenticationService} from "../service/authentication.service";
+import {Appointment} from "../domain/appointment";
+import {AppointmentService} from "../service/appointment.service";
 
 @Component({
     selector: 'app-patient-update',
     templateUrl: './patient-update.component.html',
     styleUrls: ['./patient-update.component.css'],
-    providers: [PatientService],
+    providers: [PatientService, AppointmentService],
     encapsulation: ViewEncapsulation.None
 })
 export class PatientUpdateComponent implements OnInit {
 
     private model: Patient;
+    private appointments: Appointment[];
 
-    constructor(private route: ActivatedRoute, private patientService: PatientService, public snackBar: MatSnackBar, private authService : AuthenticationService) {
+    constructor(private route: ActivatedRoute, private patientService: PatientService,
+                public snackBar: MatSnackBar, private authService: AuthenticationService,
+                public appointmentService: AppointmentService) {
     }
 
     ngOnInit() {
         this.authService.checkCredentials();
         this.model = new Patient();
-        this.route.params.subscribe(params => this.getPatient(params['id']));
+        this.route.params.subscribe(params => {
+            this.getPatient(params['id']);
+            this.getPatientAppointments(params['id']);
+        });
     }
 
     private getPatient(id: string) {
@@ -30,6 +38,10 @@ export class PatientUpdateComponent implements OnInit {
             this.model = data;
             this.model.dateOfBirth = new Date(this.model.dateOfBirth);
         });
+    }
+
+    private getPatientAppointments(id: string) {
+        this.appointmentService.getAllPatientAppointments(id).subscribe(data => this.appointments = data);
     }
 
     private onSubmit() {

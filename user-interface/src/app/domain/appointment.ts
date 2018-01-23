@@ -1,6 +1,6 @@
 export class Appointment {
     public id: string;
-    public doctorId: string;
+    public doctorEmail: string;
     public patientId: string;
     public startDate: Date;
     public endDate: Date;

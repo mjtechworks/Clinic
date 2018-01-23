@@ -7,7 +7,7 @@ import {Service} from "./service";
 
 @Injectable()
 export class AppointmentService extends Service {
-    private getAllAppointmentUrl = 'api/appointments/all';
+    private getAllAppointmentUrl = 'api/appointments/all?doctorEmail=';
     private addAppointmentUrl = 'api/appointments/add';
 
 
@@ -16,11 +16,14 @@ export class AppointmentService extends Service {
     }
 
     public getAllAppointment(): Observable<Appointment[]> {
-        return this.http.get<Appointment[]>(this.getAllAppointmentUrl, super.getHeader());
+        return this.http.get<Appointment[]>(this.getAllAppointmentUrl + this.authService.getUsername(), super.getHeader());
+    }
+
+    public getAllPatientAppointments(patientId: string): Observable<Appointment[]> {
+        return this.http.get<Appointment[]>(this.getAllAppointmentUrl + this.authService.getUsername() + "&patientId=" + patientId, super.getHeader());
     }
 
     public addAppointment(appointment: Appointment): Observable<Appointment> {
         return this.http.post<Appointment>(this.addAppointmentUrl, appointment, super.getHeader());
     }
-
 }

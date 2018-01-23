@@ -35,3 +35,23 @@
         </form>
     </mat-card>
 </div>
+<br>
+<div class="container">
+    <mat-card>
+        <mat-card-title>List of appointments</mat-card-title>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Start Date</th>
+                <th>End Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let appoint of appointments">
+                <td>{{appoint.startDate | date: 'MM/dd/yyyy HH:mm'}}</td>
+                <td>{{appoint.endDate | date: 'MM/dd/yyyy HH:mm'}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </mat-card>
+</div>

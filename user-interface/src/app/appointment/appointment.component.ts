@@ -32,7 +32,7 @@ export class AppointmentComponent implements OnInit {
     }
 
     private onSubmit() {
-        this.model.doctorId = this.authService.getUsername();
+        this.model.doctorEmail = this.authService.getUsername();
 
         this.appointmentService.addAppointment(this.model).subscribe(data => this.displayMessage("An appointment was established !"));
     }
