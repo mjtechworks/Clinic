@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {PatientService} from "../service/patient.service";
 import {Patient} from "../domain/patient";
 import {MatSnackBar} from "@angular/material";
@@ -21,7 +21,7 @@ export class PatientUpdateComponent implements OnInit {
 
     constructor(private route: ActivatedRoute, private patientService: PatientService,
                 public snackBar: MatSnackBar, private authService: AuthenticationService,
-                public appointmentService: AppointmentService) {
+                public appointmentService: AppointmentService, private router: Router) {
     }
 
     ngOnInit() {
@@ -63,6 +63,10 @@ export class PatientUpdateComponent implements OnInit {
         } else {
             return '<span class="close">CLOSE</span>';
         }
+    }
+
+    private navigateToAppointment(id: string) {
+        this.router.navigate(['appointment/update/' + id]);
     }
 
 }

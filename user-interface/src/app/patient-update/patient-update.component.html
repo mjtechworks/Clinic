@@ -48,7 +48,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let appoint of appointments">
+            <tr *ngFor="let appoint of appointments" (click)="navigateToAppointment(appoint.id)">
                 <td>{{appoint.startDate | date: 'MM/dd/yyyy HH:mm'}}</td>
                 <td>{{appoint.endDate | date: 'MM/dd/yyyy HH:mm'}}</td>
                 <td [innerHtml]="getStatus(appoint)"></td>

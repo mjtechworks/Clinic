@@ -30,6 +30,7 @@ import {OwlDateTimeModule, OwlNativeDateTimeModule} from "ng-pick-datetime";
 import {DoctorUpdateComponent} from './doctor-update/doctor-update.component';
 import {AgmCoreModule} from '@agm/core';
 import {PatientUpdateComponent} from './patient-update/patient-update.component';
+import {AppointmentUpdateComponent} from './appointment-update/appointment-update.component';
 
 
 @NgModule({
@@ -82,7 +83,8 @@ import {PatientUpdateComponent} from './patient-update/patient-update.component'
             {path: 'appointments', component: AppointmentComponent},
             {path: 'patients', component: PatientComponent},
             {path: 'doctor/update', component: DoctorUpdateComponent},
-            {path: 'patient/update/:id', component: PatientUpdateComponent}
+            {path: 'patient/update/:id', component: PatientUpdateComponent},
+            {path: 'appointment/update/:id', component: AppointmentUpdateComponent}
         ]),
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyBVauZN-pE8Gd1ygY2f6Kxb00WyG_sGI40'
@@ -97,7 +99,8 @@ import {PatientUpdateComponent} from './patient-update/patient-update.component'
         DoctorComponent,
         FilterPipe,
         DoctorUpdateComponent,
-        PatientUpdateComponent
+        PatientUpdateComponent,
+        AppointmentUpdateComponent
     ],
     providers: [CookieService],
     bootstrap: [AppComponent]
