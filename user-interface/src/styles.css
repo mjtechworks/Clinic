@@ -26,6 +26,18 @@ agm-map {
     overflow: hidden
 }
 
+.open {
+    color: green;
+}
+
+.close {
+    color: red;
+}
+
+.close, .open {
+    font-weight: bold;
+}
+
 .nav-bar .nav-bar-item {
     padding: 8px 16px;
     float: left;

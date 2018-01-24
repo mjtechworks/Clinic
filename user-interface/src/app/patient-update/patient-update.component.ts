@@ -56,4 +56,13 @@ export class PatientUpdateComponent implements OnInit {
         });
     }
 
+    private getStatus(appointment: Appointment): string {
+        let today: Date = new Date();
+        if (appointment.startDate <= today && appointment.endDate <= today) {
+            return '<span class="open">OPEN</span>';
+        } else {
+            return '<span class="close">CLOSE</span>';
+        }
+    }
+
 }

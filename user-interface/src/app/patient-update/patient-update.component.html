@@ -44,12 +44,14 @@
             <tr>
                 <th>Start Date</th>
                 <th>End Date</th>
+                <th>Status</th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let appoint of appointments">
                 <td>{{appoint.startDate | date: 'MM/dd/yyyy HH:mm'}}</td>
                 <td>{{appoint.endDate | date: 'MM/dd/yyyy HH:mm'}}</td>
+                <td [innerHtml]="getStatus(appoint)"></td>
             </tr>
             </tbody>
         </table>
