@@ -28,3 +28,14 @@
         </form>
     </mat-card>
 </div>
+<br>
+<div class="container patient-detail" (click)="navigateToPatient()">
+    <mat-card>
+        <mat-card-title>Patient details</mat-card-title>
+        <span><b>First Name : </b> {{patient.firstName}}</span><br>
+        <span><b>Last Name : </b> {{patient.lastName}}</span><br>
+        <span><b>Date of Birth : </b>{{patient.dateOfBirth | date: 'MM/dd/yyyy'}}</span><br>
+        <span><b>Email : </b>{{patient.email}}</span><br>
+        <span><b>Phone number : </b>{{patient.phoneNumber}}</span>
+    </mat-card>
+</div>

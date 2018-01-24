@@ -38,6 +38,10 @@ agm-map {
     width: 100%;
 }
 
+.patient-detail {
+    cursor: pointer;
+}
+
 .close, .open {
     font-weight: bold;
 }

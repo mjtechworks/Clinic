@@ -27,6 +27,7 @@ export class AppointmentUpdateComponent implements OnInit {
     ngOnInit() {
         this.authService.checkCredentials();
         this.appointment = new Appointment();
+        this.patient = new Patient();
         this.route.params.subscribe(params => {
             this.getAppointment(params['id']);
         });
@@ -54,6 +55,10 @@ export class AppointmentUpdateComponent implements OnInit {
         this.snackBar.open(message, "", {
             duration: 5000,
         });
+    }
+
+    private navigateToPatient() {
+        this.router.navigate(['patient/update/' + this.patient.id]);
     }
 
 }
