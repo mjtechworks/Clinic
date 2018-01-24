@@ -9,7 +9,8 @@ import {Service} from "./service";
 export class AppointmentService extends Service {
     private getAllAppointmentUrl = 'api/appointments/all?doctorEmail=';
     private addAppointmentUrl = 'api/appointments/add';
-
+    private getAppointmentUrl = 'api/appointments/';
+    private getAppointmentUpdateUrl = 'api/appointments/update';
 
     constructor(private http: HttpClient, private authService: AuthenticationService) {
         super(authService);
@@ -23,7 +24,16 @@ export class AppointmentService extends Service {
         return this.http.get<Appointment[]>(this.getAllAppointmentUrl + this.authService.getUsername() + "&patientId=" + patientId, super.getHeader());
     }
 
+    public getAppointment(id: string): Observable<Appointment> {
+        return this.http.get<Appointment>(this.getAppointmentUrl + id, super.getHeader());
+    }
+
     public addAppointment(appointment: Appointment): Observable<Appointment> {
         return this.http.post<Appointment>(this.addAppointmentUrl, appointment, super.getHeader());
     }
+
+    public updateAppointment(appointment: Appointment): Observable<Appointment> {
+        return this.http.put<Appointment>(this.getAppointmentUpdateUrl, appointment, super.getHeader());
+    }
+
 }

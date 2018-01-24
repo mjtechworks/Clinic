@@ -34,6 +34,10 @@ agm-map {
     color: red;
 }
 
+.mat-textarea {
+    width: 100%;
+}
+
 .close, .open {
     font-weight: bold;
 }
