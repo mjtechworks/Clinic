@@ -3,27 +3,27 @@ package com.clinical.management.doctor.domain;
 import java.util.Date;
 
 public class Weather {
-    private int tempMin;
-    private int tempMax;
+    private Double tempMin;
+    private Double tempMax;
     private String weather;
     private String weatherDescription;
     private String city;
     private String country;
     private Date date;
 
-    public int getTempMin() {
+    public Double getTempMin() {
         return tempMin;
     }
 
-    public void setTempMin(int tempMin) {
+    public void setTempMin(Double tempMin) {
         this.tempMin = tempMin;
     }
 
-    public int getTempMax() {
+    public Double getTempMax() {
         return tempMax;
     }
 
-    public void setTempMax(int tempMax) {
+    public void setTempMax(Double tempMax) {
         this.tempMax = tempMax;
     }
 
