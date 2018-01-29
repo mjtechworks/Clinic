@@ -1,9 +1,8 @@
 package com.clinical.management.doctor.parser;
 
 import com.clinical.management.doctor.domain.Weather;
-import org.codehaus.jettison.json.JSONArray;
-import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
@@ -16,20 +15,20 @@ import java.util.List;
 @Component
 public class WeatherParse {
 
-    public List<Weather> parse(JSONObject json) throws JSONException, ParseException {
+    public List<Weather> parse(JSONObject json) throws ParseException {
         List<Weather> allWeathers = getAllWeathers(json);
         return reduceWeathers(allWeathers);
     }
 
-    private List<Weather> getAllWeathers(JSONObject json) throws JSONException, ParseException {
+    private List<Weather> getAllWeathers(JSONObject json) throws ParseException {
         List<Weather> weathers = new ArrayList<>();
-        JSONObject object = json.getJSONObject("city");
-        JSONArray list = json.getJSONArray("list");
-        String cityName = object.getString("name");
-        String country = object.getString("country");
+        JSONObject object = (JSONObject) json.get("city");
+        JSONArray list = (JSONArray) json.get("list");
+        String cityName = (String) object.get("name");
+        String country = (String) object.get("country");
 
-        for (int i = 0; i < list.length(); i++) {
-            Weather weather = getWeather(list.getJSONObject(i));
+        for (Object obj : list) {
+            Weather weather = getWeather((JSONObject) obj);
             weather.setCity(cityName);
             weather.setCountry(country);
 
@@ -39,17 +38,17 @@ public class WeatherParse {
         return weathers;
     }
 
-    private Weather getWeather(JSONObject obj) throws JSONException, ParseException {
+    private Weather getWeather(JSONObject obj) throws ParseException {
         Weather weather = new Weather();
-        Date date = convertStringToDate(obj.getString("dt_txt"));
-        JSONObject main = obj.getJSONObject("main");
-        JSONObject weatherInfo = obj.getJSONArray("weather").getJSONObject(0);
+        Date date = convertStringToDate((String) obj.get("dt_txt"));
+        JSONObject main = (JSONObject) obj.get("main");
+        JSONObject weatherInfo = (JSONObject) ((JSONArray) obj.get("weather")).get(0);
 
         weather.setDate(date);
-        weather.setTempMax(main.getDouble("temp_max"));
-        weather.setTempMin(main.getDouble("temp_min"));
-        weather.setWeather(weatherInfo.getString("main"));
-        weather.setWeatherDescription(weatherInfo.getString("description"));
+        weather.setTempMax((Double) main.get("temp_max"));
+        weather.setTempMin((Double) main.get("temp_min"));
+        weather.setWeather((String) weatherInfo.get("main"));
+        weather.setWeatherDescription((String) weatherInfo.get("description"));
 
         return weather;
     }

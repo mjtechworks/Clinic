@@ -1,6 +1,6 @@
 package com.clinical.management.doctor.client;
 
-import org.codehaus.jettison.json.JSONObject;
+import org.json.simple.JSONObject;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

@@ -5,8 +5,7 @@ import com.clinical.management.doctor.domain.Doctor;
 import com.clinical.management.doctor.domain.Weather;
 import com.clinical.management.doctor.parser.WeatherParse;
 import com.clinical.management.doctor.repository.DoctorRepository;
-import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +31,7 @@ public class WeatherServiceImpl implements WeatherService {
     }
 
     @Override
-    public List<Weather> getWeather(String doctorEmail) throws JSONException, ParseException {
+    public List<Weather> getWeather(String doctorEmail) throws ParseException {
         Doctor doctor = doctorRepository.findDoctorByEmail(doctorEmail);
         JSONObject jsonObject = weatherServiceClient.getWeather(id, appid, doctor.getLatitude(), doctor.getLatitude());
         return weatherParser.parse(jsonObject);
