@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface WeatherServiceClient {
 
     @RequestMapping(method = RequestMethod.GET)
-    JSONObject getWeather(@RequestParam("lat") Double lat, @RequestParam("lon") Double lon);
+    JSONObject getWeather(@RequestParam("id") Integer id, @RequestParam("APPID") String appid, @RequestParam("lat") Double lat, @RequestParam("lon") Double lon);
 
 }

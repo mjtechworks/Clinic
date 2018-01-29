@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 @Component
-public class WeatherParser {
+public class WeatherParse {
 
     public List<Weather> parse(JSONObject json) throws JSONException, ParseException {
         List<Weather> allWeathers = getAllWeathers(json);

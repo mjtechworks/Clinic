@@ -4,12 +4,14 @@ import com.clinical.management.doctor.domain.Doctor;
 import com.clinical.management.doctor.domain.Weather;
 import com.clinical.management.doctor.service.DoctorService;
 import com.clinical.management.doctor.service.WeatherService;
+import org.codehaus.jettison.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -45,8 +47,8 @@ public class DoctorController {
     }
 
     @RequestMapping(path = "/weather", method = RequestMethod.GET)
-    public List<Weather> getWeathers() {
-        return weatherService.getWeather();
+    public List<Weather> getWeathers(@RequestParam("doctorEmail") String doctorEmail) throws JSONException, ParseException {
+        return weatherService.getWeather(doctorEmail);
     }
 
 }
