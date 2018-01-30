@@ -1,28 +1,21 @@
 package com.clinical.management.doctor.controller;
 
 import com.clinical.management.doctor.domain.Doctor;
-import com.clinical.management.doctor.domain.Weather;
 import com.clinical.management.doctor.service.DoctorService;
-import com.clinical.management.doctor.service.WeatherService;
-import org.codehaus.jettison.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.text.ParseException;
-import java.util.List;
 
 @RestController
 public class DoctorController {
     private DoctorService doctorService;
-    private WeatherService weatherService;
 
     @Autowired
-    public DoctorController(DoctorService doctorService, WeatherService weatherService) {
+    public DoctorController(DoctorService doctorService) {
         this.doctorService = doctorService;
-        this.weatherService = weatherService;
     }
 
     @PreAuthorize("#oauth2.hasScope('server')")
@@ -44,11 +37,6 @@ public class DoctorController {
     @RequestMapping(path = "/update", method = RequestMethod.PUT)
     public Doctor updateDoctor(@Valid @RequestBody Doctor doctor) {
         return doctorService.update(doctor);
-    }
-
-    @RequestMapping(path = "/weather", method = RequestMethod.GET)
-    public List<Weather> getWeathers(@RequestParam("doctorEmail") String doctorEmail) throws JSONException, ParseException {
-        return weatherService.getWeather(doctorEmail);
     }
 
 }

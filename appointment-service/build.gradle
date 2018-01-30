@@ -8,6 +8,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-security')
     compile('org.springframework.security.oauth:spring-security-oauth2')
     compile('org.springframework.cloud:spring-cloud-starter-feign')
+    compile('com.googlecode.json-simple:json-simple:1.1.1')
 
     testCompile('de.flapdoodle.embed:de.flapdoodle.embed.mongo')
     testCompile('com.jayway.jsonpath:json-path:2.2.0')

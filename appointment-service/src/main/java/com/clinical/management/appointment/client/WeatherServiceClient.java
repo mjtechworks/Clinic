@@ -1,4 +1,4 @@
-package com.clinical.management.doctor.client;
+package com.clinical.management.appointment.client;
 
 import org.json.simple.JSONObject;
 import org.springframework.cloud.netflix.feign.FeignClient;

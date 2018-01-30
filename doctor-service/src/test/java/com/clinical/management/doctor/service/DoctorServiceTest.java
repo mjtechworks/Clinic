@@ -4,7 +4,6 @@ package com.clinical.management.doctor.service;
 import com.clinical.management.doctor.DoctorApplication;
 import com.clinical.management.doctor.client.AuthServiceClient;
 import com.clinical.management.doctor.domain.Doctor;
-import com.clinical.management.doctor.domain.User;
 import com.clinical.management.doctor.repository.DoctorRepository;
 import com.clinical.management.doctor.util.DoctorUtil;
 import org.junit.Before;

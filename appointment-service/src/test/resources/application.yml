@@ -3,3 +3,8 @@ spring:
     mongodb:
       database: clinical-management
       port: 0
+
+weather:
+  url: http://api.openweathermap.org/data/2.5/forecast
+  id: 524901
+  APPID: 9902aaf7af693bfa61bcf7e532f62e07

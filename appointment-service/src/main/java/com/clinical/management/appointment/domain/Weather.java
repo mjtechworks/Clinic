@@ -1,4 +1,4 @@
-package com.clinical.management.doctor.domain;
+package com.clinical.management.appointment.domain;
 
 import java.util.Date;
 

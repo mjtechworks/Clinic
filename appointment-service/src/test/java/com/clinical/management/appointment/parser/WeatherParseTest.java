@@ -1,8 +1,8 @@
-package com.clinical.management.doctor.parser;
+package com.clinical.management.appointment.parser;
 
-import com.clinical.management.doctor.DoctorApplication;
-import com.clinical.management.doctor.domain.Weather;
-import com.clinical.management.doctor.util.JsonUtil;
+import com.clinical.management.appointment.AppointmentApplication;
+import com.clinical.management.appointment.domain.Weather;
+import com.clinical.management.appointment.util.JsonUtil;
 import org.json.simple.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +17,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = DoctorApplication.class)
+@SpringBootTest(classes = AppointmentApplication.class)
 public class WeatherParseTest {
 
     @InjectMocks

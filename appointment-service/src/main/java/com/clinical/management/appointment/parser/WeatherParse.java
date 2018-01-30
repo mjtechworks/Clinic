@@ -1,6 +1,6 @@
-package com.clinical.management.doctor.parser;
+package com.clinical.management.appointment.parser;
 
-import com.clinical.management.doctor.domain.Weather;
+import com.clinical.management.appointment.domain.Weather;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Component;

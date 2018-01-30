@@ -1,6 +1,6 @@
-package com.clinical.management.doctor.util;
+package com.clinical.management.appointment.util;
 
-import com.clinical.management.doctor.domain.Weather;
+import com.clinical.management.appointment.domain.Weather;
 
 import java.util.ArrayList;
 import java.util.Date;

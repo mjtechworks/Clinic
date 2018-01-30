@@ -1,4 +1,4 @@
-package com.clinical.management.doctor.util;
+package com.clinical.management.appointment.util;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
