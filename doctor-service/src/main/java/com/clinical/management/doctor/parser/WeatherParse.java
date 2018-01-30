@@ -45,8 +45,8 @@ public class WeatherParse {
         JSONObject weatherInfo = (JSONObject) ((JSONArray) obj.get("weather")).get(0);
 
         weather.setDate(date);
-        weather.setTempMax((Double) main.get("temp_max"));
-        weather.setTempMin((Double) main.get("temp_min"));
+        weather.setTempMax(convertObjectToDouble(main.get("temp_max")));
+        weather.setTempMin(convertObjectToDouble(main.get("temp_min")));
         weather.setWeather((String) weatherInfo.get("main"));
         weather.setWeatherDescription((String) weatherInfo.get("description"));
 
@@ -60,7 +60,7 @@ public class WeatherParse {
             return reduceWeathers;
         }
 
-        Weather currentWeather = reduceWeathers.get(0);
+        Weather currentWeather = weathers.get(0);
 
         for (Weather weather : weathers) {
             if (sameDay(currentWeather, weather)) {
@@ -97,6 +97,15 @@ public class WeatherParse {
         cal2.setTime(nextWeather.getDate());
 
         return cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) && cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR);
+    }
+
+    private Double convertObjectToDouble(Object tmp) {
+        if (tmp instanceof Double) {
+            return (Double) tmp;
+        }
+
+        Long tmpLong = (Long) tmp;
+        return tmpLong.doubleValue();
     }
 
     private Date convertStringToDate(String date) throws ParseException {
