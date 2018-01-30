@@ -46,8 +46,8 @@ public class AppointmentController {
     }
 
     @RequestMapping(path = "/weather", method = RequestMethod.GET)
-    public List<Weather> getWeathers(@RequestParam("lan") Double lan, @RequestParam("lon") Double lon) throws ParseException {
-        return weatherService.getWeather(lan, lon);
+    public List<Weather> getWeathers(@RequestParam("lat") Double lat, @RequestParam("lon") Double lon) throws ParseException {
+        return weatherService.getWeather(lat, lon);
     }
 
 }

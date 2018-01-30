@@ -4,7 +4,9 @@ import com.clinical.management.appointment.AppointmentApplication;
 import com.clinical.management.appointment.domain.Appointment;
 import com.clinical.management.appointment.repository.AppointmentRepository;
 import com.clinical.management.appointment.service.AppointmentService;
+import com.clinical.management.appointment.service.WeatherService;
 import com.clinical.management.appointment.util.AppointmentUtil;
+import com.clinical.management.appointment.util.WeatherUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +20,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import javax.ws.rs.core.MediaType;
+
+import java.text.ParseException;
 
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -41,6 +45,9 @@ public class AppointmentControllerTest {
 
     @Mock
     private AppointmentService appointmentService;
+
+    @Mock
+    private WeatherService weatherService;
 
     private MockMvc mockMvc;
 
@@ -103,6 +110,20 @@ public class AppointmentControllerTest {
         mockMvc.perform(put("/update").contentType(MediaType.APPLICATION_JSON).content(json))
                 .andExpect(status().isOk());
 
+    }
+
+    @Test
+    public void getWeather() throws Exception {
+        when(weatherService.getWeather(45.0, 25.0)).thenReturn(WeatherUtil.getWeathers());
+
+        mockMvc.perform(get("/weather?lat=45.0&lon=25.0")).andExpect(status().isOk());
+    }
+
+    @Test
+    public void getWeatherBadRequest() throws Exception {
+        when(weatherService.getWeather(45.0, 25.0)).thenReturn(WeatherUtil.getWeathers());
+
+        mockMvc.perform(get("/weather?lon=25.0")).andExpect(status().isBadRequest());
     }
 
 }
