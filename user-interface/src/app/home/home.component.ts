@@ -17,6 +17,9 @@ import {
     addHours
 } from 'date-fns';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Weather} from "../domain/weather";
+import {WeatherService} from "../service/weather.service";
+import {Doctor} from "../domain/doctor";
 
 const colors: any = {
     red: {
@@ -38,7 +41,7 @@ const colors: any = {
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [AuthenticationService, NgbModal],
+    providers: [AuthenticationService, NgbModal, WeatherService],
     encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent implements OnInit {
@@ -105,11 +108,22 @@ export class HomeComponent implements OnInit {
 
     activeDayIsOpen: boolean = true;
 
-    constructor(private service: AuthenticationService, private modal: NgbModal) {
+    private weathers: Weather[];
+
+    constructor(private service: AuthenticationService, private modal: NgbModal, private weatherService: WeatherService) {
     }
 
     ngOnInit() {
         this.service.checkCredentials();
+        this.service.getCurrentAccount().subscribe(data => this.getWeather(data));
+    }
+
+    private getWeather(doctor: Doctor) {
+        this.weatherService.getWeathers(doctor.latitude, doctor.longitude).subscribe(data => {
+            this.weathers = data;
+            console.log(this.weathers);
+            //TODO
+        });
     }
 
     dayClicked({date, events}: { date: Date; events: CalendarEvent[] }): void {
