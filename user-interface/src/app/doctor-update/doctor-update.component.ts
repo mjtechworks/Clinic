@@ -3,7 +3,6 @@ import {AuthenticationService} from "../service/authentication.service";
 import {Doctor} from "../domain/doctor";
 import {DoctorService} from "../service/doctor.service";
 import {MatSnackBar} from "@angular/material";
-import {PatientService} from "../service/patient.service";
 
 @Component({
     selector: 'app-doctor-update',

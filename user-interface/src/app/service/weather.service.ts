@@ -7,14 +7,14 @@ import {HttpClient} from "@angular/common/http";
 
 @Injectable()
 export class WeatherService extends Service {
-    private getWeatherUrl: string = 'api/appointments/weather?lat=${lat}&lon=${lon}';
+    private getWeatherUrl: string = 'api/appointments/weather';
 
     constructor(private http: HttpClient, private authService: AuthenticationService) {
         super(authService);
     }
 
     public getWeathers(lat: number, lon: number): Observable<Weather[]> {
-        return this.http.get <Weather[]>(this.getWeatherUrl, super.getHeader());
+        return this.http.get <Weather[]>(this.getWeatherUrl + "?lat=" + lat + "&lon=" + lon, super.getHeader());
     }
 
 }
