@@ -4,7 +4,6 @@ package com.clinical.management.appointment.repository;
 import com.clinical.management.appointment.AppointmentApplication;
 import com.clinical.management.appointment.domain.Appointment;
 import com.clinical.management.appointment.util.AppointmentUtil;
-import com.sun.jersey.core.impl.provider.entity.XMLRootObjectProvider;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.validation.constraints.NotNull;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;

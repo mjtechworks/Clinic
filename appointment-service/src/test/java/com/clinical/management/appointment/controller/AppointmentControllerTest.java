@@ -21,8 +21,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import javax.ws.rs.core.MediaType;
 
-import java.text.ParseException;
-
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
