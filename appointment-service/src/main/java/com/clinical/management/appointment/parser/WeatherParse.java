@@ -18,7 +18,7 @@ public class WeatherParse {
 
     private List<Weather> getAllWeathers(JSONObject json) throws ParseException {
         List<Weather> weathers = new ArrayList<>();
-        LinkedHashMap object =  (LinkedHashMap) json.get("city");
+        LinkedHashMap object = (LinkedHashMap) json.get("city");
         ArrayList list = (ArrayList) json.get("list");
         String cityName = (String) object.get("name");
         String country = (String) object.get("country");
@@ -96,12 +96,15 @@ public class WeatherParse {
     }
 
     private Double convertObjectToDouble(Object tmp) {
-        if (tmp instanceof Double) {
-            return (Double) tmp;
+        if (tmp instanceof Long) {
+            return ((Long) tmp).doubleValue();
         }
 
-        Long tmpLong = (Long) tmp;
-        return tmpLong.doubleValue();
+        if (tmp instanceof Integer) {
+            return ((Integer) tmp).doubleValue();
+        }
+
+        return (Double) tmp;
     }
 
     private Date convertStringToDate(String date) throws ParseException {
