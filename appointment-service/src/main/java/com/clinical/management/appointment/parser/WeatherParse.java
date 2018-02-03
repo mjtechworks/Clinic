@@ -1,16 +1,12 @@
 package com.clinical.management.appointment.parser;
 
 import com.clinical.management.appointment.domain.Weather;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Component
 public class WeatherParse {
@@ -22,13 +18,13 @@ public class WeatherParse {
 
     private List<Weather> getAllWeathers(JSONObject json) throws ParseException {
         List<Weather> weathers = new ArrayList<>();
-        JSONObject object = (JSONObject) json.get("city");
-        JSONArray list = (JSONArray) json.get("list");
+        LinkedHashMap object =  (LinkedHashMap) json.get("city");
+        ArrayList list = (ArrayList) json.get("list");
         String cityName = (String) object.get("name");
         String country = (String) object.get("country");
 
         for (Object obj : list) {
-            Weather weather = getWeather((JSONObject) obj);
+            Weather weather = getWeather((LinkedHashMap) obj);
             weather.setCity(cityName);
             weather.setCountry(country);
 
@@ -38,11 +34,11 @@ public class WeatherParse {
         return weathers;
     }
 
-    private Weather getWeather(JSONObject obj) throws ParseException {
+    private Weather getWeather(LinkedHashMap obj) throws ParseException {
         Weather weather = new Weather();
         Date date = convertStringToDate((String) obj.get("dt_txt"));
-        JSONObject main = (JSONObject) obj.get("main");
-        JSONObject weatherInfo = (JSONObject) ((JSONArray) obj.get("weather")).get(0);
+        LinkedHashMap main = (LinkedHashMap) obj.get("main");
+        LinkedHashMap weatherInfo = (LinkedHashMap) ((ArrayList) obj.get("weather")).get(0);
 
         weather.setDate(date);
         weather.setTempMax(convertObjectToDouble(main.get("temp_max")));
