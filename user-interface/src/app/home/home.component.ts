@@ -52,6 +52,7 @@ export class HomeComponent implements OnInit {
     viewDate: Date = new Date();
     refresh: Subject<any> = new Subject();
     private weathers$;
+    private isCelsius = true;
 
     modalData: {
         action: string;
@@ -173,6 +174,28 @@ export class HomeComponent implements OnInit {
         let photoDescription = weather.weatherDescription.replace(' ', '_');
         let photoUrl = '/assets/' + photoDescription + '.svg';
         return this.sanitizer.bypassSecurityTrustResourceUrl(photoUrl);
+    }
+
+    private clickTemperature(isCelsius: boolean) {
+        this.isCelsius = isCelsius;
+    }
+
+    private calculateTemperature(temperature: number): number {
+        if (this.isCelsius) {
+            return this.convertKelvinToCelsius(temperature);
+        } else {
+            return this.convertKelvinToFahrenheit(temperature);
+        }
+    }
+
+    private convertKelvinToCelsius(temperature: number): number {
+        let celsius = temperature - 273.15;
+        return Math.round(celsius);
+    }
+
+    private convertKelvinToFahrenheit(temperature: number): number {
+        let fahrenheit = temperature * 9/5 - 459.67;
+        return Math.round(fahrenheit);
     }
 
 }

@@ -114,6 +114,11 @@ agm-map {
     height: 50px;
 }
 
+.temperature-button {
+    background-color: #444 !important;
+    color: white !important;
+}
+
 #logo-image {
     width: 75px;
 }
