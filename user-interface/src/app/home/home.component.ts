@@ -20,6 +20,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Weather} from "../domain/weather";
 import {WeatherService} from "../service/weather.service";
 import {Doctor} from "../domain/doctor";
+import {DomSanitizer} from "@angular/platform-browser";
 
 const colors: any = {
     red: {
@@ -50,6 +51,7 @@ export class HomeComponent implements OnInit {
     view: string = 'month';
     viewDate: Date = new Date();
     refresh: Subject<any> = new Subject();
+    private weathers$;
 
     modalData: {
         action: string;
@@ -108,22 +110,18 @@ export class HomeComponent implements OnInit {
 
     activeDayIsOpen: boolean = true;
 
-    private weathers: Weather[];
-
-    constructor(private service: AuthenticationService, private modal: NgbModal, private weatherService: WeatherService) {
+    constructor(private service: AuthenticationService, private modal: NgbModal, private weatherService: WeatherService,
+                private sanitizer: DomSanitizer) {
     }
 
     ngOnInit() {
         this.service.checkCredentials();
+        this.weathers$ = this.weatherService.weathers();
         this.service.getCurrentAccount().subscribe(data => this.getWeather(data));
     }
 
     private getWeather(doctor: Doctor) {
-        this.weatherService.getWeathers(doctor.latitude, doctor.longitude).subscribe(data => {
-            this.weathers = data;
-            console.log(this.weathers);
-            //TODO
-        });
+        this.weatherService.loadAll(doctor.latitude, doctor.longitude);
     }
 
     dayClicked({date, events}: { date: Date; events: CalendarEvent[] }): void {
@@ -169,6 +167,12 @@ export class HomeComponent implements OnInit {
             }
         });
         this.refresh.next();
+    }
+
+    private getWeatherImage(weather: Weather) {
+        let photoDescription = weather.weatherDescription.replace(' ', '_');
+        let photoUrl = '/assets/' + photoDescription + '.svg';
+        return this.sanitizer.bypassSecurityTrustResourceUrl(photoUrl);
     }
 
 }
