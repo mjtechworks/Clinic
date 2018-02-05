@@ -114,7 +114,7 @@ agm-map {
     height: 50px;
 }
 
-.temperature-button {
+.temperature-button, .next, .previous {
     background-color: #444 !important;
     color: white !important;
 }
@@ -487,11 +487,6 @@ pre {
     -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
     white-space: nowrap;
-}
-
-.cal-day-view {
-    /* stylelint-disable-next-line selector-type-no-unknown */
-    /* stylelint-disable-next-line selector-type-no-unknown */
 }
 
 .cal-day-view .cal-hour-rows {

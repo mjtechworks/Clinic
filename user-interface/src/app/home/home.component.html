@@ -48,28 +48,13 @@
         <div class="row text-center">
             <div class="col-md-4">
                 <div class="btn-group">
-                    <div
-                            class="btn btn-primary"
-                            mwlCalendarPreviousView
-                            [view]="view"
-                            [(viewDate)]="viewDate"
-                            (viewDateChange)="activeDayIsOpen = false">
-                        Previous
-                    </div>
-                    <div
-                            class="btn btn-outline-secondary"
-                            mwlCalendarToday
-                            [(viewDate)]="viewDate">
-                        Today
-                    </div>
-                    <div
-                            class="btn btn-primary"
-                            mwlCalendarNextView
-                            [view]="view"
-                            [(viewDate)]="viewDate"
-                            (viewDateChange)="activeDayIsOpen = false">
-                        Next
-                    </div>
+                    <button mat-icon-button mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
+                            (viewDateChange)="activeDayIsOpen = false" class="previous"> <
+                    </button>
+                    <button mat-button mwlCalendarToday [(viewDate)]="viewDate">Today</button>
+                    <button mat-icon-button mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
+                            (viewDateChange)="activeDayIsOpen = false" class="next"> >
+                    </button>
                 </div>
             </div>
             <div class="col-md-4">
@@ -77,24 +62,9 @@
             </div>
             <div class="col-md-4">
                 <div class="btn-group">
-                    <div
-                            class="btn btn-primary"
-                            (click)="view = 'month'"
-                            [class.active]="view === 'month'">
-                        Month
-                    </div>
-                    <div
-                            class="btn btn-primary"
-                            (click)="view = 'week'"
-                            [class.active]="view === 'week'">
-                        Week
-                    </div>
-                    <div
-                            class="btn btn-primary"
-                            (click)="view = 'day'"
-                            [class.active]="view === 'day'">
-                        Day
-                    </div>
+                    <button mat-button (click)="view = 'month'" [class.active]="view === 'month'">Month</button>
+                    <button mat-button (click)="view = 'week'" [class.active]="view === 'week'">Week</button>
+                    <button mat-button (click)="view = 'day'" [class.active]="view === 'day'">Day</button>
                 </div>
             </div>
         </div>
