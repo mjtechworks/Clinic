@@ -21,6 +21,8 @@ import {Weather} from "../domain/weather";
 import {WeatherService} from "../service/weather.service";
 import {Doctor} from "../domain/doctor";
 import {DomSanitizer} from "@angular/platform-browser";
+import {Appointment} from "../domain/appointment";
+import {AppointmentService} from "../service/appointment.service";
 
 const colors: any = {
     red: {
@@ -42,7 +44,7 @@ const colors: any = {
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [AuthenticationService, NgbModal, WeatherService],
+    providers: [AuthenticationService, NgbModal, WeatherService, AppointmentService],
     encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent implements OnInit {
@@ -53,13 +55,15 @@ export class HomeComponent implements OnInit {
     refresh: Subject<any> = new Subject();
     private weathers$;
     private isCelsius = true;
+    private activeDayIsOpen: boolean = true;
+    private events: CalendarEvent[] = [];
 
-    modalData: {
+    private modalData: {
         action: string;
         event: CalendarEvent;
     };
 
-    actions: CalendarEventAction[] = [
+    private actions: CalendarEventAction[] = [
         {
             label: '<i class="fa fa-fw fa-pencil"></i>',
             onClick: ({event}: { event: CalendarEvent }): void => {
@@ -75,57 +79,35 @@ export class HomeComponent implements OnInit {
         }
     ];
 
-    events: CalendarEvent[] = [
-        {
-            start: subDays(startOfDay(new Date()), 1),
-            end: addDays(new Date(), 1),
-            title: 'A 3 day event',
-            color: colors.red,
-            actions: this.actions
-        },
-        {
-            start: startOfDay(new Date()),
-            title: 'An event with no end date',
-            color: colors.yellow,
-            actions: this.actions
-        },
-        {
-            start: subDays(endOfMonth(new Date()), 3),
-            end: addDays(endOfMonth(new Date()), 3),
-            title: 'A long event that spans 2 months',
-            color: colors.blue
-        },
-        {
-            start: addHours(startOfDay(new Date()), 2),
-            end: new Date(),
-            title: 'A draggable and resizable event',
-            color: colors.yellow,
-            actions: this.actions,
-            resizable: {
-                beforeStart: true,
-                afterEnd: true
-            },
-            draggable: true
-        }
-    ];
-
-    activeDayIsOpen: boolean = true;
-
     constructor(private service: AuthenticationService, private modal: NgbModal, private weatherService: WeatherService,
-                private sanitizer: DomSanitizer) {
+                private sanitizer: DomSanitizer, private appointmentService: AppointmentService) {
     }
 
     ngOnInit() {
         this.service.checkCredentials();
         this.weathers$ = this.weatherService.weathers();
         this.service.getCurrentAccount().subscribe(data => this.getWeather(data));
+        this.appointmentService.getAllAppointment().subscribe(data => this.convertAppointmentToEvent(data));
     }
 
     private getWeather(doctor: Doctor) {
         this.weatherService.loadAll(doctor.latitude, doctor.longitude);
     }
 
-    dayClicked({date, events}: { date: Date; events: CalendarEvent[] }): void {
+    private convertAppointmentToEvent(appointments: Appointment[]) {
+        appointments.forEach(appointment => {
+            this.events.push({
+                start: appointment.startDate,
+                end: appointment.endDate,
+                title: 'Open Appointment',
+                color: colors.red,
+                actions: this.actions
+            });
+            this.refresh.next();
+        });
+    }
+
+    private dayClicked({date, events}: { date: Date; events: CalendarEvent[] }): void {
         if (isSameMonth(date, this.viewDate)) {
             if (
                 (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
@@ -139,35 +121,20 @@ export class HomeComponent implements OnInit {
         }
     }
 
-    eventTimesChanged({
-                          event,
-                          newStart,
-                          newEnd
-                      }: CalendarEventTimesChangedEvent): void {
+    private eventTimesChanged({
+                                  event,
+                                  newStart,
+                                  newEnd
+                              }: CalendarEventTimesChangedEvent): void {
         event.start = newStart;
         event.end = newEnd;
         this.handleEvent('Dropped or resized', event);
         this.refresh.next();
     }
 
-    handleEvent(action: string, event: CalendarEvent): void {
+    private handleEvent(action: string, event: CalendarEvent): void {
         this.modalData = {event, action};
         this.modal.open(this.modalContent, {size: 'lg'});
-    }
-
-    addEvent(): void {
-        this.events.push({
-            title: 'New event',
-            start: startOfDay(new Date()),
-            end: endOfDay(new Date()),
-            color: colors.red,
-            draggable: true,
-            resizable: {
-                beforeStart: true,
-                afterEnd: true
-            }
-        });
-        this.refresh.next();
     }
 
     private getWeatherImage(weather: Weather) {
@@ -194,7 +161,7 @@ export class HomeComponent implements OnInit {
     }
 
     private convertKelvinToFahrenheit(temperature: number): number {
-        let fahrenheit = temperature * 9/5 - 459.67;
+        let fahrenheit = temperature * 9 / 5 - 459.67;
         return Math.round(fahrenheit);
     }
 
