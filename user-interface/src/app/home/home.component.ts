@@ -1,11 +1,7 @@
 import {ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild, ViewEncapsulation} from '@angular/core';
 import {AuthenticationService} from "../service/authentication.service";
 import {Subject} from "rxjs/Subject";
-import {
-    CalendarEvent,
-    CalendarEventAction,
-    CalendarEventTimesChangedEvent
-} from 'angular-calendar';
+import {CalendarEventAction} from 'angular-calendar';
 import {
     startOfDay,
     endOfDay,
@@ -23,6 +19,8 @@ import {Doctor} from "../domain/doctor";
 import {DomSanitizer} from "@angular/platform-browser";
 import {Appointment} from "../domain/appointment";
 import {AppointmentService} from "../service/appointment.service";
+import {CalendarAppointment} from "../domain/calendar-appointment";
+import {Router} from "@angular/router";
 
 const colors: any = {
     red: {
@@ -56,23 +54,23 @@ export class HomeComponent implements OnInit {
     private weathers$;
     private isCelsius = true;
     private activeDayIsOpen: boolean = true;
-    private events: CalendarEvent[] = [];
+    private events: CalendarAppointment[] = [];
 
     private modalData: {
         action: string;
-        event: CalendarEvent;
+        event: CalendarAppointment;
     };
 
     private actions: CalendarEventAction[] = [
         {
             label: '<i class="fa fa-fw fa-pencil"></i>',
-            onClick: ({event}: { event: CalendarEvent }): void => {
+            onClick: ({event}: { event: CalendarAppointment }): void => {
                 this.handleEvent('Edited', event);
             }
         },
         {
             label: '<i class="fa fa-fw fa-times"></i>',
-            onClick: ({event}: { event: CalendarEvent }): void => {
+            onClick: ({event}: { event: CalendarAppointment }): void => {
                 this.events = this.events.filter(iEvent => iEvent !== event);
                 this.handleEvent('Deleted', event);
             }
@@ -80,7 +78,7 @@ export class HomeComponent implements OnInit {
     ];
 
     constructor(private service: AuthenticationService, private modal: NgbModal, private weatherService: WeatherService,
-                private sanitizer: DomSanitizer, private appointmentService: AppointmentService) {
+                private sanitizer: DomSanitizer, private appointmentService: AppointmentService, private router: Router) {
     }
 
     ngOnInit() {
@@ -97,6 +95,7 @@ export class HomeComponent implements OnInit {
     private convertAppointmentToEvent(appointments: Appointment[]) {
         appointments.forEach(appointment => {
             this.events.push({
+                id: appointment.id,
                 start: appointment.startDate,
                 end: appointment.endDate,
                 title: 'Open Appointment',
@@ -107,7 +106,7 @@ export class HomeComponent implements OnInit {
         });
     }
 
-    private dayClicked({date, events}: { date: Date; events: CalendarEvent[] }): void {
+    private dayClicked({date, events}: { date: Date; events: CalendarAppointment[] }): void {
         if (isSameMonth(date, this.viewDate)) {
             if (
                 (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
@@ -121,20 +120,9 @@ export class HomeComponent implements OnInit {
         }
     }
 
-    private eventTimesChanged({
-                                  event,
-                                  newStart,
-                                  newEnd
-                              }: CalendarEventTimesChangedEvent): void {
-        event.start = newStart;
-        event.end = newEnd;
-        this.handleEvent('Dropped or resized', event);
-        this.refresh.next();
-    }
-
-    private handleEvent(action: string, event: CalendarEvent): void {
+    private handleEvent(action: string, event: CalendarAppointment): void {
         this.modalData = {event, action};
-        this.modal.open(this.modalContent, {size: 'lg'});
+        this.router.navigate(['appointment/update/' + event.id]);
     }
 
     private getWeatherImage(weather: Weather) {
