@@ -1,3 +1,5 @@
+import {Status} from "./status";
+
 export class Appointment {
     public id: string;
     public doctorEmail: string;
@@ -7,4 +9,6 @@ export class Appointment {
     public remark: String;
     public recommendation: String;
     public reason: String;
+    public description: String;
+    public status: Status;
 }

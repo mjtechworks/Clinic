@@ -5,6 +5,7 @@ import {AuthenticationService} from "../service/authentication.service";
 import {Patient} from "../domain/patient";
 import {PatientService} from "../service/patient.service";
 import {MatSnackBar} from "@angular/material";
+import {Status} from "../domain/status";
 
 @Component({
     selector: 'app-appointment',
@@ -33,6 +34,7 @@ export class AppointmentComponent implements OnInit {
 
     private onSubmit() {
         this.model.doctorEmail = this.authService.getUsername();
+        this.model.status = Status.OPEN;
 
         this.appointmentService.addAppointment(this.model).subscribe(data => this.displayMessage("An appointment was established !"));
     }
