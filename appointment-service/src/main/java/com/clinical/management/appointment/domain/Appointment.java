@@ -27,12 +27,17 @@ public class Appointment {
     private Date endDate;
 
     @NotNull
+    private String description;
+
+    @NotNull
     private String remark;
 
     private String recommendation;
 
     private String reason;
 
+    @NotNull
+    private Status status;
 
     public String getId() {
         return id;
@@ -96,5 +101,21 @@ public class Appointment {
 
     public void setReason(String reason) {
         this.reason = reason;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

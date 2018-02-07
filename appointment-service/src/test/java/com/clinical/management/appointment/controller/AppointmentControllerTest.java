@@ -69,6 +69,8 @@ public class AppointmentControllerTest {
                 .andExpect(jsonPath("$.remark").value(appointment.getRemark()))
                 .andExpect(jsonPath("$.recommendation").value(appointment.getRecommendation()))
                 .andExpect(jsonPath("$.reason").value(appointment.getReason()))
+                .andExpect(jsonPath("$.description").value(appointment.getDescription()))
+                .andExpect(jsonPath("$.status").value(appointment.getStatus().name()))
                 .andExpect(status().isOk());
     }
 

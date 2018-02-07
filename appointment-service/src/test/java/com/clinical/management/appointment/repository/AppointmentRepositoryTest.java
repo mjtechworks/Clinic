@@ -77,6 +77,8 @@ public class AppointmentRepositoryTest {
         assertEquals(app1.getRemark(), app2.getRemark());
         assertEquals(app1.getReason(), app2.getReason());
         assertEquals(app1.getRecommendation(), app2.getRecommendation());
+        assertEquals(app1.getDescription(), app2.getDescription());
+        assertEquals(app1.getStatus(), app2.getStatus());
     }
 
 }

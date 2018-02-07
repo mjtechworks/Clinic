@@ -1,6 +1,7 @@
 package com.clinical.management.appointment.util;
 
 import com.clinical.management.appointment.domain.Appointment;
+import com.clinical.management.appointment.domain.Status;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,6 +23,8 @@ public class AppointmentUtil {
         appointment.setRemark("Test - Remark");
         appointment.setRecommendation("Test - Recommendation");
         appointment.setReason("Test - Reason");
+        appointment.setDescription("Test - Description");
+        appointment.setStatus(Status.OPEN);
 
         return appointment;
     }
@@ -41,6 +44,8 @@ public class AppointmentUtil {
             appointment.setRemark("Test - Remark - " + i);
             appointment.setRecommendation("Test - Recommendation - " + i);
             appointment.setReason("Test - Reason - " + i);
+            appointment.setDescription("Test - Description - " + i);
+            appointment.setStatus(Status.OPEN);
 
             appointments.add(appointment);
         }
