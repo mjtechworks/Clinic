@@ -13,6 +13,10 @@
                 <owl-date-time #endDate></owl-date-time>
             </mat-form-field>
             <mat-form-field class="mat-textarea">
+                <textarea matInput placeholder="Description" [(ngModel)]="appointment.description"
+                          name="description"></textarea>
+            </mat-form-field>
+            <mat-form-field class="mat-textarea">
                 <textarea matInput placeholder="Remark" [(ngModel)]="appointment.remark"
                           name="remark"></textarea>
             </mat-form-field>

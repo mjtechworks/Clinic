@@ -44,6 +44,7 @@
             <tr>
                 <th>Start Date</th>
                 <th>End Date</th>
+                <th>Description</th>
                 <th>Status</th>
             </tr>
             </thead>
@@ -51,7 +52,8 @@
             <tr *ngFor="let appoint of appointments" (click)="navigateToAppointment(appoint.id)">
                 <td>{{appoint.startDate | date: 'MM/dd/yyyy HH:mm'}}</td>
                 <td>{{appoint.endDate | date: 'MM/dd/yyyy HH:mm'}}</td>
-                <td [innerHtml]="getStatus(appoint)"></td>
+                <td>{{appoint.description}}</td>
+                <td>{{appoint.status}}</td>
             </tr>
             </tbody>
         </table>
