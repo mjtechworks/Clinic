@@ -1,7 +1,7 @@
 <div class="container">
     <mat-card>
         <mat-card-title>Change appointment details</mat-card-title>
-        <form (ngSubmit)="onSubmit()" #appointmentForm="ngForm" class="form-component">
+        <form #appointmentForm="ngForm" class="form-component">
             <mat-form-field>
                 <input matInput [(ngModel)]="appointment.startDate" placeholder="Start Date" required name="startDate"
                        [owlDateTimeTrigger]="startDate" [owlDateTime]="startDate">
@@ -13,7 +13,7 @@
                 <owl-date-time #endDate></owl-date-time>
             </mat-form-field>
             <mat-form-field class="mat-textarea">
-                <textarea matInput placeholder="Description" [(ngModel)]="appointment.description"
+                <textarea matInput placeholder="Description" [(ngModel)]="appointment.description" required
                           name="description"></textarea>
             </mat-form-field>
             <mat-form-field class="mat-textarea">
@@ -28,7 +28,11 @@
                 <textarea matInput placeholder="Reason" [(ngModel)]="appointment.reason"
                           name="Reason"></textarea>
             </mat-form-field>
-            <button mat-button type="submit" class="btn" [disabled]="!appointmentForm.form.valid">Submit</button>
+            <button mat-button type="submit" class="btn" (click)="save()" [disabled]="!appointmentForm.form.valid">Submit</button>
+            <button mat-button class="btn " (click)="done()" [disabled]="!appointmentForm.form.valid"
+                    [ngClass]="appointment.status == 'DONE' ? 'btn-done' : ''">Done</button>
+            <button mat-button class="btn " (click)="close()" [disabled]="!appointmentForm.form.valid"
+                    [ngClass]="appointment.status == 'CLOSE' ? 'btn-close' : ''">Close</button>
         </form>
     </mat-card>
 </div>

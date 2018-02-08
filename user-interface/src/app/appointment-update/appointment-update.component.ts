@@ -6,6 +6,7 @@ import {Appointment} from "../domain/appointment";
 import {MatSnackBar} from "@angular/material";
 import {PatientService} from "../service/patient.service";
 import {AppointmentService} from "../service/appointment.service";
+import {Status} from "../domain/status";
 
 @Component({
     selector: 'app-appointment-update',
@@ -46,7 +47,7 @@ export class AppointmentUpdateComponent implements OnInit {
         this.patientService.getPatient(id).subscribe(data => this.patient = data);
     }
 
-    private onSubmit() {
+    private save() {
         this.appointmentService.updateAppointment(this.appointment).subscribe(data =>
             this.displayMessage('The appointment was updated successfully !'));
     }
@@ -59,6 +60,34 @@ export class AppointmentUpdateComponent implements OnInit {
 
     private navigateToPatient() {
         this.router.navigate(['patient/update/' + this.patient.id]);
+    }
+
+    private done() {
+        if (this.appointment.recommendation == null && this.appointment.remark == null) {
+            this.displayMessage("Please write a remark and a recommendation to done the appointment !");
+        } else {
+            this.doneAppointment();
+        }
+    }
+
+    private close() {
+        if (this.appointment.reason == null) {
+            this.displayMessage("Please write a reason to close the appointment !");
+        } else {
+            this.closeAppointment();
+        }
+    }
+
+    private closeAppointment() {
+        this.appointment.status = Status.CLOSE;
+        this.appointmentService.updateAppointment(this.appointment).subscribe(data =>
+            this.displayMessage('The appointment was closed successfully !'));
+    }
+
+    private doneAppointment() {
+        this.appointment.status = Status.DONE;
+        this.appointmentService.updateAppointment(this.appointment).subscribe(data =>
+            this.displayMessage('The appointment was done successfully !'));
     }
 
 }

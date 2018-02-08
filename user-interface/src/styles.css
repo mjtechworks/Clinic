@@ -26,12 +26,14 @@ agm-map {
     overflow: hidden
 }
 
-.open {
-    color: green;
+.btn-done {
+    color: green !important;
+    font-weight: bold !important;
 }
 
-.close {
-    color: red;
+.btn-close {
+    color: red !important;
+    font-weight: bold !important;
 }
 
 .mat-textarea {
@@ -40,10 +42,6 @@ agm-map {
 
 .patient-detail {
     cursor: pointer;
-}
-
-.close, .open {
-    font-weight: bold;
 }
 
 .nav-bar .nav-bar-item {
