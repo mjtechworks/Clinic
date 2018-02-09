@@ -3,6 +3,21 @@ spring:
     mongodb:
       database: clinical-management
       port: 0
+  mail:
+    host: smtp.gmail.com
+    port: 465
+    username: test
+    password: test
+    properties:
+      mail:
+        smtp:
+          auth: true
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+            fallback: false
+          ssl:
+            enable: true
 
 weather:
   url: http://api.openweathermap.org/data/2.5/forecast

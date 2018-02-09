@@ -10,4 +10,9 @@ doctor-service/out/
 gateway/src/test/
 patient-service/out/
 registry/src/test/
-/user-interface/node_modules/
+appointment-service/build/
+appointment-service/out/
+auth-service/build/
+monitoring/build/
+monitoring/src/test/
+node_modules/
