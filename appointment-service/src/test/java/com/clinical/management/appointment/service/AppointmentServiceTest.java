@@ -105,12 +105,38 @@ public class AppointmentServiceTest {
         compareAppointments(appointment, update);
     }
 
+    @Test
+    public void shouldUpdateAppointmentAndSendDoneEmail() throws MessagingException {
+        String message = getDoneAppointmentMessage(appointment, patient, doctor);
+        appointment.setStatus(Status.DONE);
+
+        when(doctorClientService.getDoctor(appointment.getDoctorEmail())).thenReturn(doctor);
+        when(patientClientService.getPatient(appointment.getPatientId())).thenReturn(patient);
+        when(repository.save(appointment)).thenReturn(appointment);
+
+        Appointment update = appointmentService.update(appointment);
+
+        verify(emailService, timeout(100)).sendEmail(patient.getEmail(), "Appointment done", message);
+        compareAppointments(appointment, update);
+    }
+
     private String getNewAppointmentMessage(Appointment appointment, Patient patient, Doctor doctor) {
         return helloMessage(patient) + newAppointmentMessage(appointment, doctor) + contactMessage(doctor) + regardMessage();
     }
 
     private String getCloseAppointmentMessage(Appointment appointment, Patient patient, Doctor doctor) {
         return helloMessage(patient) + closeAppointmentMessage(appointment, doctor) + contactMessage(doctor) + regardMessage();
+    }
+
+    private String getDoneAppointmentMessage(Appointment appointment, Patient patient, Doctor doctor) {
+        return helloMessage(patient) + doneAppointmentMessage(appointment, doctor) + contactMessage(doctor) + regardMessage();
+    }
+
+    private String doneAppointmentMessage(Appointment appointment, Doctor doctor) {
+        return String.format("The appointment between %tc - %tc with doctor %s %s was done. \n" +
+                        "You have a recommendation ' %s ' \n",
+                appointment.getStartDate(), appointment.getEndDate(), doctor.getFirstName(),
+                doctor.getLastName(), appointment.getRecommendation());
     }
 
     private String helloMessage(Patient patient) {
