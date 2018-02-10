@@ -49,12 +49,46 @@ public class AppointmentServiceImpl implements AppointmentService {
         return repository.save(appointment);
     }
 
+    @Override
+    public Appointment update(Appointment appointment) throws MessagingException {
+        Doctor doctor = doctorClientService.getDoctor(appointment.getDoctorEmail());
+        Patient patient = patientClientService.getPatient(appointment.getPatientId());
+        String message = getCloseAppointmentMessage(appointment, patient, doctor);
+
+        emailService.sendEmail(patient.getEmail(), "Close Appointment", message);
+
+        return repository.save(appointment);
+    }
+
     private String getNewAppointmentMessage(Appointment appointment, Patient patient, Doctor doctor) {
-        return String.format("Hello %s %s, \n \n" +
-                        "You have a new appointment between %tc - %tc with doctor %s %s. \n" +
-                        "If you have any problem please contact the doctor at the phone number %s or at email address %s. \n \n \n" +
-                        "Best regards !", patient.getFirstName(), patient.getLastName(), appointment.getStartDate(), appointment.getEndDate(),
-                doctor.getFirstName(), doctor.getLastName(), doctor.getPhoneNumber(), doctor.getEmail());
+        return helloMessage(patient) + newAppointmentMessage(appointment, doctor) + contactMessage(doctor) + regardMessage();
+    }
+
+    private String getCloseAppointmentMessage(Appointment appointment, Patient patient, Doctor doctor) {
+        return helloMessage(patient) + closeAppointmentMessage(appointment, doctor) + contactMessage(doctor) + regardMessage();
+    }
+
+    private String helloMessage(Patient patient) {
+        return String.format("Hello %s %s, \n \n", patient.getFirstName(), patient.getLastName());
+    }
+
+    private String contactMessage(Doctor doctor) {
+        return String.format("If you have any problem please contact the doctor at the phone number %s or at email address %s. \n \n \n",
+                doctor.getPhoneNumber(), doctor.getEmail());
+    }
+
+    private String regardMessage() {
+        return "Best regards !";
+    }
+
+    private String closeAppointmentMessage(Appointment appointment, Doctor doctor) {
+        return String.format("The appointment between %tc - %tc with doctor %s %s was closed for the next reason ' %s ' \n",
+                appointment.getStartDate(), appointment.getEndDate(), doctor.getFirstName(), doctor.getLastName(), appointment.getReason());
+    }
+
+    private String newAppointmentMessage(Appointment appointment, Doctor doctor) {
+        return String.format("You have a new appointment between %tc - %tc with doctor %s %s. \n",
+                appointment.getStartDate(), appointment.getEndDate(), doctor.getFirstName(), doctor.getLastName());
     }
 
 }

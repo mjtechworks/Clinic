@@ -7,6 +7,7 @@ import com.clinical.management.appointment.client.PatientClientService;
 import com.clinical.management.appointment.domain.Appointment;
 import com.clinical.management.appointment.domain.Doctor;
 import com.clinical.management.appointment.domain.Patient;
+import com.clinical.management.appointment.domain.Status;
 import com.clinical.management.appointment.repository.AppointmentRepository;
 import com.clinical.management.appointment.util.AppointmentUtil;
 import com.clinical.management.appointment.util.DoctorUtil;
@@ -33,6 +34,10 @@ import static org.mockito.MockitoAnnotations.initMocks;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = AppointmentApplication.class)
 public class AppointmentServiceTest {
+    private Appointment appointment;
+    private List<Appointment> appointments;
+    private Patient patient;
+    private Doctor doctor;
 
     @Mock
     private AppointmentRepository repository;
@@ -50,15 +55,16 @@ public class AppointmentServiceTest {
     private DoctorClientService doctorClientService;
 
     @Before
-    public void setup() {
+    public void setup() throws ParseException {
         initMocks(this);
+        this.appointment = AppointmentUtil.getAppointment();
+        this.appointments = AppointmentUtil.getAppointments();
+        this.doctor = DoctorUtil.getDoctor();
+        this.patient = PatientUtil.getPatient();
     }
 
     @Test
-    public void findAllAppointmentsTest() throws ParseException {
-        Appointment appointment = AppointmentUtil.getAppointment();
-        List<Appointment> appointments = AppointmentUtil.getAppointments();
-
+    public void findAllAppointmentsTest() {
         when(repository.findAllByDoctorEmailAndPatientId("test@test.com", "550"))
                 .thenReturn(Collections.singletonList(appointment));
         when(repository.findAllByDoctorEmail("test@test.com")).thenReturn(appointments);
@@ -71,38 +77,63 @@ public class AppointmentServiceTest {
     }
 
     @Test
-    public void shouldSaveAppointment() throws ParseException, MessagingException {
-        Appointment appointment = AppointmentUtil.getAppointment();
-
-        when(repository.save(appointment)).thenReturn(appointment);
-
-        Appointment saved = appointmentService.save(appointment);
-
-        compareAppointments(appointment, saved);
-    }
-
-    @Test
-    public void shouldSendEmail() throws ParseException, MessagingException {
-        Appointment appointment = AppointmentUtil.getAppointment();
-        Patient patient = PatientUtil.getPatient();
-        Doctor doctor = DoctorUtil.getDoctor();
+    public void shouldSaveAppointmentAndSendEmail() throws MessagingException {
         String message = getNewAppointmentMessage(appointment, patient, doctor);
 
         when(doctorClientService.getDoctor(appointment.getDoctorEmail())).thenReturn(doctor);
         when(patientClientService.getPatient(appointment.getPatientId())).thenReturn(patient);
         when(repository.save(appointment)).thenReturn(appointment);
 
-        appointmentService.save(appointment);
+        Appointment saved = appointmentService.save(appointment);
 
         verify(emailService, timeout(100)).sendEmail(patient.getEmail(), "New Appointment", message);
+        compareAppointments(appointment, saved);
+    }
+
+    @Test
+    public void shouldUpdateAppointmentAndSendCloseEmail() throws MessagingException {
+        String message = getCloseAppointmentMessage(appointment, patient, doctor);
+        appointment.setStatus(Status.CLOSE);
+
+        when(doctorClientService.getDoctor(appointment.getDoctorEmail())).thenReturn(doctor);
+        when(patientClientService.getPatient(appointment.getPatientId())).thenReturn(patient);
+        when(repository.save(appointment)).thenReturn(appointment);
+
+        Appointment update = appointmentService.update(appointment);
+
+        verify(emailService, timeout(100)).sendEmail(patient.getEmail(), "Close Appointment", message);
+        compareAppointments(appointment, update);
     }
 
     private String getNewAppointmentMessage(Appointment appointment, Patient patient, Doctor doctor) {
-        return String.format("Hello %s %s, \n \n" +
-                        "You have a new appointment between %tc - %tc with doctor %s %s. \n" +
-                        "If you have any problem please contact the doctor at the phone number %s or at email address %s. \n \n \n" +
-                        "Best regards !", patient.getFirstName(), patient.getLastName(), appointment.getStartDate(), appointment.getEndDate(),
-                doctor.getFirstName(), doctor.getLastName(), doctor.getPhoneNumber(), doctor.getEmail());
+        return helloMessage(patient) + newAppointmentMessage(appointment, doctor) + contactMessage(doctor) + regardMessage();
+    }
+
+    private String getCloseAppointmentMessage(Appointment appointment, Patient patient, Doctor doctor) {
+        return helloMessage(patient) + closeAppointmentMessage(appointment, doctor) + contactMessage(doctor) + regardMessage();
+    }
+
+    private String helloMessage(Patient patient) {
+        return String.format("Hello %s %s, \n \n", patient.getFirstName(), patient.getLastName());
+    }
+
+    private String contactMessage(Doctor doctor) {
+        return String.format("If you have any problem please contact the doctor at the phone number %s or at email address %s. \n \n \n",
+                doctor.getPhoneNumber(), doctor.getEmail());
+    }
+
+    private String regardMessage() {
+        return "Best regards !";
+    }
+
+    private String closeAppointmentMessage(Appointment appointment, Doctor doctor) {
+        return String.format("The appointment between %tc - %tc with doctor %s %s was closed for the next reason ' %s ' \n",
+                appointment.getStartDate(), appointment.getEndDate(), doctor.getFirstName(), doctor.getLastName(), appointment.getReason());
+    }
+
+    private String newAppointmentMessage(Appointment appointment, Doctor doctor) {
+        return String.format("You have a new appointment between %tc - %tc with doctor %s %s. \n",
+                appointment.getStartDate(), appointment.getEndDate(), doctor.getFirstName(), doctor.getLastName());
     }
 
     private void compareAppointments(Appointment app1, Appointment app2) {

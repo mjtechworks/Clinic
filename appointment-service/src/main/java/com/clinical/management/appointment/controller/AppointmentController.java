@@ -37,8 +37,8 @@ public class AppointmentController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/update")
-    public Appointment update(@RequestBody Appointment appointment) {
-        return appointmentRepository.save(appointment);
+    public Appointment update(@RequestBody Appointment appointment) throws MessagingException {
+        return appointmentService.update(appointment);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{appointmentId}")

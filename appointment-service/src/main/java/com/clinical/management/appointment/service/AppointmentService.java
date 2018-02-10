@@ -10,4 +10,6 @@ public interface AppointmentService {
     List<Appointment> findAllAppointments(String doctorEmail, String patientId);
 
     Appointment save(Appointment appointment) throws MessagingException;
+
+    Appointment update(Appointment appointment) throws MessagingException;
 }
