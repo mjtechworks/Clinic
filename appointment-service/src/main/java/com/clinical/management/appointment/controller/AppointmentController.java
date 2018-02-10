@@ -9,6 +9,7 @@ import com.clinical.management.appointment.service.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import java.text.ParseException;
 import java.util.List;
 
@@ -26,8 +27,8 @@ public class AppointmentController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/add")
-    public Appointment create(@RequestBody Appointment appointment) {
-        return appointmentRepository.save(appointment);
+    public Appointment create(@RequestBody Appointment appointment) throws MessagingException {
+        return appointmentService.save(appointment);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/all")
