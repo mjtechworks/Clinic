@@ -10,8 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
@@ -26,26 +24,15 @@ public class PatientRepositoryTest {
     @Test
     public void findPatientById() throws ParseException {
         Patient patient = PatientUtil.getPatient();
-
         patientRepository.save(patient);
 
         Patient found = patientRepository.findOne(patient.getId());
-
-        assertEquals(patient.getFirstName(), found.getFirstName());
-        assertEquals(patient.getLastName(), found.getLastName());
-        assertEquals(patient.getEmail(), found.getEmail());
-        assertEquals(patient.getDoctorEmail(), found.getDoctorEmail());
-        assertEquals(patient.getPhoneNumber(), found.getPhoneNumber());
-        assertEquals(patient.getWeight(), found.getWeight());
-        assertEquals(patient.getHeight(), found.getHeight());
-        assertEquals(patient.getDateOfBirth(), found.getDateOfBirth());
-        assertEquals(patient.getGender(), found.getGender());
+        comparePatients(patient, found);
     }
 
     @Test
     public void findAllByDoctorEmail() throws ParseException {
         List<Patient> patients = PatientUtil.getPatients();
-
         patientRepository.save(patients);
 
         List<Patient> founds = patientRepository.findAllByDoctorEmail("doctor@email.com");
@@ -53,20 +40,21 @@ public class PatientRepositoryTest {
         assertEquals(founds.size(), 5);
 
         for (int i = 0; i < 5; i++) {
-            Patient patient = patients.get(i);
-            Patient found = founds.get(i);
-
-            assertEquals(patient.getFirstName(), found.getFirstName());
-            assertEquals(patient.getLastName(), found.getLastName());
-            assertEquals(patient.getEmail(), found.getEmail());
-            assertEquals(patient.getDoctorEmail(), found.getDoctorEmail());
-            assertEquals(patient.getPhoneNumber(), found.getPhoneNumber());
-            assertEquals(patient.getWeight(), found.getWeight());
-            assertEquals(patient.getHeight(), found.getHeight());
-            assertEquals(patient.getDateOfBirth(), found.getDateOfBirth());
-            assertEquals(patient.getGender(), found.getGender());
+            comparePatients(patients.get(i), founds.get(i));
         }
     }
 
+
+    private void comparePatients(Patient patient1, Patient patient2) {
+        assertEquals(patient1.getFirstName(), patient2.getFirstName());
+        assertEquals(patient1.getLastName(), patient2.getLastName());
+        assertEquals(patient1.getEmail(), patient2.getEmail());
+        assertEquals(patient1.getDoctorEmail(), patient2.getDoctorEmail());
+        assertEquals(patient1.getPhoneNumber(), patient2.getPhoneNumber());
+        assertEquals(patient1.getWeight(), patient2.getWeight());
+        assertEquals(patient1.getHeight(), patient2.getHeight());
+        assertEquals(patient1.getDateOfBirth(), patient2.getDateOfBirth());
+        assertEquals(patient1.getGender(), patient2.getGender());
+    }
 
 }
