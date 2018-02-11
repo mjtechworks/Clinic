@@ -32,7 +32,6 @@ public class UserServiceTest {
 
     @Test
     public void shouldCreateUser() {
-
         User user = new User();
         user.setUsername("test@test.com");
         user.setPassword("password123");
@@ -43,7 +42,6 @@ public class UserServiceTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldFailWhenUserAlreadyExists() {
-
         User user = new User();
         user.setUsername("test@test.com");
         user.setPassword("password123");

@@ -19,7 +19,6 @@ public class UserRepositoryTest {
 
     @Test
     public void shouldSaveAndFindUserByName() {
-
         User user = new User();
         user.setUsername("test@test.com");
         user.setPassword("password123");

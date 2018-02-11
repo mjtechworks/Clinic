@@ -14,7 +14,6 @@ import java.security.Principal;
 
 @RestController
 public class UserController {
-
     private UserService userService;
 
     @Autowired

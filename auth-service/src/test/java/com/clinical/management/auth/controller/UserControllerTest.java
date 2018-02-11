@@ -21,7 +21,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class UserControllerTest {
-
     private static final ObjectMapper mapper = new ObjectMapper();
 
     @InjectMocks
@@ -40,8 +39,7 @@ public class UserControllerTest {
 
     @Test
     public void shouldCreateNewUser() throws Exception {
-
-        final User user = new User();
+        User user = new User();
         user.setUsername("test@test.com");
         user.setPassword("password123");
 
@@ -53,8 +51,7 @@ public class UserControllerTest {
 
     @Test
     public void shouldFailWhenUserIsNotValid() throws Exception {
-
-        final User user = new User();
+        User user = new User();
         user.setUsername("t");
         user.setPassword("p");
 

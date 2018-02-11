@@ -35,8 +35,7 @@ public class UserDetailsServiceTest {
 
     @Test
     public void shouldLoadByUsernameWhenUserExists() {
-
-        final User user = new User();
+        User user = new User();
 
         when(repository.findOne(any())).thenReturn(user);
         UserDetails loaded = service.loadUserByUsername("name");
