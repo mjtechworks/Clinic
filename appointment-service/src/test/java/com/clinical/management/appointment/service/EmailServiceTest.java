@@ -25,6 +25,9 @@ import static org.mockito.MockitoAnnotations.initMocks;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = AppointmentApplication.class)
 public class EmailServiceTest {
+    private static final String subject = "New Appointment";
+    private static final String text = "You have a new appointment established for 01/01/2018";
+    private static final String to = "lungu.daniel94@gmail.com";
 
     @InjectMocks
     private EmailServiceImpl emailService;
@@ -44,10 +47,6 @@ public class EmailServiceTest {
 
     @Test
     public void shouldSendEmail() throws MessagingException {
-        String subject = "New Appointment";
-        String text = "You have a new appointment established for 01/01/2018";
-        String to = "lungu.daniel94@gmail.com";
-
         emailService.sendEmail(to, subject, text);
 
         verify(mailSender).send(captor.capture());

@@ -21,6 +21,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import javax.ws.rs.core.MediaType;
 
+import java.text.ParseException;
+import java.util.List;
+
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -34,6 +37,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebAppConfiguration
 public class AppointmentControllerTest {
     private static final ObjectMapper mapper = new ObjectMapper();
+    private static List<Appointment> appointments;
+    private static Appointment appointment;
 
     @InjectMocks
     private AppointmentController appointmentController;
@@ -50,15 +55,15 @@ public class AppointmentControllerTest {
     private MockMvc mockMvc;
 
     @Before
-    public void setup() {
+    public void setup() throws ParseException {
         initMocks(this);
         this.mockMvc = MockMvcBuilders.standaloneSetup(appointmentController).build();
+        appointments = AppointmentUtil.getAppointments();
+        appointment = AppointmentUtil.getAppointment();
     }
 
     @Test
     public void getAppointmentById() throws Exception {
-        Appointment appointment = AppointmentUtil.getAppointment();
-
         when(appointmentRepository.findOne(appointment.getId())).thenReturn(appointment);
 
         mockMvc.perform(get("/" + appointment.getId()))
@@ -76,7 +81,7 @@ public class AppointmentControllerTest {
 
     @Test
     public void getAllAppointment() throws Exception {
-        when(appointmentRepository.findAll()).thenReturn(AppointmentUtil.getAppointments());
+        when(appointmentService.findAllAppointments("test@test.com", null)).thenReturn(appointments);
 
         mockMvc.perform(get("/all?doctorEmail=test@test.com"))
                 .andExpect(status().isOk());
@@ -84,7 +89,7 @@ public class AppointmentControllerTest {
 
     @Test
     public void getAllAppointmentByPatient() throws Exception {
-        when(appointmentRepository.findAll()).thenReturn(AppointmentUtil.getAppointments());
+        when(appointmentService.findAllAppointments("test@test.com", "550")).thenReturn(appointments);
 
         mockMvc.perform(get("/all?doctorEmail=test@test.com&patientId=550"))
                 .andExpect(status().isOk());
@@ -92,8 +97,6 @@ public class AppointmentControllerTest {
 
     @Test
     public void saveAppointment() throws Exception {
-        Appointment appointment = AppointmentUtil.getAppointment();
-
         String json = mapper.writeValueAsString(appointment);
 
         mockMvc.perform(post("/add").contentType(MediaType.APPLICATION_JSON).content(json))
@@ -103,8 +106,6 @@ public class AppointmentControllerTest {
 
     @Test
     public void updateAppointment() throws Exception {
-        Appointment appointment = AppointmentUtil.getAppointment();
-
         String json = mapper.writeValueAsString(appointment);
 
         mockMvc.perform(put("/update").contentType(MediaType.APPLICATION_JSON).content(json))

@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.validation.constraints.NotNull;
 import java.text.ParseException;
+import java.util.Collections;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
@@ -27,45 +28,43 @@ public class AppointmentRepositoryTest {
     @Test
     public void findAllAppointments() throws ParseException {
         List<Appointment> appointments = AppointmentUtil.getAppointments();
-
-        appointmentRepository.deleteAll();
-        appointmentRepository.save(appointments);
+        saveAppointments(appointments);
 
         List<Appointment> founds = appointmentRepository.findAllByDoctorEmail("test@test.com");
-        assertEquals(founds.size(), appointments.size());
 
-        for (int i = 0; i < founds.size(); i++) {
-            Appointment appointment = appointments.get(i);
-            Appointment found = founds.get(i);
-            compareAppointments(found, appointment);
-        }
+        assertEquals(founds.size(), appointments.size());
+        compareAppointments(founds, appointments);
     }
 
     @Test
     public void findAllAppointmentsByPatient() throws ParseException {
         List<Appointment> appointments = AppointmentUtil.getAppointments();
-
-        appointmentRepository.deleteAll();
-        appointmentRepository.save(appointments);
+        saveAppointments(appointments);
 
         List<Appointment> founds = appointmentRepository.findAllByDoctorEmailAndPatientId("test@test.com", "660");
+
         assertEquals(founds.size(), 1);
-
-        for (int i = 0; i < founds.size(); i++) {
-            Appointment appointment = appointments.get(i);
-            Appointment found = founds.get(i);
-            compareAppointments(found, appointment);
-        }
-
+        compareAppointments(founds, appointments);
     }
 
     @Test
     public void findAppointmentById() throws ParseException {
         Appointment appointment = AppointmentUtil.getAppointment();
-        appointmentRepository.deleteAll();
-        appointmentRepository.save(appointment);
+        saveAppointments(Collections.singletonList(appointment));
+
         Appointment found = appointmentRepository.findOne(appointment.getId());
         compareAppointments(found, appointment);
+    }
+
+    private void saveAppointments(List<Appointment> appointments) {
+        appointmentRepository.deleteAll();
+        appointmentRepository.save(appointments);
+    }
+
+    private void compareAppointments(List<Appointment> app1, List<Appointment> app2) {
+        for (int i = 0; i < app1.size(); i++) {
+            compareAppointments(app1.get(i), app2.get(i));
+        }
     }
 
     private void compareAppointments(@NotNull Appointment app1, @NotNull Appointment app2) {
