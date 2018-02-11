@@ -2,7 +2,7 @@ package com.clinical.management.appointment.service;
 
 import com.clinical.management.appointment.client.WeatherServiceClient;
 import com.clinical.management.appointment.domain.Weather;
-import com.clinical.management.appointment.parser.WeatherParse;
+import com.clinical.management.appointment.component.WeatherParse;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

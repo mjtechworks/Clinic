@@ -1,4 +1,4 @@
-package com.clinical.management.appointment.parser;
+package com.clinical.management.appointment.component;
 
 import com.clinical.management.appointment.domain.Weather;
 import org.json.simple.JSONObject;

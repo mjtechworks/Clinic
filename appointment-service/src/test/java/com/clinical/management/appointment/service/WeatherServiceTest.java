@@ -3,7 +3,7 @@ package com.clinical.management.appointment.service;
 import com.clinical.management.appointment.AppointmentApplication;
 import com.clinical.management.appointment.client.WeatherServiceClient;
 import com.clinical.management.appointment.domain.Weather;
-import com.clinical.management.appointment.parser.WeatherParse;
+import com.clinical.management.appointment.component.WeatherParse;
 import com.clinical.management.appointment.util.WeatherUtil;
 import org.json.simple.JSONObject;
 import org.junit.Before;
