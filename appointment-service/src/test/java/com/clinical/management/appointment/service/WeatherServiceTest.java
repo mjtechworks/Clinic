@@ -11,8 +11,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -27,22 +25,13 @@ import static org.mockito.MockitoAnnotations.initMocks;
 public class WeatherServiceTest {
 
     @Mock
-    private WeatherServiceClient weatherServiceClientMock;
+    private WeatherServiceClient weatherServiceClient;
 
     @Mock
     private WeatherParse weatherParser;
 
     @InjectMocks
     private WeatherServiceImpl weatherService;
-
-    @Autowired
-    private WeatherServiceClient weatherServiceClient;
-
-    @Value("${weather.id}")
-    private Integer id;
-
-    @Value("${weather.APPID}")
-    private String appid;
 
     @Before
     public void setup() {
@@ -51,10 +40,10 @@ public class WeatherServiceTest {
 
     @Test
     public void mustGetWeathers() throws Exception {
-        JSONObject jsonObject = weatherServiceClient.getWeather(id, appid, 45.0, 25.0);
+        JSONObject jsonObject = WeatherUtil.getWeatherJson();
         List<Weather> weathers = WeatherUtil.getWeathers();
 
-        when(weatherServiceClientMock.getWeather(null, null, 45.0, 25.0)).thenReturn(jsonObject);
+        when(weatherServiceClient.getWeather(null, null, 45.0, 25.0)).thenReturn(jsonObject);
         when(weatherParser.parse(jsonObject)).thenReturn(weathers);
 
         List<Weather> current = weatherService.getWeather(45.0, 25.0);

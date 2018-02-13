@@ -18,13 +18,13 @@ public class WeatherParse {
 
     private List<Weather> getAllWeathers(JSONObject json) throws ParseException {
         List<Weather> weathers = new ArrayList<>();
-        LinkedHashMap object = (LinkedHashMap) json.get("city");
+        HashMap object = (HashMap) json.get("city");
         ArrayList list = (ArrayList) json.get("list");
         String cityName = (String) object.get("name");
         String country = (String) object.get("country");
 
         for (Object obj : list) {
-            Weather weather = getWeather((LinkedHashMap) obj);
+            Weather weather = getWeather((HashMap) obj);
             weather.setCity(cityName);
             weather.setCountry(country);
 
@@ -34,11 +34,11 @@ public class WeatherParse {
         return weathers;
     }
 
-    private Weather getWeather(LinkedHashMap obj) throws ParseException {
+    private Weather getWeather(HashMap obj) throws ParseException {
         Weather weather = new Weather();
         Date date = convertStringToDate((String) obj.get("dt_txt"));
-        LinkedHashMap main = (LinkedHashMap) obj.get("main");
-        LinkedHashMap weatherInfo = (LinkedHashMap) ((ArrayList) obj.get("weather")).get(0);
+        HashMap main = (HashMap) obj.get("main");
+        HashMap weatherInfo = (HashMap) ((ArrayList) obj.get("weather")).get(0);
 
         weather.setDate(date);
         weather.setTempMax(convertObjectToDouble(main.get("temp_max")));
