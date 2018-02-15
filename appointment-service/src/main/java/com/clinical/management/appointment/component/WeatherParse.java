@@ -43,7 +43,6 @@ public class WeatherParse {
         weather.setDate(date);
         weather.setTempMax(convertObjectToDouble(main.get("temp_max")));
         weather.setTempMin(convertObjectToDouble(main.get("temp_min")));
-        weather.setWeather((String) weatherInfo.get("main"));
         weather.setWeatherDescription((String) weatherInfo.get("description"));
 
         return weather;
@@ -52,7 +51,7 @@ public class WeatherParse {
     private List<Weather> reduceWeathers(List<Weather> weathers) {
         List<Weather> reduceWeathers = new ArrayList<>();
 
-        if (weathers.size() == 0) {
+        if (weathers.isEmpty()) {
             return reduceWeathers;
         }
 
@@ -60,7 +59,7 @@ public class WeatherParse {
 
         for (Weather weather : weathers) {
             if (sameDay(currentWeather, weather)) {
-                currentWeather = reduceWeather(currentWeather, weather);
+                reduceWeather(currentWeather, weather);
             } else {
                 reduceWeathers.add(currentWeather);
                 currentWeather = weather;
@@ -70,7 +69,7 @@ public class WeatherParse {
         return reduceWeathers;
     }
 
-    private Weather reduceWeather(Weather currentWeather, Weather nextWeather) {
+    private void reduceWeather(Weather currentWeather, Weather nextWeather) {
         if (currentWeather.getTempMin() > nextWeather.getTempMin()) {
             currentWeather.setTempMin(nextWeather.getTempMin());
         }
@@ -78,8 +77,6 @@ public class WeatherParse {
         if (currentWeather.getTempMax() < nextWeather.getTempMax()) {
             currentWeather.setTempMax(nextWeather.getTempMax());
         }
-
-        return currentWeather;
     }
 
     private boolean sameDay(Weather currentWeather, Weather nextWeather) {

@@ -5,7 +5,6 @@ import java.util.Date;
 public class Weather {
     private Double tempMin;
     private Double tempMax;
-    private String weather;
     private String weatherDescription;
     private String city;
     private String country;
@@ -25,14 +24,6 @@ public class Weather {
 
     public void setTempMax(Double tempMax) {
         this.tempMax = tempMax;
-    }
-
-    public String getWeather() {
-        return weather;
-    }
-
-    public void setWeather(String weather) {
-        this.weather = weather;
     }
 
     public String getWeatherDescription() {
