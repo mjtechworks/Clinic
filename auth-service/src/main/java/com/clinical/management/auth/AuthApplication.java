@@ -68,9 +68,9 @@ public class AuthApplication {
     @Configuration
     @EnableAuthorizationServer
     protected static class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
-        private final static String CLIENT_CREDENTIALS = "client_credentials";
-        private final static String REFRESH_TOKEN = "refresh_token";
-        private final static String SERVER = "server";
+        private static final String CLIENT_CREDENTIALS = "client_credentials";
+        private static final String REFRESH_TOKEN = "refresh_token";
+        private static final String SERVER = "server";
 
         private TokenStore tokenStore = new InMemoryTokenStore();
 

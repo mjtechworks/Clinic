@@ -20,7 +20,7 @@ import org.springframework.security.oauth2.provider.token.ResourceServerTokenSer
 import java.util.*;
 
 public class CustomUserInfoTokenServices implements ResourceServerTokenServices {
-    private final String ERROR = "error";
+    private static final String ERROR = "ERROR";
     private final Log logger = LogFactory.getLog(getClass());
     private static final String[] PRINCIPAL_KEYS = new String[]{"user", "username", "userid", "user_id", "login", "id", "name"};
     private final String userInfoEndpointUrl;
