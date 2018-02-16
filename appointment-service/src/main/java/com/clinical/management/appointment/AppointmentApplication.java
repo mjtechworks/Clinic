@@ -44,8 +44,8 @@ public class AppointmentApplication extends ResourceServerConfigurerAdapter {
     }
 
     @Bean
-    public RequestInterceptor oauth2FeignRequestInterceptor() {
-        return new OAuth2FeignRequestInterceptor(new DefaultOAuth2ClientContext(), clientCredentialsResourceDetails());
+    public ResourceServerTokenServices tokenServices() {
+        return new CustomUserInfoTokenServices(sso.getUserInfoUri(), sso.getClientId());
     }
 
     @Bean
@@ -54,8 +54,8 @@ public class AppointmentApplication extends ResourceServerConfigurerAdapter {
     }
 
     @Bean
-    public ResourceServerTokenServices tokenServices() {
-        return new CustomUserInfoTokenServices(sso.getUserInfoUri(), sso.getClientId());
+    public RequestInterceptor oauth2FeignRequestInterceptor() {
+        return new OAuth2FeignRequestInterceptor(new DefaultOAuth2ClientContext(), clientCredentialsResourceDetails());
     }
 
 }

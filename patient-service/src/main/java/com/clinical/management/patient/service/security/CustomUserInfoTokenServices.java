@@ -66,18 +66,7 @@ public class CustomUserInfoTokenServices implements ResourceServerTokenServices 
         this.logger.debug("Getting user info from: " + path);
 
         try {
-            OAuth2RestOperations restOperations = this.restTemplate;
-            if (restOperations == null) {
-                BaseOAuth2ProtectedResourceDetails resource = new BaseOAuth2ProtectedResourceDetails();
-                resource.setClientId(this.clientId);
-                restOperations = new OAuth2RestTemplate(resource);
-            }
-            OAuth2AccessToken existingToken = restOperations.getOAuth2ClientContext().getAccessToken();
-            if (existingToken == null || !accessToken.equals(existingToken.getValue())) {
-                DefaultOAuth2AccessToken token = new DefaultOAuth2AccessToken(accessToken);
-                token.setTokenType(this.tokenType);
-                restOperations.getOAuth2ClientContext().setAccessToken(token);
-            }
+            OAuth2RestOperations restOperations = createRestOperations(accessToken);
             return restOperations.getForEntity(path, Map.class).getBody();
         } catch (Exception ex) {
             this.logger.info("Could not fetch user details: " + ex.getClass() + ", " + ex.getMessage());
@@ -85,15 +74,27 @@ public class CustomUserInfoTokenServices implements ResourceServerTokenServices 
         }
     }
 
+    private OAuth2RestOperations createRestOperations(String accessToken) {
+        OAuth2RestOperations restOperations = this.restTemplate;
+        if (restOperations == null) {
+            BaseOAuth2ProtectedResourceDetails resource = new BaseOAuth2ProtectedResourceDetails();
+            resource.setClientId(this.clientId);
+            restOperations = new OAuth2RestTemplate(resource);
+        }
+        OAuth2AccessToken existingToken = restOperations.getOAuth2ClientContext().getAccessToken();
+        if (existingToken == null || !accessToken.equals(existingToken.getValue())) {
+            DefaultOAuth2AccessToken token = new DefaultOAuth2AccessToken(accessToken);
+            token.setTokenType(this.tokenType);
+            restOperations.getOAuth2ClientContext().setAccessToken(token);
+        }
+        return restOperations;
+    }
+
     private OAuth2Authentication extractAuthentication(Map<String, Object> map) {
-        Object principal = getPrincipal(map);
-        OAuth2Request request = getRequest(map);
-
         List<GrantedAuthority> authorities = this.authoritiesExtractor.extractAuthorities(map);
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(principal, "N/A", authorities);
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(getPrincipal(map), "N/A", authorities);
         token.setDetails(map);
-
-        return new OAuth2Authentication(request, token);
+        return new OAuth2Authentication(getRequest(map), token);
     }
 
     private Object getPrincipal(Map<String, Object> map) {
