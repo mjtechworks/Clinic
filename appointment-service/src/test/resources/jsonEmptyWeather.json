@@ -1,0 +1,15 @@
+{
+  "cod": "200",
+  "message": 0.0082,
+  "cnt": 40,
+  "list": [],
+  "city": {
+    "id": 1907296,
+    "name": "Tawarano",
+    "coord": {
+      "lat": 35.0164,
+      "lon": 139.0077
+    },
+    "country": "none"
+  }
+}

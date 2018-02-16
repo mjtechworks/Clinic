@@ -31,11 +31,20 @@ public class WeatherParseTest {
 
     @Test
     public void shouldGetWeathers() throws Exception {
-        JSONObject jsonObject = WeatherUtil.getWeatherJson();
+        JSONObject jsonObject = WeatherUtil.getWeatherJson("jsonWeather.json");
         List<Weather> weathers = weatherParser.parse(jsonObject);
 
         assertNotNull(weathers);
         assertTrue(weathers.size() > 3);
+    }
+
+    @Test
+    public void shouldGetEmptyWeather() throws Exception {
+        JSONObject jsonObject = WeatherUtil.getWeatherJson("jsonEmptyWeather.json");
+        List<Weather> weathers = weatherParser.parse(jsonObject);
+
+        assertNotNull(weathers);
+        assertTrue(weathers.isEmpty());
     }
 
 }

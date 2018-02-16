@@ -80,10 +80,6 @@ public class WeatherParse {
     }
 
     private boolean sameDay(Weather currentWeather, Weather nextWeather) {
-        if (currentWeather == null) {
-            return false;
-        }
-
         Calendar cal1 = Calendar.getInstance();
         Calendar cal2 = Calendar.getInstance();
         cal1.setTime(currentWeather.getDate());

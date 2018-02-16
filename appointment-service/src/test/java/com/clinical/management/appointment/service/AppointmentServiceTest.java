@@ -78,10 +78,12 @@ public class AppointmentServiceTest {
         when(repository.findAllByDoctorEmail("test@test.com")).thenReturn(appointments);
 
         List<Appointment> foundAppointment = appointmentService.findAllAppointments("test@test.com", "550");
-        List<Appointment> foundAppointments = appointmentService.findAllAppointments("test@test.com", null);
+        List<Appointment> foundAppointmentsNullPatientId = appointmentService.findAllAppointments("test@test.com", null);
+        List<Appointment> foundAppointmentsEmptyPatientId = appointmentService.findAllAppointments("test@test.com", "");
 
         assertEquals(foundAppointment.size(), 1);
-        assertEquals(foundAppointments.size(), appointments.size());
+        assertEquals(foundAppointmentsNullPatientId.size(), appointments.size());
+        assertEquals(foundAppointmentsEmptyPatientId.size(), appointments.size());
     }
 
     @Test

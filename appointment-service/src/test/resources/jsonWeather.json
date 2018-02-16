@@ -1260,9 +1260,9 @@
     {
       "dt": 1486209600,
       "main": {
-        "temp": 285.906,
-        "temp_min": 285.906,
-        "temp_max": 285.906,
+        "temp": 2857891.9,
+        "temp_min": 2857891.9,
+        "temp_max": 2857891.9,
         "pressure": 1016.93,
         "sea_level": 1026.64,
         "grnd_level": 1016.93,
@@ -1293,12 +1293,12 @@
     {
       "dt": 1486220400,
       "main": {
-        "temp": 285.51,
-        "temp_min": 285.51,
-        "temp_max": 285.51,
-        "pressure": 1016.46,
-        "sea_level": 1026.16,
-        "grnd_level": 1016.46,
+        "temp": 2,
+        "temp_min": 2,
+        "temp_max": 2,
+        "pressure": 1016,
+        "sea_level": 1026,
+        "grnd_level": 1016,
         "humidity": 100,
         "temp_kf": 0
       },
@@ -1314,14 +1314,14 @@
         "all": 44
       },
       "wind": {
-        "speed": 2.97,
-        "deg": 283.001
+        "speed": 2,
+        "deg": 283
       },
       "rain": {},
       "sys": {
         "pod": "n"
       },
-      "dt_txt": "2017-02-04 15:00:00"
+      "dt_txt": "2018-02-04 15:00:00"
     }
   ],
   "city": {

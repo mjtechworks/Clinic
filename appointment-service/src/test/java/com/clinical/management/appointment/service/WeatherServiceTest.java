@@ -40,7 +40,7 @@ public class WeatherServiceTest {
 
     @Test
     public void mustGetWeathers() throws Exception {
-        JSONObject jsonObject = WeatherUtil.getWeatherJson();
+        JSONObject jsonObject = WeatherUtil.getWeatherJson("jsonWeather.json");
         List<Weather> weathers = WeatherUtil.getWeathers();
 
         when(weatherServiceClient.getWeather(null, null, 45.0, 25.0)).thenReturn(jsonObject);

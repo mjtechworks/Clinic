@@ -23,9 +23,9 @@ public class WeatherUtil {
         return weathers;
     }
 
-    public static JSONObject getWeatherJson() throws IOException, ParseException {
+    public static JSONObject getWeatherJson(String fileName) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
-        BufferedReader bufferedReader = getFile("jsonWeather.json");
+        BufferedReader bufferedReader = getFile(fileName);
 
         return (JSONObject) parser.parse(bufferedReader);
     }
