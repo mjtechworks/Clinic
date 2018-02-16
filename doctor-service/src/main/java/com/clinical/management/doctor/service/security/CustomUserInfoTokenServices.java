@@ -57,6 +57,11 @@ public class CustomUserInfoTokenServices implements ResourceServerTokenServices 
         return extractAuthentication(map);
     }
 
+    @Override
+    public OAuth2AccessToken readAccessToken(String accessToken) {
+        throw new UnsupportedOperationException("Not supported: read access token");
+    }
+
     private OAuth2Authentication extractAuthentication(Map<String, Object> map) {
         Object principal = getPrincipal(map);
         OAuth2Request request = getRequest(map);
@@ -85,11 +90,6 @@ public class CustomUserInfoTokenServices implements ResourceServerTokenServices 
 
         return new OAuth2Request(null, clientIdRequest, null, true, new HashSet<>(scope),
                 null, null, null, null);
-    }
-
-    @Override
-    public OAuth2AccessToken readAccessToken(String accessToken) {
-        throw new UnsupportedOperationException("Not supported: read access token");
     }
 
     @SuppressWarnings({"unchecked"})
