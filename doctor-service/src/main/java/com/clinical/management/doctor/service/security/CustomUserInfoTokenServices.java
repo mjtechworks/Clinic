@@ -21,10 +21,12 @@ import java.util.*;
 
 public class CustomUserInfoTokenServices implements ResourceServerTokenServices {
     private static final String ERROR = "ERROR";
-    private final Log logger = LogFactory.getLog(getClass());
     private static final String[] PRINCIPAL_KEYS = new String[]{"user", "username", "userid", "user_id", "login", "id", "name"};
+
+    private final Log logger = LogFactory.getLog(getClass());
     private final String userInfoEndpointUrl;
     private final String clientId;
+
     private OAuth2RestOperations restTemplate;
     private String tokenType = DefaultOAuth2AccessToken.BEARER_TYPE;
 
@@ -35,12 +37,12 @@ public class CustomUserInfoTokenServices implements ResourceServerTokenServices 
         this.clientId = clientId;
     }
 
-    public void setTokenType(String tokenType) {
-        this.tokenType = tokenType;
-    }
-
     public void setRestTemplate(OAuth2RestOperations restTemplate) {
         this.restTemplate = restTemplate;
+    }
+
+    public void setTokenType(String tokenType) {
+        this.tokenType = tokenType;
     }
 
     public void setAuthoritiesExtractor(AuthoritiesExtractor authoritiesExtractor) {
@@ -70,15 +72,6 @@ public class CustomUserInfoTokenServices implements ResourceServerTokenServices 
         return new OAuth2Authentication(getRequest(map), token);
     }
 
-    private Object getPrincipal(Map<String, Object> map) {
-        for (String key : PRINCIPAL_KEYS) {
-            if (map.containsKey(key)) {
-                return map.get(key);
-            }
-        }
-        return "unknown";
-    }
-
     @SuppressWarnings({"unchecked"})
     private OAuth2Request getRequest(Map<String, Object> map) {
         Map<String, Object> request = (Map<String, Object>) map.get("oauth2Request");
@@ -89,6 +82,15 @@ public class CustomUserInfoTokenServices implements ResourceServerTokenServices 
 
         return new OAuth2Request(null, clientIdRequest, null, true, new HashSet<>(scope),
                 null, null, null, null);
+    }
+
+    private Object getPrincipal(Map<String, Object> map) {
+        for (String key : PRINCIPAL_KEYS) {
+            if (map.containsKey(key)) {
+                return map.get(key);
+            }
+        }
+        return "unknown";
     }
 
     @SuppressWarnings({"unchecked"})
