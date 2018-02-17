@@ -1,8 +1,13 @@
-FROM node:6
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-COPY package.json /usr/src/app
-RUN npm install
-COPY . /usr/src/app
+FROM node:8-alpine as builder
+COPY package.json ./
+RUN npm set progress=false && npm config set depth 0 && npm cache clean --force
+RUN npm i && mkdir /ng-app && cp -R ./node_modules ./ng-app
+WORKDIR /ng-app
+COPY . .
+RUN $(npm bin)/ng build --prod --build-optimizer --aot=false
+FROM nginx:1.13.3-alpine
+COPY nginx/default.conf /etc/nginx/conf.d/
+RUN rm -rf /usr/share/nginx/html/*
+COPY --from=builder /ng-app/dist /usr/share/nginx/html
+CMD ["nginx", "-g", "daemon off;"]
 EXPOSE 4200
-CMD ["npm", "start"]
