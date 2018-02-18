@@ -1,4 +1,4 @@
-FROM mongo:3
+FROM mongo:3.4
 
 ADD init.sh /init.sh
 
