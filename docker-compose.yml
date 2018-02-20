@@ -165,6 +165,8 @@ services:
       build: user-interface
       ports:
         - 4200:4200
+      links:
+        - gateway
       restart: always
       depends_on:
         config:
