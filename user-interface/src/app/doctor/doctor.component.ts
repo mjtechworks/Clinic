@@ -34,7 +34,7 @@ export class DoctorComponent implements OnInit {
         if (this.repeatPassword === this.model.password) {
             this.doctorService.createDoctor(this.model).subscribe(
                 data => this.obtainAccess(data),
-                err => this.displayMessage(err));
+                () => this.displayMessage("Doctor with email " + this.model.email + " already exits !"));
         } else {
             this.displayMessage("The passwords aren't the same");
         }
