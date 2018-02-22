@@ -5,11 +5,11 @@
 This is a proof-of-concept application, which demonstrates Microservice Architecture Pattern using Spring Boot, Spring Cloud and Docker.
 
 ## Technologies used:
-- Backend : Java 8, Gradle, Srping Boot, Spring Cloud, Spring Security, Spring Data JPA
-- Frontend : Angular 5, TypeScript, NPM.
+- Backend : Java 8, Gradle 4.2, Srping Boot 1.5.8, Spring Cloud Dalston.SR4, Spring Security, Spring Data JPA
+- Frontend : Angular 5, TypeScript 2.4, NPM 5.5.
 - Containerization : Docker.
-- Database : MongoDB.
-- Infrastructure : GitHub, DockerHub, SonarQube, TravisCI.
+- Database : MongoDB 3.4.
+- Infrastructure : GitHub, SonarQube, TravisCI.
 
 ## Functional Service
 
@@ -42,15 +42,13 @@ Also this microservices expose an endpoint to retrieve weather forecast for the 
 
 #### Before you start
 
-- Install Docker, Docker Compose, Java 8 and Gradle.
+- Install Docker, Docker Compose, Java 8, Gradle, and NPM.
 - Make sure to build the project: `gradle build`
+- Also you have to build the user-interface service. Run the command `npm run-script build` inside the user-interface project.
 
-#### Production mode
-In this mode, all latest images will be pulled from Docker Hub.
-Just copy `docker-compose.yml` and hit `docker-compose up`
-
-#### Development mode
-If you'd like to build images yourself, you have to clone all repository and build artifacts with gradle. Then, run `docker-compose -f docker-compose.yml -f docker-compose.dev.yml up`
+#### Run the project
+- From the commande line run `bash start_dev.sh` and waith for aproximately 5 minutes until all the project is containerized and started.
+- Keep in mind, that you are going to start 8 Spring Boot applications, 4 MongoDB instances and an Angular interface. Make sure you have 4 Gb RAM available on your machine.
 
 #### Important endpoints
 - http://localhost:80 - Gateway
